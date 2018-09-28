@@ -1,5 +1,5 @@
 'use strict'
 module.exports = {
     NODE_ENV: '"production"',
-    BASE_API: '"kitchen.linglinkmenu.com"',
+    BASE_API: '"http://kitchen.linglinkmenu.com"',
 }
