@@ -4,6 +4,10 @@
             <span style="font-weight: bold;">My Demos</span>
         </div>
         <div class="Grid-Column">
+            <div>
+                <div>To receive the best outcome, you are highly recommended to view demos on your mobile phone.</div>
+                <div>You can choose any one of the following ways to access your demo.</div>
+            </div>
             <div class="Grid-Row">
                 <span>English Version</span>
             </div>
