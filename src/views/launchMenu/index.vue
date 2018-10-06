@@ -22,14 +22,14 @@
                 <span style="font-weight: bold;margin-top: 20px;">Menu QR Code</span>
             </div>
             <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>(View on Wechat Only)</span>
                 </div>
-                <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
                     <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
                 </div>
-                <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
                         <el-button type="primary">Download</el-button>
                     </el-form>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;margin-top: 20px;display:flex; justify-content: space-between">
+            <div class="title" style="width: 800px; margin-right: 20px;margin-top: 20px;display:flex; justify-content: space-between">
                 <span style="font-weight: bold;">DIY QR Code Generator</span>
             </div>
         </div>
@@ -132,7 +132,7 @@
     flex: 0 0 25%;
 }
 .Grid-Title {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
 }

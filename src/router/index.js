@@ -81,12 +81,12 @@ export const constantRouterMap = [
                 }
             },
             {
-                path: 'setting',
-                name: 'Setting',
+                path: 'settings',
+                name: 'Settings',
                 component: () =>
-                    import('@/views/setting/index'),
+                    import('@/views/settings/index'),
                 meta: {
-                    title: 'Setting',
+                    title: 'Settings',
                     icon: 'link'
                 }
             }

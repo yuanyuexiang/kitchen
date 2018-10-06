@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Restaurant Details</span>
+            <span style="font-weight: bold;">Settings</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
@@ -137,7 +137,7 @@
     flex: 0 0 25%;
 }
 .Grid-Title {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
 }

@@ -157,7 +157,7 @@
     flex-direction: column;
 }
 .Grid-Title {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
 }

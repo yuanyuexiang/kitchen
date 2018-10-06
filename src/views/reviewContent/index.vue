@@ -183,7 +183,7 @@
     flex: 0 0 25%;
 }
 .Grid-Title {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
 }
