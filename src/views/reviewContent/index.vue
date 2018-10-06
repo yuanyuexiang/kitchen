@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
                 <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
             </div>
             <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
@@ -30,12 +30,12 @@
                     <span style="mar">XXX</span>
                 </div>
             </div>
-            <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
                 <el-button type="primary">Edit</el-button>
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
                 <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
             </div>
             <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
@@ -64,7 +64,7 @@
                     <span style="mar">XXX</span>
                 </div>
             </div>
-            <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
                 <el-button type="primary">Edit</el-button>
             </div>
         </div>

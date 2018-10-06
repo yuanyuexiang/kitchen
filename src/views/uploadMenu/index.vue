@@ -1,12 +1,12 @@
 <template>
     <div class="app-container">
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                 <el-form ref="postForm" :model="postForm" class="form-container">
-                    <span class="title" style="line-height: 10px;">Upload PDF/Picture: </span>
+                    <span class="title" style="line-height: 10px;font-weight: bold;">Upload PDF/Picture: </span>
                 </el-form>
             </div>
-            <div class="Grid-Column" style="width: 200px;height: 250px;margin-right: 20px;"> 
+            <div class="Grid-Column" style="width: 300px;margin-right: 20px;"> 
                 <el-upload
                     class="avatar-uploader"
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -16,13 +16,13 @@
                     <img v-if="imageUrl" :src="imageUrl" class="avatar">
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
-                <span style="mar">Only xx format accepted.</span>
+                <span style="margin-top: 20px;">Only xx format accepted.</span>
             </div>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 150px;height: 300px;margin-right: 20px;">
+        <div class="Grid-Row" style="margin-top: 20px;">
+            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
                 <el-form ref="postForm" :model="postForm" class="form-container">
-                    <span class="title" style="line-height: 10px;">DIY Upload Menu: </span>
+                    <span class="title" style="line-height: 10px;font-weight: bold;">DIY Upload Menu: </span>
                 </el-form>
             </div>
             <div class="Grid-Column" style="width: 300px;margin-right: 20px;"> 
@@ -73,7 +73,7 @@
 						</el-select>
 					</el-form-item>
 					<el-form-item class="button_submit">
-						<el-button type="primary" @click="submitForm('formData')">立即创建</el-button>
+						<el-button type="primary" @click="submitForm('formData')">Subbmit</el-button>
 					</el-form-item>
                 </el-form>
             </div>

@@ -3,9 +3,9 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 300px;margin-right: 20px;">
-                <span style="mar">Upload Logo:</span>
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                <span style="font-weight: bold;">Upload Logo:</span>
                 <el-upload
                     class="avatar-uploader"
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -16,7 +16,7 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </div>
-            <div class="Grid-Column" style="width: 200px;height: 300px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Restaurant Name:</span>
                     <el-form-item>
@@ -38,21 +38,8 @@
                         </el-select>
                     </el-form-item>
                 </el-form>
-                <!--
-                <div style="height:0px;">
-                    <el-form>
-                        <el-form-item prop="title">
-                            <md-input name="title" placeholder="输入标题"></md-input>
-                        </el-form-item>
-                    </el-form>
-                </div>
-                
-                <div class="Grid-cell u-1of4">...</div>
-                <div class="Grid-cell">...</div>
-                <div class="Grid-cell u-1of3">...</div>
-                -->
             </div>
-            <div class="Grid-Column" style="width: 200px;height: 300px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                 <el-form ref="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Contact Email:</span>
                     <el-form-item>
@@ -77,8 +64,8 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 300px;margin-right: 20px;">
-                <span class="title" style="line-height: 10px;">Restaurant Address:</span>
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 20px;">
+                <span class="title" style="line-height: 10px;font-weight: bold;">Restaurant Address:</span>
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <el-form-item style="margin-bottom: 0px;" label-width="45px" label="Street:">
                         <el-input type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
@@ -93,10 +80,10 @@
                         <el-form-item style="margin-bottom: 0px;" label-width="45px" label="State:">
                             <el-input type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
-                        <el-form-item style="margin-bottom: 0px;" label-width="45px" label="Country:">
+                        <el-form-item style="margin-bottom: 0px;" label-width="55px" label="Country:">
                             <el-input type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
-                        <el-form-item style="margin-bottom: 0px;" label-width="45px" label="Zip Code:">
+                        <el-form-item style="margin-bottom: 0px;" label-width="85px" label="Zip Code:">
                             <el-input type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
                     </div>
@@ -107,8 +94,8 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 300px;margin-right: 20px;">
-                <span class="title" style="line-height: 10px;">Features:</span>
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 80px;">
+                <span class="title" style="line-height: 10px;font-weight: bold;">Features:</span>
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <el-form-item style="margin-bottom: 0px;" label="Opening Hours:">
                         <el-time-picker
@@ -152,9 +139,9 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 300px;margin-right: 20px;">
-                <span class="title" style="line-height: 10px;">About Us:</span>
-                <el-form ref="postForm" :model="postForm" class="form-container">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 80px;">
+                <span class="title" style="line-height: 10px;font-weight: bold;">About Us:</span>
+                <el-form ref="postForm" :model="postForm" class="form-container" style="margin-top: 20px;">
                     <el-input
                         type="textarea"
                         rows="5"
@@ -162,8 +149,8 @@
                         v-model="textarea2">
                     </el-input>
                 </el-form>
-                <span class="title" style="line-height: 10px;">More About Us:</span>
-                <el-form ref="postForm" :model="postForm" class="form-container">
+                <span class="title" style="line-height: 10px;margin-top: 20px;">More About Us:</span>
+                <el-form ref="postForm" :model="postForm" class="form-container" style="margin-top: 20px;">
                     <el-input
                         type="textarea"
                         rows="5"
@@ -172,6 +159,10 @@
                     </el-input>
                 </el-form>
             </div>
+        </div>
+        <div class="Grid-Row" style="margin-top: 20px;">
+            <el-button type="primary" @click="submitForm('formData')">Save</el-button>
+            <el-button type="primary" @click="submitForm('formData')">Cancel</el-button>
         </div>
     </div>
 </template>

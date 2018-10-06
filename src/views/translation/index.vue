@@ -3,41 +3,45 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
-        <div class="Grid-Column">
+        <div class="Grid-Column" style="margin-top: 50px;">
             <div class="Grid-Row">
-                <span>Translator Info</span>
+                <span style="font-weight: bold;">Translator Info</span>
             </div>
             <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 40px;margin-top: 20px;">
                     <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
                 </div>
-                <div class="Grid-Column" style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span>asfasfasfssssssssssss</span>
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;margin-top: 20px;">
+                    <el-form ref="postForm" :model="postForm" class="form-container">
+                    <el-form-item style="margin-bottom: 0px;" label-width="45px" label="Name:">
+                        <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
+                    </el-form-item>
                     <el-input
-                        style="width:100%"
+                        style="width:100%;margin-top: 20px;"
                         type="textarea"
                         :rows="2"
-                        placeholder="请输入内容"
+                        placeholder="Leave me a message"
                         v-model="textarea">
                     </el-input>
+                    </el-form>
                 </div>
             </div>
-            <div class="Grid-Row">
-                <span>Working Progress</span>
+            <div class="Grid-Row" style="margin-top: 20px;">
+                <span style="font-weight: bold;">Working Progress</span>
             </div>
             <div class="Grid-Column">
-                <div class="Grid-Row" style="width: 400px;margin-right: 20px;justify-content:space-between">
+                <div class="Grid-Row" style="width: 400px;margin-right: 20px;margin-top: 20px;justify-content:space-between">
                     <span>1. Content under review</span>
                     <el-radio v-model="radio" label=""></el-radio>
                 </div>
-                <div class="Grid-Row" style="width: 400px;margin-right: 20px;justify-content:space-between">
+                <div class="Grid-Row" style="width: 400px;margin-right: 20px;margin-top: 20px;justify-content:space-between">
                     <span>2. Translation in progress</span>
                     <el-radio v-model="radio" label=""></el-radio>
                 </div>
-                <div class="Grid-Row" style="width: 400px;margin-right: 20px;justify-content:space-between">
+                <div class="Grid-Row" style="width: 400px;margin-right: 20px;margin-top: 20px;justify-content:space-between">
                     <span>Delivery date: </span>
                 </div>
-                <div class="Grid-Row" style="width: 400px;margin-right: 20px;justify-content:space-between">
+                <div class="Grid-Row" style="width: 400px;margin-right: 20px;margin-top: 20px;justify-content:space-between">
                     <span>3. Ready to go</span>
                     <el-radio v-model="radio" label=""></el-radio>
                 </div>
@@ -137,7 +141,6 @@
     display: flex;
     justify-content: center;
 }
-
 </style>
 <style lang="less">
 //文章页textarea修改样式
@@ -153,6 +156,15 @@
     }
     .title {
         line-height: 0px;
+    }
+}
+.article-textarea {
+    textarea {
+        padding-right: 0px;
+        resize: none;
+        border: none;
+        border-radius: 0px;
+        border-bottom: 1px solid #bfcbd9;
     }
 }
 </style>

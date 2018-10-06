@@ -3,49 +3,57 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">My Demos</span>
         </div>
-        <div class="Grid-Column">
+        <div class="Grid-Column" style="margin-top: 50px;">
             <div>
                 <div>To receive the best outcome, you are highly recommended to view demos on your mobile phone.</div>
                 <div>You can choose any one of the following ways to access your demo.</div>
             </div>
-            <div class="Grid-Row">
-                <span>English Version</span>
+            <div class="Grid-Row" style="margin-top: 20px;">
+                <span style="font-weight: bold;">English Version</span>
             </div>
-            <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Row" style="margin-top: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
+                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
                 </div>
-                <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Message me the link</span>
-                    <el-form ref="postForm" :model="postForm" class="form-container">
+                    <el-form style="margin-top: 20px;" ref="postForm" :model="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">Mobile Number</span>
                         <el-form-item>
                             <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
                         <el-button type="primary">Send</el-button>
                     </el-form>
+                </div>
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                    <span>Copy link</span>
+                    <span style="margin-top: 20px;">link</span>
                 </div>
             </div>
         </div>
         <div class="Grid-Column">
-            <div class="Grid-Row">
-                <span>Chinese Version</span>
+            <div class="Grid-Row" style="margin-top: 20px;">
+                <span style="font-weight: bold;">Chinese Version</span>
             </div>
-            <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 150px;height: 200px;margin-right: 20px;">
+            <div class="Grid-Row" style="margin-top: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
+                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
                 </div>
-                <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Message me the link</span>
-                    <el-form ref="postForm" :model="postForm" class="form-container">
+                    <el-form style="margin-top: 20px;" ref="postForm" :model="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">Mobile Number</span>
                         <el-form-item>
                             <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
                         <el-button type="primary">Send</el-button>
                     </el-form>
+                </div>
+                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                    <span>Copy link</span>
+                    <span style="margin-top: 20px;">link</span>
                 </div>
             </div>
         </div>

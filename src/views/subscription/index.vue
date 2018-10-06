@@ -3,10 +3,10 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 300px;margin-right: 20px;">
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;">Subscription Summary</span>
+                    <span style="line-height: 30px;font-weight: bold;">Subscription Summary</span>
                     <el-button type="primary">Upgrade</el-button>
                 </div>
                 <el-form ref="postForm" :model="postForm" class="form-container">
@@ -24,13 +24,13 @@
                 </el-form>
             </div>
         </div>
-        <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;">Billing Information</span>
+        <div class="Grid-Column" style="margin-top: 50px;">
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
+                <span style="line-height: 30px;font-weight: bold;">Billing Information</span>
                 <el-button type="primary">Save</el-button>
             </div>
             <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 250px;height: 300px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">Card Holder Name</span>
                         <el-form-item>
@@ -40,19 +40,19 @@
                         <el-form-item>
                             <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
-                        <div class="Grid-Row" style="width: 250px;height: 300px;margin-right: 20px;">
-                            <div style="width: 160px;height: 300px;margin-right: 20px;">
+                        <div class="Grid-Row" style="width: 350px;margin-right: 20px;">
+                            <div style="width: 250px;margin-right: 20px;">
                                 <span class="title" style="line-height: 10px;">Expiration Date</span>
                                 <el-form-item>
                                     <el-date-picker
-                                        style="width:90px;"
+                                        style="width:150px;"
                                         v-model="value1"
                                         type="date"
-                                        placeholder="选择日期">
+                                        placeholder="Select">
                                     </el-date-picker>
                                 </el-form-item>
                             </div>
-                            <div style="width: 90px;height: 300px;margin-right: 20px;">
+                            <div>
                                 <span class="title" style="line-height: 10px;">CVV</span>
                                 <el-form-item>
                                     <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
@@ -61,20 +61,20 @@
                         </div>
                     </el-form>
                 </div>
-                <div class="Grid-Column" style="width: 250px;height: 300px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 350px;">
                     <el-form ref="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">Street Address</span>
                         <el-form-item>
                             <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
                         </el-form-item>
-                        <div class="Grid-Row" style="width: 250px;margin-right: 20px;">
-                            <div style="width: 160px;margin-right: 20px;">
+                        <div class="Grid-Row" style="width: 350px;margin-right: 20px;">
+                            <div style="margin-right: 20px;">
                                 <span class="title" style="line-height: 10px;">City:</span>
                                 <el-form-item>
                                     <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
                                 </el-form-item>
                             </div>
-                            <div style="width: 90px;margin-right: 20px;">
+                            <div>
                                 <span class="title" style="line-height: 10px;">Zip Code:</span>
                                 <el-form-item>
                                     <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
@@ -96,13 +96,13 @@
                 </div>
             </div>
         </div>
-        <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;">Invoice Information (optional)</span>
+        <div class="Grid-Column" style="margin-top: 20px;">
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
+                <span style="line-height: 30px;font-weight: bold;">Invoice Information (optional)</span>
                 <el-button type="primary">Save</el-button>
             </div>
             <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 250px;height: 300px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">First Name</span>
                         <el-form-item>
@@ -118,7 +118,7 @@
                         </el-form-item>
                     </el-form>
                 </div>
-                <div class="Grid-Column" style="width: 250px;height: 300px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
                     <el-form ref="postForm" class="form-container">
                         <span class="title" style="line-height: 10px;">Last Name</span>
                         <el-form-item>
@@ -136,14 +136,14 @@
                 </div>
             </div>
         </div>
-        <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;">Payment History</span>
+        <div class="Grid-Column" style="margin-top: 20px;">
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
+                <span style="line-height: 30px;font-weight: bold;">Payment History</span>
             </div>
         </div>
         <div class="Grid-Column">
             <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;">Terms & Contract</span>
+                <span style="line-height: 30px;font-weight: bold;">Terms & Contract</span>
             </div>
         </div>
     </div>

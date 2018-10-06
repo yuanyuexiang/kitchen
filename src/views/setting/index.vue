@@ -3,10 +3,10 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 200px;margin-right: 20px;">
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;">Reset Password</span>
+                    <span style="line-height: 30px;font-weight: bold;">Reset Password</span>
                     <el-button type="primary">Save</el-button>
                 </div>
                 <el-form ref="postForm" :model="postForm" label-width="140px" class="form-container">
@@ -22,27 +22,30 @@
                 </el-form>
             </div>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 200px;margin-right: 20px;">
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;">Terms of Service and Privacy Policy</span>
+                    <span style="line-height: 30px;font-weight: bold;">Terms of Service and Privacy Policy</span>
                     <el-button type="primary">View</el-button>
                 </div>
-                <span>
+                <span style="margin-top: 20px;">
                     Linglink Terms of Service and Privacy Policy explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
                 </span>
             </div>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 600px;height: 100px;margin-right: 20px;">
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;">Marketing and Communications</span>
+                    <span style="line-height: 30px;font-weight: bold;">Marketing and Communications</span>
                     <el-button type="primary">Save</el-button>
                 </div>
-                <span>
+                <span style="margin-top: 20px;">
                     We process your personal information for the purposes of marketing activities to offer you products or services that may be of interest based on your preferences. 
                 </span>
             </div>
+        </div>
+        <div style="margin-top: 50px;">
+            <el-radio v-model="radio" label="1">I would like to receive relevant marketing communications</el-radio>
         </div>
     </div>
 </template>

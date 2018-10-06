@@ -3,23 +3,23 @@
         <div class="Grid-Title">
             <span style="font-weight: bold;">Launch Menu</span>
         </div>
-        <div class="Grid-Row" style="height: 50px;">
+        <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Row">
-                <span>Menu Status</span>
+                <span style="font-weight: bold;">Menu Status</span>
             </div>
             <div class="Grid-Row" style="margin-left: 20px;">
-                <span>Onhold</span>
+                <span style="margin-right: 10px;">Onhold</span>
                 <el-switch
                     v-model="value2"
                     active-color="#13ce66"
                     inactive-color="#ff4949">
                 </el-switch>
-                <span>Launched</span>
+                <span style="margin-left: 10px;">Launched</span>
             </div>
         </div>
         <div class="Grid-Column">
             <div class="Grid-Row">
-                <span>Menu QR Code</span>
+                <span style="font-weight: bold;margin-top: 20px;">Menu QR Code</span>
             </div>
             <div class="Grid-Row">
                 <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
+                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
                 </div>
                 <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
@@ -38,8 +38,8 @@
             </div>
         </div>
         <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;">DIY QR Code Generator</span>
+            <div class="title" style="width: 600px; margin-right: 20px;margin-top: 20px;display:flex; justify-content: space-between">
+                <span style="font-weight: bold;">DIY QR Code Generator</span>
             </div>
         </div>
     </div>
