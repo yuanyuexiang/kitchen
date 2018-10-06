@@ -4,7 +4,7 @@
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
-            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;padding-right: 20px;">
                 <span style="font-weight: bold;">Upload Logo:</span>
                 <el-upload
                     class="avatar-uploader"
@@ -16,7 +16,7 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </div>
-            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 300px;padding-right: 20px;">
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Restaurant Name:</span>
                     <el-form-item>
@@ -39,7 +39,7 @@
                     </el-form-item>
                 </el-form>
             </div>
-            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+            <div class="Grid-Column" style="width: 300px;padding-right: 20px;">
                 <el-form ref="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Contact Email:</span>
                     <el-form-item>
@@ -64,7 +64,7 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 20px;">
+            <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
                 <span class="title" style="line-height: 10px;font-weight: bold;">Restaurant Address:</span>
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <el-form-item style="margin-bottom: 0px;" label-width="45px" label="Street:">
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 80px;">
+            <div class="Grid-Column" style="width: 800px;margin-top: 80px;">
                 <span class="title" style="line-height: 10px;font-weight: bold;">Features:</span>
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <el-form-item style="margin-bottom: 0px;" label="Opening Hours:">
@@ -139,7 +139,7 @@
             </div>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 800px;margin-right: 20px;margin-top: 80px;">
+            <div class="Grid-Column" style="width: 800px;margin-top: 80px;">
                 <span class="title" style="line-height: 10px;font-weight: bold;">About Us:</span>
                 <el-form ref="postForm" :model="postForm" class="form-container" style="margin-top: 20px;">
                     <el-input
@@ -261,6 +261,7 @@
     line-height: 178px;
     text-align: center;
     background-color: #E5E5E5;
+    margin-top: 10px;
 }
 .avatar {
     width: 178px;
