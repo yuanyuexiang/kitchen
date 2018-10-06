@@ -10,10 +10,6 @@
                     <span style="mar">XXX</span>
                 </div>
                 <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
                     <span style="mar">Category:</span>
                     <span style="mar">XXX</span>
                 </div>
@@ -27,6 +23,10 @@
                 </div>
                 <div style="width: 400px;height: 200px;margin-right: 20px;">
                     <span style="mar">Ingredients:</span>
+                    <span style="mar">XXX</span>
+                </div>
+                <div style="width: 400px;height: 200px;margin-right: 20px;">
+                    <span style="mar">Options:</span>
                     <span style="mar">XXX</span>
                 </div>
             </div>
@@ -44,10 +44,6 @@
                     <span style="mar">XXX</span>
                 </div>
                 <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
                     <span style="mar">Category:</span>
                     <span style="mar">XXX</span>
                 </div>
@@ -61,6 +57,10 @@
                 </div>
                 <div style="width: 400px;height: 200px;margin-right: 20px;">
                     <span style="mar">Ingredients:</span>
+                    <span style="mar">XXX</span>
+                </div>
+                <div style="width: 400px;height: 200px;margin-right: 20px;">
+                    <span style="mar">Options:</span>
                     <span style="mar">XXX</span>
                 </div>
             </div>
