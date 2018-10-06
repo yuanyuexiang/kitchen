@@ -148,8 +148,6 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
-            min-height: 35px;
-            height: 35px;
         }
     }
     .title {
