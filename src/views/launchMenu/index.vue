@@ -27,7 +27,9 @@
                 </div>
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
+                    <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
+                    <!-- <vue-q-art :config="config"></vue-q-art> -->
+                    <div id="qrcode" ref="qrcode"></div>
                 </div>
                 <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
@@ -49,8 +51,10 @@
     import {
         getList
     } from "@/api/table";
+    import QRCode from 'qrcodejs2'
 
     export default {
+        components: {QRCode},
         filters: {
             statusFilter(status) {
                 const statusMap = {
@@ -64,11 +68,20 @@
         data() {
             return {
                 list: null,
-                listLoading: true
+                listLoading: true,
+                config: {
+                    value: 'https://www.baidu.com',
+                    imagePath: '/static/logo.png',
+                    filter: 'color',
+                }
             };
         },
         created() {
             //this.fetchData();
+            //this.qrcode();
+        },
+        mounted(){
+            this.qrcode();
         },
         methods: {
             fetchData() {
@@ -77,7 +90,14 @@
                     this.list = response.data.items;
                     this.listLoading = false;
                 });
-            }
+            },
+            qrcode () {
+                let qrcode = new QRCode('qrcode', {  
+                    width: 180,  // 设置宽度 
+                    height: 180, // 设置高度
+                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
+                })
+            },
         }
     };
 

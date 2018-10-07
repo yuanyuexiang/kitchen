@@ -14,7 +14,8 @@
             <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
+                    <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
+                    <div id="qrcode" ref="qrcode"></div>
                 </div>
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Message me the link</span>
@@ -39,7 +40,8 @@
             <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb">
+                    <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
+                    <div id="qrcode2" ref="qrcode2"></div>
                 </div>
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Message me the link</span>
@@ -61,50 +63,12 @@
 </template>
 
 <script>
-    export default {
+    import QRCode from 'qrcodejs2'
 
+    export default {
         data() {
             return {
                 filterText: '',
-                data2: [{
-                    id: 1,
-                    label: 'Level one 1',
-                    children: [{
-                        id: 4,
-                        label: 'Level two 1-1',
-                        children: [{
-                            id: 9,
-                            label: 'Level three 1-1-1'
-                        }, {
-                            id: 10,
-                            label: 'Level three 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: 'Level one 2',
-                    children: [{
-                        id: 5,
-                        label: 'Level two 2-1'
-                    }, {
-                        id: 6,
-                        label: 'Level two 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: 'Level one 3',
-                    children: [{
-                        id: 7,
-                        label: 'Level two 3-1'
-                    }, {
-                        id: 8,
-                        label: 'Level two 3-2'
-                    }]
-                }],
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                }
             }
         },
         watch: {
@@ -112,12 +76,26 @@
                 this.$refs.tree2.filter(val)
             }
         },
-
+        mounted(){
+            this.createQrcode()
+        },
         methods: {
             filterNode(value, data) {
                 if (!value) return true
                 return data.label.indexOf(value) !== -1
-            }
+            },
+            createQrcode() {
+                let qrcode = new QRCode('qrcode', {  
+                    width: 180,  // 设置宽度 
+                    height: 180, // 设置高度
+                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
+                })
+                let qrcode2 = new QRCode('qrcode2', {  
+                    width: 180,  // 设置宽度 
+                    height: 180, // 设置高度
+                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
+                })
+            },
         }
     }
 

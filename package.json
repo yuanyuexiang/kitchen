@@ -22,7 +22,9 @@
         "less-loader": "^4.1.0",
         "normalize.css": "7.0.0",
         "nprogress": "0.2.0",
+        "qrcodejs2": "0.0.2",
         "vue": "2.5.17",
+        "vue-qart": "^2.2.0",
         "vue-router": "3.0.1",
         "vuex": "3.0.1"
     },
@@ -47,7 +49,7 @@
         "eventsource-polyfill": "0.9.6",
         "file-loader": "1.1.11",
         "friendly-errors-webpack-plugin": "1.7.0",
-        "html-webpack-plugin": "3.2.0",
+        "html-webpack-plugin": "^3.2.0",
         "mini-css-extract-plugin": "0.4.1",
         "node-notifier": "5.2.1",
         "node-sass": "^4.7.2",
