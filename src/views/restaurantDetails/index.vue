@@ -4,7 +4,7 @@
             <span style="font-weight: bold;">Restaurant Details</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
-            <div class="Grid-Column" style="width: 200px;padding-right: 20px;">
+            <div class="Grid-Column" style="width: 200px;">
                 <span style="font-weight: bold;">Upload Logo:</span>
                 <el-upload
                     class="avatar-uploader"
@@ -16,7 +16,7 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
             </div>
-            <div class="Grid-Column" style="width: 300px;padding-right: 20px;">
+            <div class="Grid-Column" style="width: 300px;padding-left: 20px;">
                 <el-form ref="postForm" :model="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Restaurant Name:</span>
                     <el-form-item>
@@ -39,7 +39,7 @@
                     </el-form-item>
                 </el-form>
             </div>
-            <div class="Grid-Column" style="width: 300px;padding-right: 20px;">
+            <div class="Grid-Column" style="width: 300px;padding-left: 20px;">
                 <el-form ref="postForm" class="form-container">
                     <span class="title" style="line-height: 10px;">Contact Email:</span>
                     <el-form-item>
