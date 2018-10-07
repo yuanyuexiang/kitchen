@@ -10,12 +10,12 @@
                     <el-button type="primary">Upgrade</el-button>
                 </div>
                 <el-form ref="postForm" :model="postForm" class="form-container">
-                    <el-form-item style="margin-bottom: 0px; " label="My Plan:">
+                    <el-form-item style="margin-bottom: 10px; " label="My Plan:">
                         <div style="margin-right: 30px; margin-top: 15px; display:flex; flex-direction: column;">
                             <el-radio style="margin-left: 30px;" v-model="radio" label="1">Cash</el-radio>
-                            <el-radio v-model="radio" label="2">Credit Card</el-radio>
-                            <el-radio v-model="radio" label="3">WeChat Pay</el-radio>
-                            <el-radio v-model="radio" label="4">Apple Pay</el-radio>
+                            <el-radio style="margin-top: 10px;" v-model="radio" label="2">Credit Card</el-radio>
+                            <el-radio style="margin-top: 10px;" v-model="radio" label="3">WeChat Pay</el-radio>
+                            <el-radio style="margin-top: 10px;" v-model="radio" label="4">Apple Pay</el-radio>
                         </div>
                     </el-form-item>
                     <span class="title" style="line-height: 10px;">Menu Published:</span>
