@@ -29,11 +29,18 @@
                     <span>Scan the code</span>
                     <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
                     <!-- <vue-q-art :config="config"></vue-q-art> -->
-                    <div id="qrcode" ref="qrcode"></div>
+                    <!-- <div id="qrcode" ref="qrcode"></div> -->
+                    <vueLogoQrcode ref="qrcode"
+                       :content="content"
+                       :width="width"
+                       logoSrc="/static/logo.png"
+                       :autoGen="true"
+                       logoRadius="20"
+                       @click.native="downloadImage"></vueLogoQrcode>
                 </div>
                 <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="postForm" :model="postForm" class="form-container">
-                        <el-button type="primary">Download</el-button>
+                        <el-button type="primary" @click.native="downloadImage">Download</el-button>
                     </el-form>
                     <span>Download to Print</span>
                 </div>
@@ -51,10 +58,13 @@
     import {
         getList
     } from "@/api/table";
-    import QRCode from 'qrcodejs2'
-
+    //import QRCode from 'qrcodejs2'
+    import vueLogoQrcode from '@njshaoshao/vue-logo-qrcode';
     export default {
-        components: {QRCode},
+        components: {
+            //QRCode
+            vueLogoQrcode 
+        },
         filters: {
             statusFilter(status) {
                 const statusMap = {
@@ -73,7 +83,9 @@
                     value: 'https://www.baidu.com',
                     imagePath: '/static/logo.png',
                     filter: 'color',
-                }
+                },
+                content: "http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no",
+                width: 200,
             };
         },
         created() {
@@ -97,6 +109,9 @@
                     height: 180, // 设置高度
                     text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
                 })
+            },
+            downloadImage() {
+                this.$refs.qrcode.genQrCodeImageDownload();
             },
         }
     };
