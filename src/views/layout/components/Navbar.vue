@@ -2,6 +2,7 @@
     <el-menu class="navbar" mode="horizontal">
         <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" />
         <breadcrumb />
+        <my-restaurant class="restaurant-container"/>
         <el-dropdown class="avatar-container" trigger="click">
             <div class="avatar-wrapper">
                 <!-- <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar"> -->
@@ -9,13 +10,13 @@
                 <img src="@/assets/logo.png" class="user-avatar">
             </div>
             <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                <router-link class="inlineBlock" to="/">
+                <router-link class="inlineBlock" to="/yourAccount/profile">
                     <el-dropdown-item>
-                        Home
+                        Profile
                     </el-dropdown-item>
                 </router-link>
                 <el-dropdown-item divided>
-                    <span style="display:block;" @click="logout">LogOut</span>
+                    <span style="display:block;" @click="logout">Logout</span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
@@ -28,11 +29,13 @@
     } from 'vuex'
     import Breadcrumb from '@/components/Breadcrumb'
     import Hamburger from '@/components/Hamburger'
+    import MyRestaurant from './MyRestaurant'
 
     export default {
         components: {
             Breadcrumb,
-            Hamburger
+            Hamburger,
+            MyRestaurant,
         },
         computed: {
             ...mapGetters([
@@ -72,6 +75,13 @@
             right: 90px;
             top: 16px;
             color: red;
+        }
+
+        .restaurant-container {
+            height: 50px;
+            display: inline-block;
+            position: absolute;
+            right: 80px;
         }
 
         .avatar-container {

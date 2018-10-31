@@ -68,8 +68,8 @@
             }
             return {
                 loginForm: {
-                    username: 'admin',
-                    password: 'admin'
+                    username: '',
+                    password: ''
                 },
                 loginRules: {
                     username: [{
@@ -88,7 +88,7 @@
             }
         },
         methods: {
-            ...mapActions(['Login']),
+            ...mapActions(['Login','getRestaurants']),
             showPwd() {
                 if (this.pwdType === 'password') {
                     this.pwdType = ''
@@ -113,6 +113,7 @@
                        
                        this.Login({username:this.loginForm.username,password:md5(this.loginForm.password)}).then(() => {
                             this.loading = false
+                            this.getRestaurants()
                             this.$router.push({
                                 path: '/'
                             })
