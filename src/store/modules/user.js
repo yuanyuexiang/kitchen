@@ -49,6 +49,7 @@ const user = {
                     commit('SET_TOKEN', data.token)
                     setUserID(data.user_id);
                     commit('SET_USER_ID', data.user_id)
+                    localStorage.clear()
                     resolve()
                 }).catch(error => {
                     reject(error)
@@ -76,7 +77,7 @@ const user = {
         },
 
         // 登出
-        LogOut({commit,state}) {
+        Logout({commit,state}) {
             return new Promise((resolve, reject) => {
                 deleteSession().then(() => {
                     commit('SET_TOKEN', '')

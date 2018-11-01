@@ -1,13 +1,18 @@
 <template>
-    <el-dropdown @command="handleCommand">
+    <el-dropdown v-if="restaurants" @command="handleCommand">
         <span class="el-dropdown-link">
-            {{currentRestaurants.name_en}}<i class="el-icon-arrow-down el-icon--right"></i>
+            {{currentRestaurant.name_en}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for="item in restaurants" :key="item.id" :command="item">{{item.name_en}}</el-dropdown-item>
             <el-dropdown-item divided>Create Restaurant</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
+    <div v-else>
+        <span class="el-dropdown-link">
+            <router-link to="/restaurantManagement/restaurantDetails">Create Restaurant</router-link>
+        </span>
+    </div>
 </template>
 
 <script>
@@ -36,48 +41,42 @@
                 'restaurant',
             ])
         },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                let myRestaurant = JSON.parse(JSON.stringify(newRestaurant))
+                if(myRestaurant){
+                    this.currentRestaurant = myRestaurant
+                }
+            },
+            restaurants(newRestaurants, oldRestaurants){
+                console.log("-------------watch-----------------")
+                console.log(newRestaurants)
+            }
+        },
         data() {
             return {
-                //restaurants: ["Krazi Kebob","Krazi Burrito","Bagel Place","DemoSample"],
-                currentRestaurants: "Krazi Kebob",
-                user_id:getUserID(),
+                currentRestaurant: {},
             }
         },
         methods: {
-            ...mapActions(['getRestaurants','setRestaurant']),
+            ...mapActions(['getRestaurants','setRestaurant','deleteRestaurant']),
             handleCommand(command) {
                 if(command != undefined){
-                    if(this.currentRestaurants.id != command.id){
-                        this.currentRestaurants = command;
+                    if( !this.currentRestaurant || this.currentRestaurant.id != command.id){
+                        this.currentRestaurant = command;
                         console.log("****************************")
-                        console.log(this.currentRestaurants)
-                        this.setRestaurant(this.currentRestaurants)
+                        console.log(this.currentRestaurant)
+                        this.setRestaurant(this.currentRestaurant)
                         this.$message('click on item ' + command.name_en);
                     }
+                }else{
+                    this.deleteRestaurant()
+                    this.$router.push("/restaurantManagement/restaurantDetails")
                 }
             },
-            /*
-            getRestaurants(){
-                console.log("----------------")
-                console.log({administrator_id:this.user_id})
-                getRestaurantList(this.user_id).then(response => {
-                    const data = response.data
-                    console.log("--------getRestaurantList------")
-                    console.log(data)
-                    if (data != null){
-                        this.restaurants = data
-                    }
-                }).catch(error => {
-                    reject(error)
-                })
-            }
-            */
         },
         mounted(){
-            //this.getRestaurants()
-            this.currentRestaurants = this.restaurant
-            //console.log("================================")
-            //console.log(this.restaurants)
+            this.currentRestaurant = this.restaurant
         },
     }
 

@@ -6,9 +6,18 @@
         <div class="Grid-Row" style="width: 800px;margin-top: 50px;">
             <div class="Grid-Column" style="width: 200px;">
                 <span style="font-weight: bold;">Upload Logo:</span>
-                <el-upload
+                <!-- <el-upload
                     class="avatar-uploader"
                     action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="formData.pic_url" :src="formData.pic_url" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload> -->
+                <el-upload
+                    class="avatar-uploader"
+                    :action="baseUrl + '/camaro/v1/file'"
                     :show-file-list="false"
                     :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload">
@@ -17,14 +26,14 @@
                 </el-upload>
             </div>
             <div class="Grid-Column" style="width: 300px;padding-left: 20px;">
-                <el-form ref="postForm" :model="formData" class="form-container">
+                <el-form ref="formData" class="form-container">
                     <span class="title" style="line-height: 10px;">Restaurant Name:</span>
                     <el-form-item>
-                        <el-input :rows="1" :value="formData.name_en" type="textarea" class="article-textarea" autosize placeholder=""/>
+                        <el-input :rows="1" v-model="formData.name_en" type="textarea" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                     <span class="title" style="line-height: 10px;">Contact Person:</span>
                     <el-form-item>
-                        <el-input :rows="1" :value="formData.contact_email" type="textarea" class="article-textarea" autosize placeholder=""/>
+                        <el-input :rows="1" v-model="formData.contact_person" type="textarea" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                     <span class="title" style="line-height: 10px;">Restaurant Type:</span>
                     <el-form-item>
@@ -40,14 +49,14 @@
                 </el-form>
             </div>
             <div class="Grid-Column" style="width: 300px;padding-left: 20px;">
-                <el-form ref="postForm" :model="formData" class="form-container">
+                <el-form ref="formData" class="form-container">
                     <span class="title" style="line-height: 10px;">Contact Email:</span>
                     <el-form-item>
-                        <el-input :rows="1" :value="formData.contact_email" type="textarea" class="article-textarea" autosize placeholder=""/>
+                        <el-input :rows="1" v-model="formData.contact_email" type="textarea" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                     <span class="title" style="line-height: 10px;">Contact Phone Number:</span>
                     <el-form-item>
-                        <el-input :rows="1" :value="formData.contact_phone_number" type="textarea" class="article-textarea" autosize placeholder=""/>
+                        <el-input :rows="1" v-model="formData.contact_phone_number" type="textarea" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                     <span class="title" style="line-height: 10px;">Cuisine Type:</span>
                     <el-form-item>
@@ -66,21 +75,21 @@
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
                 <span class="title" style="line-height: 10px;font-weight: bold;">Restaurant Address:</span>
-                <el-form ref="postForm" :model="formData" class="form-container">
-                    <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Street:">
-                        <el-input type="textarea" :value="formData.street" class="article-textarea" autosize placeholder=""/>
+                <el-form ref="formData" class="form-container">
+                    <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Street:">
+                        <el-input type="textarea" v-model="formData.street" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
-                    <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Unit:">
-                        <el-input type="textarea" :value="formData.unit" class="article-textarea" autosize placeholder=""/>
+                    <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Unit:">
+                        <el-input type="textarea" v-model="formData.unit" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                     <div style="display:flex;">
-                        <el-form-item style="margin-bottom: 10px;" label-width="60px" label="City:">
-                            <el-input type="textarea" :value="formData.city" class="article-textarea" autosize placeholder=""/>
+                        <el-form-item style="margin-bottom: 10px;" label-width="70px" label="City:">
+                            <el-input type="textarea" v-model="formData.city" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="120px" label="State/Province:">
-                            <el-input type="textarea" :value="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
-                        <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Country:">
+                        <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Country:">
                             <el-select v-model="formData.country" placeholder="Select">
                                 <el-option
                                 v-for="item in countryList"
@@ -91,11 +100,11 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="85px" label="Zip Code:">
-                            <el-input type="textarea" :value="formData.zip_code" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.zip_code" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                     </div>
-                    <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Website:">
-                        <el-input type="textarea" :value="formData.website" class="article-textarea" autosize placeholder=""/>
+                    <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Website:">
+                        <el-input type="textarea" v-model="formData.website" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                 </el-form>
             </div>
@@ -103,68 +112,44 @@
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
                 <span class="title" style="line-height: 20px;font-weight: bold;">Features:</span>
-                <el-form ref="postForm" :model="postForm" class="form-container" label-width="150px">
-                    <!-- <el-form-item style="margin-bottom: 0px;" label="Opening Hours:">
-                        <el-time-picker
-                            v-model="value2"
-                            :picker-options="{ selectableRange: '18:30:00 - 20:30:00' }"
-                            placeholder="任意时间点">
-                        </el-time-picker>
-                        <span>---</span>
-                        <el-time-picker
-                            arrow-control
-                            v-model="value3"
-                            :picker-options="{ selectableRange: '18:30:00 - 20:30:00' }"
-                            placeholder="任意时间点">
-                        </el-time-picker>
-                    </el-form-item> -->
+                <el-form ref="formData" class="form-container" label-width="150px">
                     <el-form-item style="margin-bottom: 10px;" label="Take Reservations:">
-                        <el-select v-model="value" style="width:100px" placeholder="Select">
-                            <el-option>Yes</el-option>
-                            <el-option>No</el-option>
+                        <el-select v-model="formData.reservations" placeholder="Select">
+                            <el-option value="Yes">Yes</el-option>
+                            <el-option value="No">No</el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item style="margin-bottom: 10px;" label="Delivery:">
-                        <el-select v-model="value" style="width:100px" placeholder="Select">
-                            <el-option>Yes</el-option>
-                            <el-option>No</el-option>
+                        <el-select v-model="formData.delivery" placeholder="Select">
+                            <el-option value="Yes">Yes</el-option>
+                            <el-option value="No">No</el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item style="margin-bottom: 10px;" label="Wifi:">
-                        <el-select v-model="value" placeholder="Select">
-                            <el-option>Yes</el-option>
-                            <el-option>No</el-option>
+                        <el-select v-model="formData.wifi" placeholder="Select">
+                            <el-option value="Yes">Yes</el-option>
+                            <el-option value="No">No</el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item style="margin-bottom: 10px;" label="Payment:">
-                        <el-radio v-model="radio" label="1">Cash</el-radio>
-                        <el-radio v-model="radio" label="2">Credit Card</el-radio>
-                        <el-radio v-model="radio" label="1">WeChat Pay</el-radio>
-                        <el-radio v-model="radio" label="2">Apple Pay</el-radio>
-                    </el-form-item>
+                        <el-checkbox-group v-model="formData.payment">
+                            <el-checkbox v-for="item in paymentList" :label="item" :key="item"></el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item> 
                 </el-form>
             </div>
         </div>
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
                 <span class="title" style="line-height: 10px;font-weight: bold;">About Us:</span>
-                <el-form ref="postForm" :model="postForm" class="form-container" style="margin-top: 20px;">
+                <el-form ref="formData" class="form-container" style="margin-top: 20px;">
                     <el-input
                         type="textarea"
                         rows="5"
-                        placeholder="A brief introduction about your restaurant"
-                        v-model="textarea2">
+                        placeholder="A brief introduction about your restaurant. Also include fun facts or stories about your dishes, staff, history, restaurant culture, etc. to make your restaurant special and memorable among customers."
+                        v-model="formData.about_us">
                     </el-input>
                 </el-form>
-                <!-- <span class="title" style="line-height: 10px;margin-top: 20px;">More About Us:</span>
-                <el-form ref="postForm" :model="postForm" class="form-container" style="margin-top: 20px;">
-                    <el-input
-                        type="textarea"
-                        rows="5"
-                        placeholder="Fun facts or stories about your dishes, staff, history, restaurant culture, etc. you would like to share with your customers."
-                        v-model="textarea2">
-                    </el-input>
-                </el-form> -->
             </div>
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
@@ -175,69 +160,155 @@
 </template>
 
 <script>
-    import MdInput from '@/components/MDinput';
     import {
-        getList
-    } from "@/api/table";
-
+        updateRestaurant,
+        addRestaurant,
+    } from '@/api/foodie'
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex'
+    import {
+        getToken,
+        setToken,
+        removeToken,
+        getUserID,
+        setUserID,
+        removeUserID,
+    } from '@/utils/auth'
     export default {    
         components:{
-            MdInput,
-        },
-        filters: {
-            statusFilter(status) {
-                const statusMap = {
-                    published: "success",
-                    draft: "gray",
-                    deleted: "danger"
-                };
-                return statusMap[status];
-            }
         },
         data() {
             return {
+				baseUrl:process.env.BASE_API,
                 list: null,
                 listLoading: true,
                 imageUrl: '',
-                value: '',
-                postForm: {},
                 cuisineTypeList:[
-                "American",
-                "British ",
-                "Caribbean ",
-                "Chinese ",
-                "French ",
-                "Greek ",
-                "Indian ",
-                "Italian ",
-                "Japanese ",
-                "Mediterranean ",
-                "Mexican ",
-                "Moroccan ",
-                "Spanish  ",
-                "Thai  ",
-                "Turkish  ",
-                "Vietnamese ",
+                    "American",
+                    "British",
+                    "Caribbean",
+                    "Chinese",
+                    "French",
+                    "Greek",
+                    "Indian",
+                    "Italian",
+                    "Japanese",
+                    "Mediterranean",
+                    "Mexican",
+                    "Moroccan",
+                    "Spanish",
+                    "Thai",
+                    "Turkish",
+                    "Vietnamese",
                 ],
                 restaurantTypeList: ["Dine-in","Quick Type"],
-                formData: {},
-            };
+                
+                countryList:["USA","Canada"],
+                paymentList: [
+                    "Cash",
+                    "Credit Card (Visa)",
+                    "Credit Card (Mastercard)",
+                    "Credit Card (Discover)",
+                    "Credit Card (American Express)",
+                    "Debit Card",
+                    "WeChat Pay",
+                    "Apple Pay"],
+                formData: {
+                    name_en: '',
+                    contact_email: '',
+                    contact_person: '',
+                    pic_url: '',
+                    payment:[],
+                },
+            }
+        },
+        computed: {
+            ...mapGetters(['restaurant'])
+        },
+        mounted(){
+            let myRestaurant = JSON.parse(JSON.stringify(this.restaurant))
+            if(myRestaurant && myRestaurant.id){
+                console.log("+++++++++++++++++++++++++++++++++++")
+                this.formData = myRestaurant
+                if (myRestaurant.payment){
+                    this.formData.payment = myRestaurant.payment.split(",")
+                }else {
+                    this.formData.payment = []
+                }
+            }
+        },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                console.log("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ")
+                let myRestaurant = JSON.parse(JSON.stringify(newRestaurant))
+                if(myRestaurant && myRestaurant.id){
+                    this.formData = myRestaurant
+                    if (myRestaurant.payment){
+                        this.formData.payment = myRestaurant.payment.split(",")
+                    }else {
+                        this.formData.payment = []
+                    }
+                }else{
+                    this.formData = {
+                        name_en: '',
+                        contact_email: '',
+                        contact_person: '',
+                        pic_url: '',
+                        payment:[],
+                    }
+                }
+            }
         },
         created() {
             //this.fetchData();
         },
         methods: {
-            fetchData() {
-                this.listLoading = true;
-                getList(this.listQuery).then(response => {
-                    this.list = response.data.items;
-                    this.listLoading = false;
-                });
+            ...mapActions(['getRestaurants','setRestaurant']),
+            submitForm(formName){
+                console.log(this.formData)
+                let myRestaurant = JSON.parse(JSON.stringify(this.formData))
+                if(myRestaurant.id){
+                    myRestaurant.payment = myRestaurant.payment.join(',')
+                    updateRestaurant(myRestaurant).then(response => {
+                        const data = response.data
+                        if(response.status == 1){
+                            this.$message('success')
+                            this.getRestaurants()
+                            this.setRestaurant(myRestaurant)
+                        }else{
+                            this.$message('fail')
+                        }
+                    }).catch(error => {
+                        this.$message(error);
+                    })
+                }else{
+                    myRestaurant.payment = myRestaurant.payment.join(',')
+                    myRestaurant.administrator_id = parseInt(getUserID())
+                    myRestaurant.code = myRestaurant.name_en+'-'+myRestaurant.country+'-'+myRestaurant.zip_code
+                    addRestaurant(myRestaurant).then(response => {
+                        const data = response.data
+                        if(response.status == 1){
+                            this.$message('success')
+                            this.getRestaurants()
+                            myRestaurant.id=data
+                            this.setRestaurant(myRestaurant)
+                        }else{
+                            this.$message('fail')
+                        }
+                    }).catch(error => {
+                        this.$message(error);
+                    })
+                }
             },
             handleAvatarSuccess(res, file) {
                 //this.imageUrl = URL.createObjectURL(file.raw);
+                console.log(res)
                 if (res.status == 1) {
-					this.formData.pic_url = res.data.aws_url;
+                    this.formData.pic_url = res.data.aws_url;
+                    console.log("=================")
+                    console.log(this.formData.pic_url)
 				}else{
 					this.$message.error('上传图片失败！');
 				}
