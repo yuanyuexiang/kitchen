@@ -8,7 +8,7 @@
                 <span style="font-weight: bold;">Menu Status</span>
             </div>
             <div class="Grid-Row" style="margin-left: 20px;">
-                <span style="margin-right: 10px;">Onhold</span>
+                <span style="margin-right: 10px;">Closed</span>
                 <el-switch
                     v-model="value2"
                     active-color="#13ce66"
@@ -25,32 +25,36 @@
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>(View on Wechat Only)</span>
                 </div>
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Scan the code</span>
+                <div class="Grid-Column" style="align-items: center;">
+                    <!-- <span>Scan the code</span> -->
                     <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
                     <!-- <vue-q-art :config="config"></vue-q-art> -->
                     <!-- <div id="qrcode" ref="qrcode"></div> -->
-                    <vueLogoQrcode ref="qrcode"
-                       :content="content"
-                       :width="width"
-                       logoSrc="/static/logo.png"
-                       :autoGen="true"
-                       logoRadius="20"
-                       @click.native="downloadImage"></vueLogoQrcode>
-                </div>
-                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
-                    <el-form ref="postForm" :model="postForm" class="form-container">
-                        <el-button type="primary" @click.native="downloadImage">Download</el-button>
-                    </el-form>
-                    <span>Download to Print</span>
+                    <vueLogoQrcode
+                        style="align-items: center"
+                        ref="qrcode"
+                        :content="content"
+                        :width="width"
+                        logoSrc="/static/logo.png"
+                        :autoGen="true"
+                        logoRadius="20"
+                        @click.native="downloadImage">
+                    </vueLogoQrcode>
+                    
+                    <div class="Grid-Column" style="align-items: center">
+                        <span style="align-items: center">Download the QR Code for printing</span>
+                        <el-form ref="postForm" :model="postForm" class="form-container">
+                            <el-button type="primary" @click.native="downloadImage">Download</el-button>
+                        </el-form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="Grid-Column">
+        <!-- <div class="Grid-Column">
             <div class="title" style="width: 800px; margin-right: 20px;margin-top: 20px;display:flex; justify-content: space-between">
                 <span style="font-weight: bold;">DIY QR Code Generator</span>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

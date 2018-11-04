@@ -1,43 +1,12 @@
 <template>
     <div class="app-container">
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
-            <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
-                </div>
-            </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
-            </div>
+            <i class="el-icon-back"></i>
         </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
+        <div class="Grid-Title">
+            <span style="font-weight: bold;">Submit a Request</span>
+        </div>
+        <div class="Grid-Row" style="margin-left: 20px;margin-top: 30px;width: 800px;">
             <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
                 <div style="width: 400px;height: 200px;margin-right: 20px;">
                     <span style="mar">Dish Name:</span>
@@ -64,8 +33,8 @@
                     <span style="mar">XXX</span>
                 </div>
             </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
+            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
+                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
             </div>
         </div>
     </div>

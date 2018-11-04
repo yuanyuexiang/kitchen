@@ -1,134 +1,172 @@
 <template>
     <div class="app-container">
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
-            <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
+        <el-tabs v-model="activeName">
+            <el-tab-pane label="Dish List" name="first">
+                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in dishList" :key="item.id" >
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                    </div>
+                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Dish Name:</span>
+                            <span style="margin-top: 20px;">{{item.name_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Category:</span>
+                            <span style="margin-top: 20px;">{{item.category_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Price:</span>
+                            <span>{{item.price}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Description:</span>
+                            <span>{{item.discription_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Ingredients:</span>
+                            <span>{{item.ingredientList}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Options:</span>
+                            <span>{{item.stepList}}</span>
+                        </div>
+                    </div>
+                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                        <router-link :to="{path:'/menuManagement/reviewContent',query: {name: id}}">
+                            <el-button type="primary">Make Changes</el-button>
+                        </router-link>
+                    </div>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
+                <div class="Pagination" style="text-align: left;margin-top: 10px;">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="10"
+                        layout="total, prev, pager, next"
+                        :total="count">
+                    </el-pagination>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
-                </div>
-            </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
-            </div>
-        </div>
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
-            <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
-                </div>
-            </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
-            </div>
-        </div>
+            </el-tab-pane>
+            <el-tab-pane label="Wait for Update" name="second"></el-tab-pane>
+        </el-tabs>
     </div>
 </template>
 
 <script>
-    export default {
+    import {
+        getDishList,
+        getDishCount,
+    } from '@/api/foodie'
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex'
 
+    export default {
         data() {
             return {
                 filterText: '',
-                data2: [{
-                    id: 1,
-                    label: 'Level one 1',
-                    children: [{
-                        id: 4,
-                        label: 'Level two 1-1',
-                        children: [{
-                            id: 9,
-                            label: 'Level three 1-1-1'
-                        }, {
-                            id: 10,
-                            label: 'Level three 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: 'Level one 2',
-                    children: [{
-                        id: 5,
-                        label: 'Level two 2-1'
-                    }, {
-                        id: 6,
-                        label: 'Level two 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: 'Level one 3',
-                    children: [{
-                        id: 7,
-                        label: 'Level two 3-1'
-                    }, {
-                        id: 8,
-                        label: 'Level two 3-2'
-                    }]
-                }],
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                }
+                activeName: 'first',
+                dishList:[],
+                offset: 0,
+
+                limit: 10,
+                count: 0,
+                currentPage: 1,
+                dialogFormVisible: false,
+                selectTable: {},
+                params: {
+                    offset: 0,
+                    limit: 10,
+                    sortby: "id",
+                    order: "desc",
+                    query: "",
+                    timestamp: new Date().getTime()
+                },
             }
+        },
+        computed: {
+            ...mapGetters(['restaurant'])
         },
         watch: {
             filterText(val) {
                 this.$refs.tree2.filter(val)
             }
         },
-
+        mounted(){
+            this.initData()
+            this.params.query = "restaurant_id:"+this.restaurant.id
+        },
         methods: {
+            initData(){
+                try{
+                    const params = {
+                        query: "",
+                        timestamp:new Date().getTime(),
+                    }
+                    params.query = "restaurant_id:"+this.restaurant.id
+                    getDishCount(params).then(response => {
+                        const responseData = response.data
+                        const status = response.status
+                        console.log(responseData)
+                        if (status == 1) {
+                            this.count = responseData
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    });
+
+                    this.getDishes(this.params)
+                }catch(err){
+                    console.log('get data error', err);
+                }
+            },
             filterNode(value, data) {
                 if (!value) return true
                 return data.label.indexOf(value) !== -1
-            }
+            },
+            getDishes(params){
+				getDishList(params).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+						console.log(message);
+					}else{
+						const data = responseData;
+                        this.dishList = data;
+                        this.dishList.forEach(function(dish){
+                            let ingredients = dish.ingredients
+                            let ingredientList = ""
+                            ingredients.forEach(function(ingredient){
+                                ingredientList+=ingredient.name_en+","
+                            })
+                            dish.ingredientList = ingredientList
+                            let steps = dish.steps
+                            let stepList = ""
+                            steps.forEach(function(step){
+                                stepList+=step.name_en+","
+                            })
+                            dish.stepList = stepList
+                        })
+                        console.log(this.dishList);
+					}
+				}).catch(error => {
+					console.log(error);
+				});
+			},
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                this.currentPage = val;
+                this.offset = (val - 1) * this.limit;
+                this.params.offset = this.offset;
+                this.getDishes(this.params);
+            },
         }
     }
 

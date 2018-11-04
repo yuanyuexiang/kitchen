@@ -156,17 +156,18 @@ export const constantRouterMap = [
                     icon: 'link'
                 }
             },
-            /*
             {
-                path: 'translation',
-                name: 'Translation',
+                path: 'reviewContent',
+                name: 'Review Content',
                 component: () =>
-                    import('@/views/translation/index'),
+                    import('@/views/reviewContent/index'),
                 meta: {
-                    title: 'Translation',
+                    title: 'Review Content',
                     icon: 'link'
-                }
+                },
+                hidden: true
             },
+            /*
             {
                 path: 'myDemos',
                 name: 'My Demos',

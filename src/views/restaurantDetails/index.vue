@@ -230,7 +230,6 @@
         mounted(){
             let myRestaurant = JSON.parse(JSON.stringify(this.restaurant))
             if(myRestaurant && myRestaurant.id){
-                console.log("+++++++++++++++++++++++++++++++++++")
                 this.formData = myRestaurant
                 if (myRestaurant.payment){
                     this.formData.payment = myRestaurant.payment.split(",")
@@ -241,7 +240,6 @@
         },
         watch:{
             restaurant(newRestaurant, oldRestaurant){
-                console.log("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ")
                 let myRestaurant = JSON.parse(JSON.stringify(newRestaurant))
                 if(myRestaurant && myRestaurant.id){
                     this.formData = myRestaurant
@@ -274,9 +272,14 @@
                     updateRestaurant(myRestaurant).then(response => {
                         const data = response.data
                         if(response.status == 1){
-                            this.$message('success')
+                            //this.$message('success2')
                             this.getRestaurants()
                             this.setRestaurant(myRestaurant)
+                            this.$notify({
+                                title: 'update success',
+                                message: "It's great that Linglink helps to boost your business! We will get back to you shortly to add your new restaurant for you.",
+                                type: 'success'
+                            });
                         }else{
                             this.$message('fail')
                         }
@@ -290,10 +293,15 @@
                     addRestaurant(myRestaurant).then(response => {
                         const data = response.data
                         if(response.status == 1){
-                            this.$message('success')
+                            //this.$message('success1')
                             this.getRestaurants()
                             myRestaurant.id=data
                             this.setRestaurant(myRestaurant)
+                            this.$notify({
+                                title: 'Get ready for more',
+                                message: "It's great that Linglink helps to boost your business! We will get back to you shortly to add your new restaurant for you.",
+                                type: 'success'
+                            });
                         }else{
                             this.$message('fail')
                         }

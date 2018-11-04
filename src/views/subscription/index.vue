@@ -7,143 +7,111 @@
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Subscription Summary</span>
-                    <el-button type="primary">Upgrade</el-button>
+                    <el-button type="primary" @click="upgrade">Upgrade</el-button>
                 </div>
-                <el-form ref="postForm" :model="postForm" class="form-container">
-                    <el-form-item style="margin-bottom: 10px; " label="My Plan:">
+                <el-form ref="formData" :model="formData" class="form-container">
+                    <el-form-item class="form-item-label" style="margin-bottom: 10px; " label="My Plan:">
                         <div style="margin-right: 30px; margin-top: 15px; display:flex; flex-direction: column;">
-                            <el-radio style="margin-left: 30px;" v-model="radio" label="1">Cash</el-radio>
-                            <el-radio style="margin-top: 10px;" v-model="radio" label="2">Credit Card</el-radio>
-                            <el-radio style="margin-top: 10px;" v-model="radio" label="3">WeChat Pay</el-radio>
-                            <el-radio style="margin-top: 10px;" v-model="radio" label="4">Apple Pay</el-radio>
+                            <!-- <el-radio style="margin-left: 30px; color:inherit;" disabled="true" v-model="formData.x" label="1">Appetizer</el-radio>
+                            <el-radio style="margin-top: 10px;color:inherit;" disabled="true" v-model="formData.x" label="2">Entree</el-radio>
+                            <el-radio style="margin-top: 10px;color:inherit;" disabled="true" v-model="formData.x" label="3">Combo</el-radio> -->
+                            <el-radio-group v-model="formData.my_plan" disabled style="display:flex;flex-direction: column">
+                                <el-radio style="margin-left: 30px; color:inherit;" label="3">Appetizer</el-radio>
+                                <el-radio style="margin-top: 10px;color:inherit;" label="Entree">Entree</el-radio>
+                                <el-radio style="margin-top: 10px;color:inherit;" label="Combo">Combo</el-radio>
+                            </el-radio-group>
                         </div>
                     </el-form-item>
-                    <span class="title" style="line-height: 10px;">Menu Published:</span>
-                    <span class="title">1/1</span>
-                    <span class="title">(可发布数量根据plan计算，可一账户管理多个menu）</span>
                 </el-form>
-            </div>
-        </div>
-        <div class="Grid-Column" style="margin-top: 50px;">
-            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;font-weight: bold;">Billing Information</span>
-                <el-button type="primary">Save</el-button>
-            </div>
-            <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
-                    <el-form ref="postForm" :model="postForm" class="form-container">
-                        <span class="title" style="line-height: 10px;">Card Holder Name</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <span class="title" style="line-height: 10px;">Credit Card Number</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <div class="Grid-Row" style="width: 350px;margin-right: 20px;">
-                            <div style="width: 250px;margin-right: 20px;">
-                                <span class="title" style="line-height: 10px;">Expiration Date</span>
-                                <el-form-item>
-                                    <el-date-picker
-                                        style="width:150px;"
-                                        v-model="value1"
-                                        type="date"
-                                        placeholder="Select">
-                                    </el-date-picker>
-                                </el-form-item>
-                            </div>
-                            <div>
-                                <span class="title" style="line-height: 10px;">CVV</span>
-                                <el-form-item>
-                                    <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
-                                </el-form-item>
-                            </div>
-                        </div>
-                    </el-form>
-                </div>
-                <div class="Grid-Column" style="width: 350px;">
-                    <el-form ref="postForm" class="form-container">
-                        <span class="title" style="line-height: 10px;">Street Address</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <div class="Grid-Row" style="width: 350px;margin-right: 20px;">
-                            <div style="margin-right: 20px;">
-                                <span class="title" style="line-height: 10px;">City:</span>
-                                <el-form-item>
-                                    <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
-                                </el-form-item>
-                            </div>
-                            <div>
-                                <span class="title" style="line-height: 10px;">Zip Code:</span>
-                                <el-form-item>
-                                    <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="input"/>
-                                </el-form-item>
-                            </div>
-                        </div>
-                        <span class="title" style="line-height: 10px;">Country:</span>
-                        <el-form-item>
-                            <el-select v-model="value" placeholder="Select">
-                                <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </el-form-item>
-                    </el-form>
-                </div>
             </div>
         </div>
         <div class="Grid-Column" style="margin-top: 20px;">
             <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
                 <span style="line-height: 30px;font-weight: bold;">Invoice Information (optional)</span>
-                <el-button type="primary">Save</el-button>
+                <el-button type="primary" @click="save">Save</el-button>
             </div>
             <div class="Grid-Row">
-                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
-                    <el-form ref="postForm" :model="postForm" class="form-container">
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
                         <span class="title" style="line-height: 10px;">First Name</span>
                         <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
+                            <el-input :rows="1" type="textarea" v-model="formData.first_name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                         <span class="title" style="line-height: 10px;">Company Name</span>
                         <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <span class="title" style="line-height: 10px;">Street Address</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
+                            <el-input :rows="1" type="textarea" v-model="formData.company_name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                     </el-form>
                 </div>
-                <div class="Grid-Column" style="width: 350px;margin-right: 20px;">
-                    <el-form ref="postForm" class="form-container">
+                <div class="Grid-Column" style="width: 400px;padding-right: 20px;">
+                    <el-form ref="formData" class="form-container">
                         <span class="title" style="line-height: 10px;">Last Name</span>
                         <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <span class="title" style="line-height: 10px;">VAT Number</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <span class="title" style="line-height: 10px;">Street Address 2</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
+                            <el-input :rows="1" type="textarea" v-model="formData.last_name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                     </el-form>
                 </div>
             </div>
-        </div>
-        <div class="Grid-Column" style="margin-top: 20px;">
-            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;font-weight: bold;">Payment History</span>
+            <div class="Grid-Column">
+                <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                    <el-form ref="formData" class="form-container">
+                        <span class="title" style="line-height: 10px;">Street:</span>
+                        <el-form-item>
+                            <el-input type="textarea" v-model="formData.street" class="article-textarea" autosize placeholder=""/>
+                        </el-form-item>
+                        <div style="display:flex;">
+                            <el-form-item class="form-item-label" style="margin-bottom: 10px;" label-width="40px" label="City:">
+                                <el-input type="textarea" v-model="formData.city" class="article-textarea" autosize placeholder=""/>
+                            </el-form-item>
+                            <el-form-item class="form-item-label" style="margin-bottom: 10px;" label-width="120px" label="State/Province:">
+                                <el-input type="textarea" v-model="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
+                            </el-form-item>
+                            <el-form-item class="form-item-label" style="margin-bottom: 10px;" label-width="70px" label="Country:">
+                                <el-select v-model="formData.country" placeholder="Select">
+                                    <el-option
+                                    v-for="item in countryList"
+                                    :key="item"
+                                    :label="item"
+                                    :value="item">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item class="form-item-label" style="margin-bottom: 10px;" label-width="85px" label="Zip Code:">
+                                <el-input type="textarea" v-model="formData.zip_code" class="article-textarea" autosize placeholder=""/>
+                            </el-form-item>
+                        </div>
+                    </el-form>
+                </div>
             </div>
         </div>
-        <div class="Grid-Column">
-            <div class="title" style="width: 600px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;font-weight: bold;">Terms & Contract</span>
+        <div class="Grid-Column" style="margin-top: 20px;margin-bottom: 20px;">
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
+                <span style="line-height: 30px;font-weight: bold;">Statement</span>
+            </div>
+            <div class="Grid-Row">
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
+                        <span class="title" style="line-height: 10px;">Date</span>
+                    </el-form>
+                </div>
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
+                        <span class="title" style="line-height: 10px;">PDF</span>
+                    </el-form>
+                </div>
+            </div>
+            <div class="hr2" style="width: 800px; margin-right: 20px;margin-bottom: 20px;"/> 
+            <div class="Grid-Row">
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
+                        <span class="title" style="line-height: 10px;">November 01, 2018</span>
+                    </el-form>
+                </div>
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
+                        <a :href="pdfURL" download="PaymentStatementSample.pdf"><i class="el-icon-document" style="cursor:pointer" @click="downloadPDF"></i></a>
+                    </el-form>
+                </div>
             </div>
         </div>
     </div>
@@ -152,7 +120,16 @@
 <script>
     import {
         getList
-    } from "@/api/table";
+    } from "@/api/table"
+    import {
+        getSubscription,
+        addSubscription,
+        updateSubscription,
+    } from '@/api/foodie'
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex'
 
     export default {
         filters: {
@@ -168,20 +145,105 @@
         data() {
             return {
                 list: null,
-                listLoading: true
+                listLoading: true,
+                formData:{
+                    my_plan:'Entree',
+                },
+                countryList:["USA","Canada"],
+                theDate:{},
+                pdfURL:'https://s3.us-east-2.amazonaws.com/linglink/public/PaymentStatementSample.pdf',
+                subscription:null,
             };
+        },
+        computed: {
+            ...mapGetters(['restaurant'])
         },
         created() {
             //this.fetchData();
         },
+        mounted(){
+            this.theDate = new Date()
+            this.init()
+        },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                this.init()
+                this.formData={
+                    my_plan:'Entree',
+                }
+            },
+        },
         methods: {
+            init(){
+                this.subscription = null
+                this.getSubscription()
+            },
             fetchData() {
                 this.listLoading = true;
                 getList(this.listQuery).then(response => {
                     this.list = response.data.items;
                     this.listLoading = false;
                 });
-            }
+            },
+            downloadPDF(){
+                window.location.href = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541225423369&di=e61c6d0549651f3cad82862a5b4fcd0b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180815%2F2eb08e528396486e87485658c16cf79f.png"; // 本窗口打开下载
+                //window.open(urls, '_blank'); // 新开窗口下载
+            },
+            upgrade(){
+                this.$notify({
+                    title: 'Get ready for more',
+                    message: "It's great that Linglink helps to boost your business! We will get back to you shortly with more info on our advanced plan options.",
+                    type: 'success'
+                });
+            },
+            getSubscription(formName){
+                if(this.restaurant){
+                    getSubscription(this.restaurant.id).then(response => {
+                        const data = response.data
+                        if(response.status == 1){
+                           this.subscription = data
+                           this.formData = data
+                        }else{
+                            this.$message('fail')
+                        }
+                    }).catch(error => {
+                        this.$message(error);
+                    })
+                }
+            },
+            save(){
+                if(this.subscription){
+                    updateSubscription(this.subscription).then(response => {
+                        const data = response.data
+                        if(response.status == 1){
+                            this.$message({
+                                message: 'update subscription success',
+                                type: 'success'
+                            });
+                        }else{
+                            this.$message.error('update subscription fail')
+                        }
+                    }).catch(error => {
+                        this.$message.error(error);
+                    })
+                }else{
+                    this.formData.restaurant_id = this.restaurant.id
+                    addSubscription(this.formData).then(response => {
+                        const data = response.data
+                        if(response.status == 1){
+                            this.$message({
+                                message: 'create subscription success',
+                                type: 'success'
+                            });
+                            this.subscription = this.formData
+                        }else{
+                            this.$message.error('create subscription fail')
+                        }
+                    }).catch(error => {
+                        this.$message.error(error);
+                    })
+                }
+            },
         }
     };
 
@@ -211,7 +273,17 @@
     height: 178px;
     display: block;
 }
-
+.form-item-label >>> .el-form-item__label {
+    text-align: right;
+    float: left;
+    font-size:inherit;
+    font-weight: inherit;
+    color:inherit;
+    line-height: 40px;
+    padding: 0 12px 0 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .Grid-Row {
     display: flex;
     flex-direction:row;
@@ -240,7 +312,12 @@
     display: flex;
     justify-content: center;
 }
-
+.hr2{ 
+    height:3px;
+    border:none;
+    border-top:1px solid #bfcbd9;
+    margin-top: 10px;
+}  
 </style>
 <style lang="less">
 //文章页textarea修改样式

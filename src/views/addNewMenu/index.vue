@@ -1,72 +1,11 @@
 <template>
     <div class="app-container">
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
-            <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
-                </div>
-            </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
-            </div>
+        <div class="Grid-Column" style="align-items: center;width: 800px;">
+            <div>Become an advanced plan customer and enjoy more services!</div>
+            <div>Simply click the button below to request a free demo.</div>
+            <el-button style="margin-top:30px" type="primary" @click="upgrade">Upgrade Now</el-button>
         </div>
         <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
-            </div>
-            <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
-                </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
-                </div>
-            </div>
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-button type="primary">Edit</el-button>
-            </div>
         </div>
     </div>
 </template>
@@ -77,41 +16,6 @@
         data() {
             return {
                 filterText: '',
-                data2: [{
-                    id: 1,
-                    label: 'Level one 1',
-                    children: [{
-                        id: 4,
-                        label: 'Level two 1-1',
-                        children: [{
-                            id: 9,
-                            label: 'Level three 1-1-1'
-                        }, {
-                            id: 10,
-                            label: 'Level three 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: 'Level one 2',
-                    children: [{
-                        id: 5,
-                        label: 'Level two 2-1'
-                    }, {
-                        id: 6,
-                        label: 'Level two 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: 'Level one 3',
-                    children: [{
-                        id: 7,
-                        label: 'Level two 3-1'
-                    }, {
-                        id: 8,
-                        label: 'Level two 3-2'
-                    }]
-                }],
                 defaultProps: {
                     children: 'children',
                     label: 'label'
@@ -128,7 +32,14 @@
             filterNode(value, data) {
                 if (!value) return true
                 return data.label.indexOf(value) !== -1
-            }
+            },
+            upgrade(){
+                this.$notify({
+                    title: 'Get ready for more',
+                    message: "It's great that Linglink helps to boost your business! We will get back to you shortly with more info on our advanced plan options.",
+                    type: 'success'
+                });
+            },
         }
     }
 

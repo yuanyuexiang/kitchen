@@ -5,16 +5,52 @@
         </div>
         <div class="Grid-Column" style="margin-top: 50px;">
             <div>
-                <div>To receive the best outcome, you are highly recommended to view demos on your mobile phone.</div>
-                <div>You can choose any one of the following ways to access your demo.</div>
+                <!-- <div>To receive the best outcome, you are highly recommended to view demos on your mobile phone.</div>
+                <div>You can choose any one of the following ways to access your demo.</div> -->
+                <div>Reminders:</div>
+                <div>1. To receive the best outcome, please <span style="font-weight:bold">view demos on your mobile phone.</span></div>
+                <div>2. These two versions are demos for 
+                    <el-popover
+                        placement="top-start"
+                        title=""
+                        ref="reference"
+                        width="400"
+                        trigger="hover"
+                        content='The codes here are NOT the same as the one printed for your dine-in customers. If you need to print extra copies for display, please refer to the code in "Launch Menu" page under "Menu Management".'>
+                        <span style="color:#1890FF;cursor:pointer;" slot="reference" @click="visible = !visible">restaurants' use only.</span>
+                    </el-popover>
+                </div>
+
+                <div>3. To scan QR code blow, use the smart phone's 
+                    <el-popover
+                        placement="top-start"
+                        title=""
+                        ref="reference"
+                        width="400"
+                        trigger="hover"
+                        content='You can choose one of the following ways to access your demo. To scan the code using the camera, hold your phone steady for 2-3 seconds towards the QR Code below. Click on the notification to open the website.'>
+                        <span style="color:#1890FF;cursor:pointer;" slot="reference" @click="visible = !visible">Camera function.</span>
+                    </el-popover>
+                </div>
+
+                <div class="Grid-Row" style="margin-top: 20px;">
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <span style="font-weight:bold;margin-top: 20px;">Demo in English</span>
+                        <div style="font-weight:bold;margin-top: 20px;" id="qrcode" ref="qrcode"></div>
+                    </div>
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <span style="font-weight:bold;margin-top: 20px;">Demo in Chinese</span>
+                        <div style="font-weight:bold;margin-top: 20px;" id="qrcode2" ref="qrcode2"></div>
+                    </div>
+                </div>
+
             </div>
-            <div class="Grid-Row" style="margin-top: 20px;">
+            <!-- <div class="Grid-Row" style="margin-top: 20px;">
                 <span style="font-weight: bold;">English Version</span>
             </div>
             <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
                     <div id="qrcode" ref="qrcode"></div>
                 </div>
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
@@ -31,16 +67,15 @@
                     <span>Copy link</span>
                     <span style="margin-top: 20px;">link</span>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <div class="Grid-Column">
+        <!-- <div class="Grid-Column">
             <div class="Grid-Row" style="margin-top: 20px;">
                 <span style="font-weight: bold;">Chinese Version</span>
             </div>
             <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                     <span>Scan the code</span>
-                    <!-- <img style="width: 200px;" src="static/qrcode.jpeg" class="pan-thumb"> -->
                     <div id="qrcode2" ref="qrcode2"></div>
                 </div>
                 <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
@@ -58,7 +93,7 @@
                     <span style="margin-top: 20px;">link</span>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

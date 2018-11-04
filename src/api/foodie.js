@@ -50,10 +50,49 @@ export function updateRestaurant(data) {
         data,
     })
 }
-/*
-export const addRestaurant = data => fetch('/foodie/v1/restaurant', data, 'POST');
-export const updateRestaurant = data => fetch('/foodie/v1/restaurant/'+data.id, data, 'PUT');
-export const deleteRestaurant = id => fetch('/foodie/v1/restaurant/'+id, {}, 'DELETE');
-export const getRestaurantList = data => fetch('/foodie/v1/restaurant', data, 'GET');
-export const getRestaurantCount = data => fetch('/foodie/v1/restaurant/count', data, 'GET');
-*/
+
+export function getSubscription(id) {
+    return request({
+        url: '/foodie/v1/subscription/'+id,
+        method: 'GET',
+    })
+}
+
+export function addSubscription(data) {
+    return request({
+        url: '/foodie/v1/subscription',
+        method: 'POST',
+        data,
+    })
+}
+
+export function updateSubscription(data) {
+    return request({
+        url: '/foodie/v1/subscription/'+data.id,
+        method: 'PUT',
+        data,
+    })
+}
+
+export function getDishCount(params) {
+    return request({
+        url: '/foodie/v1/dish/count',
+        method: 'GET',
+        params
+    });
+}
+
+export function getDishList(params) {
+    return request({
+        url: '/foodie/v1/dish',
+        method: 'GET',
+        params
+    });
+}
+
+export function getDish(id) {
+    return request({
+        url: '/foodie/v1/dish/'+id,
+        method: 'GET',
+    })
+}
