@@ -1,6 +1,6 @@
 <template>
     <div class="app-container" style="width:800px">
-        <el-steps :space="200" :active="0" simple >
+        <el-steps :space="200" :active="active" simple >
             <el-step title="Review Content" class="el-step-width" icon="x">
             </el-step>
             <el-step title="Review Content" class="el-step-width" icon="x">
@@ -8,7 +8,8 @@
             <el-step title="Translate Dishes" class="el-step-width" icon="x">
             </el-step>
         </el-steps>
-        <div class="Grid-Raw" style="margin-top: 20px;margin-left: 20px;">
+
+        <div class="Grid-Raw" v-show="active==1" style="margin-top: 20px;margin-left: 20px;">
             <el-upload
                 class="upload-demo"
                 :action="baseUrl + '/camaro/v1/file'"
@@ -26,6 +27,133 @@
                 <div slot="tip" class="el-upload__tip">Format: PDF, Word, Excel, Jpeg/Png</div>
             </el-upload>
         </div>
+
+
+
+        <el-tabs v-model="activeName" v-show="active==2"  style="width: 800px;">
+            <el-tab-pane label="Dish List" name="first">
+                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in dishList" :key="item.id" >
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                    </div>
+                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Dish Name:</span>
+                            <span style="margin-top: 20px;">{{item.name_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Category:</span>
+                            <span style="margin-top: 20px;">{{item.category_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Price:</span>
+                            <span>{{item.price}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Description:</span>
+                            <span>{{item.discription_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Ingredients:</span>
+                            <span>{{item.ingredientList}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Options:</span>
+                            <span>{{item.stepList}}</span>
+                        </div>
+                    </div>
+                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                        <router-link :to="{path:'/menuManagement/reviewContent',query: {restaurant_id: item.id}}">
+                            <el-button type="primary">Make Changes</el-button>
+                        </router-link>
+                    </div>
+                </div>
+                <div class="Pagination" style="text-align: left;margin-top: 10px;">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="10"
+                        layout="total, prev, pager, next"
+                        :total="count">
+                    </el-pagination>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="Wait for Update" name="second">
+                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in dishList" :key="item.id" >
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                    </div>
+                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Dish Name:</span>
+                            <span style="margin-top: 20px;">{{item.name_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Category:</span>
+                            <span style="margin-top: 20px;">{{item.category_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Price:</span>
+                            <span>{{item.price}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Description:</span>
+                            <span>{{item.discription_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Ingredients:</span>
+                            <span>{{item.ingredientList}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Options:</span>
+                            <span>{{item.stepList}}</span>
+                        </div>
+                    </div>
+                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                        <el-button type="primary" disabled="">Wait for Update</el-button>
+                    </div>
+                </div>
+                <div class="Pagination" style="text-align: left;margin-top: 10px;">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="10"
+                        layout="total, prev, pager, next"
+                        :total="count">
+                    </el-pagination>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+
+
+        <div class="Grid-Column" v-show="active==3" style="margin-top: 20px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                <div class="title" style="display:flex; justify-content: space-between">
+                    <span style="line-height: 30px;font-weight: bold;">Translator Info</span>
+                    <!-- <el-button type="primary">View</el-button> -->
+                </div>
+                <div class="title" style="display:flex; flex-direction:Column;align-items: center;margin-top: 20px;">
+                    <img src="/static/review.jpeg" style="height:100px">
+                    <span style="line-height: 30px;">Your Translator: Grace</span>
+                    <!-- <router-link to="/menuPreparation/reviewContent">dasdasdasdsad</router-link> -->
+                </div>
+            </div>
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                <div class="title" style="display:flex; justify-content: space-between">
+                    <span style="line-height: 30px;font-weight: bold;">Working Progress</span>
+                    <!-- <el-button type="primary">View</el-button> -->
+                </div>
+                <el-steps :active="1">
+                    <el-step title="Content Under Review" description="As soon as you finish finalizing content in the previous step, your translator will roll up sleeves and get to work! "></el-step>
+                    <el-step title="Translation In Progress" description="Your translator is working hard on the menu! We will send you an email with an estimated time of completion."></el-step>
+                    <el-step title="You're All Set!" description='Great! Your Chinese menu is ready to go! Check the "Menu Management" Page to view a demo.'></el-step>
+                </el-steps>
+            </div>
+        </div>
+
+        
     </div>
 </template>
 
@@ -63,6 +191,7 @@
                 content: "http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no",
                 width: 200,
                 fileList:[],
+                active:3
             };
         },
         created() {
@@ -164,6 +293,7 @@
     border-radius: 0px;
     background: white;
     border-bottom: 1px solid #bfcbd9;
+    width: 800px;
 }
 /* .el-step-width >>> .el-step__title {
     max-width: 50% !important;

@@ -184,16 +184,29 @@ export const constantRouterMap = [
     {
         path: '/menuPreparation',
         component: Layout,
-        children: [{
-            path: 'index',
-            name: 'Menu Preparation',
-            component: () =>
-                import('@/views/menuPreparation/index'),
-            meta: {
-                title: 'Menu Preparation',
-                icon: 'form'
-            }
-        }]
+        children: [
+            {
+                path: 'index',
+                name: 'Menu Preparation',
+                component: () =>
+                    import('@/views/menuPreparation/index'),
+                meta: {
+                    title: 'Menu Preparation',
+                    icon: 'form'
+                },
+            },
+            {
+                path: 'reviewContent',
+                name: 'Review Content',
+                component: () =>
+                    import('@/views/reviewContent/index'),
+                meta: {
+                    title: 'Review Content',
+                    icon: 'link'
+                },
+                hidden: true
+            },
+        ]
     },
     {
         path: '/marketingCampaign',

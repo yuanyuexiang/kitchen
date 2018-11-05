@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <el-tabs v-model="activeName">
+        <el-tabs v-model="activeName" style="width: 800px;">
             <el-tab-pane label="Dish List" name="first">
                 <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in dishList" :key="item.id" >
                     <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
