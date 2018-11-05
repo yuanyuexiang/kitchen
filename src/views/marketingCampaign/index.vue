@@ -1,6 +1,12 @@
 <template>
     <div class="app-container">
-        
+        <div class="Grid-Column" style="align-items: center;width: 800px;">
+            <div>Become an advanced plan customer and enjoy more services!</div>
+            <div>Simply click the button below to request a free demo.</div>
+            <el-button style="margin-top:30px" type="primary" @click="upgrade">Upgrade Now</el-button>
+        </div>
+        <div class="Grid-Row">
+        </div>
     </div>
 </template>
 
@@ -62,6 +68,13 @@
             },
             downloadImage() {
                 this.$refs.qrcode.genQrCodeImageDownload();
+            },
+            upgrade(){
+                this.$notify({
+                    title: 'Get ready for more',
+                    message: "It's great that Linglink helps to boost your business! We will get back to you shortly with more info on our advanced plan options.",
+                    type: 'success'
+                });
             },
         }
     };
@@ -133,6 +146,7 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
+            height: 36px !important;
         }
     }
     .title {

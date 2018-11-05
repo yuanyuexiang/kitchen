@@ -152,8 +152,8 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
-            min-height: 35px;
-            height: 35px;
+            min-height: 36px;
+            height: 36px !important;
         }
     }
     .title {
@@ -167,6 +167,7 @@
         border: none;
         border-radius: 0px;
         border-bottom: 1px solid #bfcbd9;
+        height: 36px !important;
     }
 }
 </style>

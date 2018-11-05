@@ -12,11 +12,8 @@
                 <el-form ref="formData" :model="formData" class="form-container">
                     <el-form-item class="form-item-label" style="margin-bottom: 10px; " label="My Plan:">
                         <div style="margin-right: 30px; margin-top: 15px; display:flex; flex-direction: column;">
-                            <!-- <el-radio style="margin-left: 30px; color:inherit;" disabled="true" v-model="formData.x" label="1">Appetizer</el-radio>
-                            <el-radio style="margin-top: 10px;color:inherit;" disabled="true" v-model="formData.x" label="2">Entree</el-radio>
-                            <el-radio style="margin-top: 10px;color:inherit;" disabled="true" v-model="formData.x" label="3">Combo</el-radio> -->
                             <el-radio-group v-model="formData.my_plan" disabled style="display:flex;flex-direction: column">
-                                <el-radio style="margin-left: 30px; color:inherit;" label="3">Appetizer</el-radio>
+                                <el-radio style="margin-left: 30px; color:inherit;" label="Appetizer">Appetizer</el-radio>
                                 <el-radio style="margin-top: 10px;color:inherit;" label="Entree">Entree</el-radio>
                                 <el-radio style="margin-top: 10px;color:inherit;" label="Combo">Combo</el-radio>
                             </el-radio-group>
@@ -109,7 +106,7 @@
                 </div>
                 <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="formData" :model="formData" class="form-container">
-                        <a :href="pdfURL" download="PaymentStatementSample.pdf"><i class="el-icon-document" style="cursor:pointer" @click="downloadPDF"></i></a>
+                        <a :href="pdfURL" target="_blank" download="PaymentStatementSample.pdf"><i class="el-icon-document" style="cursor:pointer"></i></a>
                     </el-form>
                 </div>
             </div>
@@ -147,7 +144,7 @@
                 list: null,
                 listLoading: true,
                 formData:{
-                    my_plan:'Entree',
+                    my_plan:'Appetizer',
                 },
                 countryList:["USA","Canada"],
                 theDate:{},
@@ -184,10 +181,6 @@
                     this.list = response.data.items;
                     this.listLoading = false;
                 });
-            },
-            downloadPDF(){
-                window.location.href = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541225423369&di=e61c6d0549651f3cad82862a5b4fcd0b&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180815%2F2eb08e528396486e87485658c16cf79f.png"; // 本窗口打开下载
-                //window.open(urls, '_blank'); // 新开窗口下载
             },
             upgrade(){
                 this.$notify({
@@ -329,6 +322,7 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
+            height: 36px !important;
         }
     }
     .title {

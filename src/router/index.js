@@ -147,12 +147,12 @@ export const constantRouterMap = [
                 }
             },
             {
-                path: 'addNewMenu',
-                name: 'Add New Menu',
+                path: 'addNewDish',
+                name: 'Add New Dish',
                 component: () =>
-                    import('@/views/addNewMenu/index'),
+                    import('@/views/addNewDish/index'),
                 meta: {
-                    title: 'Add New Menu',
+                    title: 'Add New Dish',
                     icon: 'link'
                 }
             },
@@ -210,6 +210,21 @@ export const constantRouterMap = [
         }]
     },
     {
+        path: '/myAccount',
+        component: Layout,
+        children: [{
+            path: 'index',
+            name: 'My Account',
+            component: () =>
+                import('@/views/myAccount/index'),
+            meta: {
+                title: 'My Account',
+                icon: 'form'
+            }
+        }]
+    },
+    /*
+    {
         path: '/yourAccount',
         component: Layout,
         redirect: '/yourAccount/profile',
@@ -220,7 +235,7 @@ export const constantRouterMap = [
         },
         children: [
             {
-                path: 'profile',
+                path: '/profile',
                 name: 'Profile',
                 component: () =>
                     import('@/views/profile/index'),
@@ -370,7 +385,7 @@ export const constantRouterMap = [
 ]
 
 export default new Router({
-    // mode: 'history', //后端支持可开
+    //mode: 'history', //后端支持可开
     scrollBehavior: () => ({
         y: 0
     }),

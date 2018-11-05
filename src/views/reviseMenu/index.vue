@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                        <router-link :to="{path:'/menuManagement/reviewContent',query: {name: id}}">
+                        <router-link :to="{path:'/menuManagement/reviewContent',query: {restaurant_id: item.id}}">
                             <el-button type="primary">Make Changes</el-button>
                         </router-link>
                     </div>
@@ -49,7 +49,52 @@
                     </el-pagination>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="Wait for Update" name="second"></el-tab-pane>
+            <el-tab-pane label="Wait for Update" name="second">
+                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in dishList" :key="item.id" >
+                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                    </div>
+                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Dish Name:</span>
+                            <span style="margin-top: 20px;">{{item.name_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Category:</span>
+                            <span style="margin-top: 20px;">{{item.category_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Price:</span>
+                            <span>{{item.price}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Description:</span>
+                            <span>{{item.discription_en}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Ingredients:</span>
+                            <span>{{item.ingredientList}}</span>
+                        </div>
+                        <div style="width: 400px;margin-right: 20px;">
+                            <span style="font-weight:bold;">Options:</span>
+                            <span>{{item.stepList}}</span>
+                        </div>
+                    </div>
+                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                        <el-button type="primary" disabled="">Wait for Update</el-button>
+                    </div>
+                </div>
+                <div class="Pagination" style="text-align: left;margin-top: 10px;">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="currentPage"
+                        :page-size="10"
+                        layout="total, prev, pager, next"
+                        :total="count">
+                    </el-pagination>
+                </div>
+            </el-tab-pane>
         </el-tabs>
     </div>
 </template>
@@ -90,10 +135,11 @@
         computed: {
             ...mapGetters(['restaurant'])
         },
-        watch: {
-            filterText(val) {
-                this.$refs.tree2.filter(val)
-            }
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                this.initData()
+                this.params.query = "restaurant_id:"+this.restaurant.id
+            },
         },
         mounted(){
             this.initData()
@@ -237,6 +283,7 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
+            height: 36px !important;
         }
     }
     .title {

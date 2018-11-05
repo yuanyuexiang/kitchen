@@ -1,90 +1,86 @@
 <template>
     <div class="app-container">
         <div class="Grid-Row">
-            <i class="el-icon-back"></i>
+            <i class="el-icon-back" style="cursor: pointer;" @click="goback"></i>
         </div>
         <div class="Grid-Title">
             <span style="font-weight: bold;">Submit a Request</span>
         </div>
         <div class="Grid-Row" style="margin-left: 20px;margin-top: 30px;width: 800px;">
             <div class="Grid-Column" style="width: 400px;height: 250px;margin-right: 20px;">
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Dish Name:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 0px;">
+                    <span style="font-weight:bold;">Dish Name:</span>
+                    <span style="margin-top: 20px;">{{dish.name_en}}</span>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Category:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 20px;">
+                    <span style="font-weight:bold;">Category:</span>
+                    <span style="margin-top: 20px;">{{dish.category_en}}</span>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Price:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 20px;">
+                    <span style="font-weight:bold;">Price:</span>
+                    <span>{{dish.price}}</span>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Description:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 20px;">
+                    <span style="font-weight:bold;">Description:</span>
+                    <span>{{dish.discription_en}}</span>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Ingredients:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 20px;">
+                    <span style="font-weight:bold;">Ingredients:</span>
+                    <span>{{dish.ingredientList}}</span>
                 </div>
-                <div style="width: 400px;height: 200px;margin-right: 20px;">
-                    <span style="mar">Options:</span>
-                    <span style="mar">XXX</span>
+                <div style="width: 400px;margin-top: 20px;">
+                    <span style="font-weight:bold;">Options:</span>
+                    <span>{{dish.stepList}}</span>
                 </div>
             </div>
-            <div class="Grid-Column" style="width: 200px;height: 200px;margin-right: 20px;">
-                <img style="width: 200px;" src="static/logo.png" class="pan-thumb">
+            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                <img style="width: 200px;" :src="dish.pic_url" class="pan-thumb">
+            </div>
+        </div>
+        <div class="Grid-Column" style="margin-left: 20px;margin-top: 20px;margin-bottom: 20px;">
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
+                <span style="line-height: 30px;font-weight: bold;">Make Changes:</span>
+            </div>
+            <div class="hr2" style="width: 800px; margin-right: 20px;margin-bottom: 20px;"/> 
+            <div class="Grid-Column">
+                <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                    <el-form ref="formData" :model="formData" class="form-container">
+                        <el-form-item class="form-item-label" style="margin-bottom: 10px;" label-width="120px" label="Content Tab:">
+                            <el-select v-model="formData.field" placeholder="Select">
+                                <el-option
+                                v-for="item in fieldList"
+                                :key="item"
+                                :label="item"
+                                :value="item">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item class="form-item-label" style="width: 800px;margin-bottom: 10px;" label-width="120px" label="New Content:">
+                            <el-input type="textarea" :rows="3" v-model="formData.content" placeholder="Leave a message"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </div>
+                <div class="Grid-Row" style="margin-top: 20px;">
+                    <el-button type="primary" @click="submitForm('formData')">Submit</el-button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {
+        getDish,
+    } from '@/api/foodie'
     export default {
 
         data() {
             return {
                 filterText: '',
-                data2: [{
-                    id: 1,
-                    label: 'Level one 1',
-                    children: [{
-                        id: 4,
-                        label: 'Level two 1-1',
-                        children: [{
-                            id: 9,
-                            label: 'Level three 1-1-1'
-                        }, {
-                            id: 10,
-                            label: 'Level three 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: 'Level one 2',
-                    children: [{
-                        id: 5,
-                        label: 'Level two 2-1'
-                    }, {
-                        id: 6,
-                        label: 'Level two 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    label: 'Level one 3',
-                    children: [{
-                        id: 7,
-                        label: 'Level two 3-1'
-                    }, {
-                        id: 8,
-                        label: 'Level two 3-2'
-                    }]
-                }],
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                }
+                restaurant_id:0,
+                dish:{},
+                formData:{},
+                fieldList:["Dish Name","Category","Price","Description","Ingredients","Options",],
             }
         },
         watch: {
@@ -92,12 +88,35 @@
                 this.$refs.tree2.filter(val)
             }
         },
-
+        mounted(){
+            console.log("this.$route.query")
+            console.log(this.$route.query)
+            let restaurant_id = this.$route.query.restaurant_id
+            this.getDish(restaurant_id)
+        },
         methods: {
             filterNode(value, data) {
                 if (!value) return true
                 return data.label.indexOf(value) !== -1
-            }
+            },
+            goback(){
+                this.$router.go(-1)
+            },
+            getDish(id){
+				getDish(id).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+						console.log(message);
+					}else{
+						this.dish = responseData;
+					}
+				}).catch(error => {
+					console.log(error);
+				});
+			},
         }
     }
 
@@ -127,7 +146,12 @@
     height: 178px;
     display: block;
 }
-
+.hr2{ 
+    height:3px;
+    border:none;
+    border-top:1px solid #bfcbd9;
+    margin-top: 10px;
+}
 .Grid-Row {
     display: flex;
     flex-direction:row;
@@ -168,6 +192,7 @@
             border: none;
             border-radius: 0px;
             border-bottom: 1px solid #bfcbd9;
+            height: 36px !important;
         }
     }
     .title {
