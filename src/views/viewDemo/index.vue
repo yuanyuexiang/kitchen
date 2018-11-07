@@ -33,83 +33,54 @@
                     </el-popover>
                 </div>
 
-                <div class="Grid-Row" style="margin-top: 20px;">
+                <div class="Grid-Row" style="width: 800px;margin-top: 20px;justify-content:space-around;">
                     <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                         <span style="font-weight:bold;margin-top: 20px;">Demo in English</span>
-                        <div style="font-weight:bold;margin-top: 20px;" id="qrcode" ref="qrcode"></div>
+                        <div style="font-weight:bold;margin-top: 20px;" id="qrcodeEnglish"></div>
                     </div>
                     <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
                         <span style="font-weight:bold;margin-top: 20px;">Demo in Chinese</span>
-                        <div style="font-weight:bold;margin-top: 20px;" id="qrcode2" ref="qrcode2"></div>
+                        <div style="font-weight:bold;margin-top: 20px;" id="qrcodeChinese"></div>
                     </div>
                 </div>
-
             </div>
-            <!-- <div class="Grid-Row" style="margin-top: 20px;">
-                <span style="font-weight: bold;">English Version</span>
-            </div>
-            <div class="Grid-Row" style="margin-top: 20px;">
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Scan the code</span>
-                    <div id="qrcode" ref="qrcode"></div>
-                </div>
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Message me the link</span>
-                    <el-form style="margin-top: 20px;" ref="postForm" :model="postForm" class="form-container">
-                        <span class="title" style="line-height: 10px;">Mobile Number</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <el-button type="primary">Send</el-button>
-                    </el-form>
-                </div>
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Copy link</span>
-                    <span style="margin-top: 20px;">link</span>
-                </div>
-            </div> -->
         </div>
-        <!-- <div class="Grid-Column">
-            <div class="Grid-Row" style="margin-top: 20px;">
-                <span style="font-weight: bold;">Chinese Version</span>
-            </div>
-            <div class="Grid-Row" style="margin-top: 20px;">
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Scan the code</span>
-                    <div id="qrcode2" ref="qrcode2"></div>
-                </div>
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Message me the link</span>
-                    <el-form style="margin-top: 20px;" ref="postForm" :model="postForm" class="form-container">
-                        <span class="title" style="line-height: 10px;">Mobile Number</span>
-                        <el-form-item>
-                            <el-input :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please input contents"/>
-                        </el-form-item>
-                        <el-button type="primary">Send</el-button>
-                    </el-form>
-                </div>
-                <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                    <span>Copy link</span>
-                    <span style="margin-top: 20px;">link</span>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
 <script>
     import QRCode from 'qrcodejs2'
+    import {
+        mapGetters,
+        mapActions
+    } from 'vuex'
 
     export default {
         data() {
             return {
                 filterText: '',
+                qrcodeChinese:{},
+                qrcodeEnglish:{},
+                qrcodeChineseText:'',
+                qrcodeEnglishText:'',
             }
         },
-        watch: {
-            filterText(val) {
-                this.$refs.tree2.filter(val)
-            }
+        computed: {
+            ...mapGetters(['restaurant'])
+        },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no&lang=en'
+                this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no'
+                this.qrcodeChinese.clear()
+                this.qrcodeEnglish.clear()
+                this.qrcodeChinese.makeCode(this.qrcodeChineseText);
+                this.qrcodeEnglish.makeCode(this.qrcodeEnglishText);
+            },
+        },
+        created(){
+            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no&lang=en'
+            this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no'
         },
         mounted(){
             this.createQrcode()
@@ -120,15 +91,17 @@
                 return data.label.indexOf(value) !== -1
             },
             createQrcode() {
-                let qrcode = new QRCode('qrcode', {  
+                this.qrcodeChinese = new QRCode('qrcodeChinese', {  
                     width: 180,  // 设置宽度 
                     height: 180, // 设置高度
-                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
+                    text: this.qrcodeChineseText,
+	                correctLevel : QRCode.CorrectLevel.L
                 })
-                let qrcode2 = new QRCode('qrcode2', {  
+                this.qrcodeEnglish = new QRCode('qrcodeEnglish', {  
                     width: 180,  // 设置宽度 
                     height: 180, // 设置高度
-                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
+                    text: this.qrcodeEnglishText,
+	                correctLevel : QRCode.CorrectLevel.L
                 })
             },
         }

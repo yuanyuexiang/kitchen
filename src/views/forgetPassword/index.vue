@@ -10,7 +10,16 @@
                 <span class="svg-container svg-container_login">
                     <svg-icon icon-class="user" />
                 </span>
-                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
+                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="email" />
+            </el-form-item>
+            <el-form-item prop="validationCode">
+                <span class="svg-container svg-container_login">
+                    <svg-icon icon-class="user" />
+                </span>
+                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="code" />
+                <span class="show-pwd" @click="sendMsg">
+                    {{buttonName}}
+                </span>
             </el-form-item>
             <el-form-item prop="password">
                 <span class="svg-container">
@@ -24,18 +33,12 @@
             </el-form-item>
             <el-form-item>
                 <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-                    Sign in
+                    Submit
                 </el-button>
             </el-form-item>
-            <!--
-            <div class="tips">
-                <span style="margin-right:20px;">username: admin</span>
-                <span> password: admin</span>
-            </div>
-            -->
             <div class="tips">
                 <span>
-                    <router-link to="/forgetPassword">forget password</router-link>
+                    <router-link to="/login">go back</router-link>
                 </span>
             </div>
         </el-form>
@@ -84,7 +87,11 @@
                     }]
                 },
                 loading: false,
-                pwdType: 'password'
+                pwdType: 'password',
+
+                buttonName:"Send code to email",
+                isDisabled:false,
+                time: 30,
             }
         },
         methods: {
@@ -100,18 +107,7 @@
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true
-                        /*
-                        this.$store.dispatch('Login', this.loginForm).then(() => {
-                            this.loading = false
-                            this.$router.push({
-                                path: '/'
-                            })
-                        }).catch(() => {
-                            this.loading = false
-                        })
-                        */
-                       
-                       this.Login({username:this.loginForm.username,password:md5(this.loginForm.password)}).then(() => {
+                        this.Login({username:this.loginForm.username,password:md5(this.loginForm.password)}).then(() => {
                             this.loading = false
                             this.getRestaurants()
                             this.$router.push({
@@ -124,15 +120,22 @@
                         console.log('error submit!!')
                         return false
                     }
-                    /*
-                    if (valid) {
-                        this.loading = false
-                        this.$router.push({
-                            path: '/'
-                        })
-                    }
-                    */
                 })
+            },
+            sendMsg() {
+                let me = this;
+                me.isDisabled = true;
+                let interval = window.setInterval(function() {
+                    me.buttonName = '(' + me.time + 'S)Send again';
+                    --me.time;
+                    if(me.time < 0) {
+                        me.buttonName = "Send code to email";
+                        me.time = 30;
+                        me.isDisabled = false;
+                        window.clearInterval(interval);
+                    }
+                }, 1000);
+
             }
         }
     }
@@ -179,6 +182,12 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+.validationCode{
+    width: 50%;
+}
+.validationCode /deep/ .el-input{
+    width: 80%;
 }
 </style>
 

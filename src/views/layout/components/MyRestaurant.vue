@@ -49,8 +49,6 @@
                 }
             },
             restaurants(newRestaurants, oldRestaurants){
-                console.log("-------------watch-----------------")
-                console.log(newRestaurants)
             }
         },
         data() {
@@ -64,10 +62,8 @@
                 if(command != undefined){
                     if( !this.currentRestaurant || this.currentRestaurant.id != command.id){
                         this.currentRestaurant = command;
-                        console.log("****************************")
-                        console.log(this.currentRestaurant)
                         this.setRestaurant(this.currentRestaurant)
-                        this.$message('click on item ' + command.name_en);
+                        //this.$message('click on item ' + command.name_en);
                     }
                 }else{
                     this.deleteRestaurant()

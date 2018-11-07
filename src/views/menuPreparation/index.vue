@@ -145,7 +145,7 @@
                     <span style="line-height: 30px;font-weight: bold;">Working Progress</span>
                     <!-- <el-button type="primary">View</el-button> -->
                 </div>
-                <el-steps :active="1">
+                <el-steps :align-center="true" :active="1">
                     <el-step title="Content Under Review" description="As soon as you finish finalizing content in the previous step, your translator will roll up sleeves and get to work! "></el-step>
                     <el-step title="Translation In Progress" description="Your translator is working hard on the menu! We will send you an email with an estimated time of completion."></el-step>
                     <el-step title="You're All Set!" description='Great! Your Chinese menu is ready to go! Check the "Menu Management" Page to view a demo.'></el-step>
@@ -153,7 +153,7 @@
             </div>
         </div>
 
-        
+        <el-button @click="change">Next</el-button>
     </div>
 </template>
 
@@ -229,6 +229,13 @@
                     this.$message.error('上传头像图片大小不能超过 2MB!');
                 }
                 return isLt2M;
+            },
+            change(){
+                if(this.active == 3){
+                    this.active = 1
+                }else{
+                    this.active++
+                }
             }
         }
     };

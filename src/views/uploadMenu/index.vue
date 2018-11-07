@@ -1,81 +1,50 @@
 <template>
     <div class="app-container">
-        <div class="Grid-Row">
-            <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                <el-form ref="postForm" :model="postForm" class="form-container">
-                    <span class="title" style="line-height: 10px;font-weight: bold;">Upload PDF/Picture: </span>
-                </el-form>
-            </div>
-            <div class="Grid-Column" style="width: 300px;margin-right: 20px;"> 
-                <el-upload
-                    class="avatar-uploader"
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :show-file-list="false"
-                    :on-success="handleAvatarSuccess"
-                    :before-upload="beforeAvatarUpload">
-                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-                <span style="margin-top: 20px;">Only xx format accepted.</span>
+        <div class="Grid-Title">
+            <span style="font-weight: bold;">Upload Menu</span>
+        </div>
+        <div class="Grid-Row" style="margin-top: 50px;">
+            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                <div class="title" style="display:flex; justify-content: space-between">
+                    <span style="line-height: 30px;font-weight: bold;">Tips</span>
+                    <!-- <el-button type="primary">View</el-button> -->
+                </div>
+                <span style="margin-top: 20px;margin-bottom: 20px;">
+                Linglink <a style="color:#1890FF;" target="_blank" href="http://www.linglink.us/llktermsofservice">Terms of Service</a> and <a target="_blank" style="color:#1890FF;" href="http://www.linglink.us/llkprivacypolicy">Privacy Policy</a> explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
+                </span>
             </div>
         </div>
-        <div class="Grid-Row" style="margin-top: 20px;">
-            <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                <el-form ref="postForm" :model="postForm" class="form-container">
-                    <span class="title" style="line-height: 10px;font-weight: bold;">DIY Upload Menu: </span>
-                </el-form>
-            </div>
-            <div class="Grid-Column" style="width: 300px;margin-right: 20px;"> 
-                <el-form ref="formData" label-width="110px" class="demo-formData">
-                    <el-form-item label="Dish Name*" prop="name_cn">
-						<el-input></el-input>
-					</el-form-item>
-					<el-form-item label="Category" prop="name_en">
-						<el-input></el-input>
-					</el-form-item>
-					<el-form-item label="price*$" prop="least">
-						<el-input></el-input>
-					</el-form-item>
-                    <el-form-item label="Image" prop="price">
-						<el-upload
-						  class="avatar-uploader"
-						  :action="baseUrl + '/camaro/v1/file'"
-						  :show-file-list="false"
-						  :on-success="uploadImg"
-						  :before-upload="beforeImgUpload">
-						  <img v-if="formData.pic_url" :src="formData.pic_url" class="avatar">
-						  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-						</el-upload>
-					</el-form-item>
-                    <el-form-item label="Description" prop="least">
-						<el-input></el-input>
-					</el-form-item>
-                    <el-form-item label="Ingredients" prop="rule">
-						<el-select style="width: 100%;" v-model="formData.ingredients" value-key="id" multiple placeholder="请选择">
-							<el-option
-							v-for="item in ingredients"
-							size="medium"
-							:label="item.name_cn"
-							:key="item.id"
-							:value="item">
-							</el-option>
-						</el-select>
-					</el-form-item>
-					<el-form-item label="Add option" prop="rule">
-						<el-select style="width: 100%;" v-model="formData.steps" value-key="id" multiple placeholder="请选择">
-							<el-option
-							v-for="item in steps"
-							size="medium"
-							:label="item.name_cn"
-							:key="item.id"
-							:value="item">
-							</el-option>
-						</el-select>
-					</el-form-item>
-					<el-form-item class="button_submit">
-						<el-button type="primary" @click="submitForm('formData')">Subbmit</el-button>
-					</el-form-item>
-                </el-form>
+        <div class="Grid-Row">
+            <div class="Grid-Raw" style="margin-top: 20px;width: 800px;">
+                <!-- <el-upload
+                    class="upload-demo"
+                    :action="baseUrl + '/camaro/v1/file'"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    multiple
+                    :limit="10"
+                    :on-exceed="handleExceed"
+                    :on-success="handleSuccess"
+                    :before-upload="beforeUpload"
+                    :file-list="fileList">
+                    <el-button size="small" type="primary">Choose File</el-button>
+                    <div slot="tip" class="el-upload__tip">SIze: less than 2 MB</div>
+                    <div slot="tip" class="el-upload__tip">Format: PDF, Word, Excel, Jpeg/Png</div>
+                </el-upload> -->
+                <el-upload
+                    class="upload-demo"
+                    ref="upload"
+                    :action="baseUrl + '/camaro/v1/file'"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :file-list="fileList"
+                    :auto-upload="false">
+                    <el-button slot="trigger" size="small" type="primary">Choose File</el-button>
+                    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Upload To Server</el-button>
+                    <div slot="tip" class="el-upload__tip">Size: less than 2 MB</div>
+                    <div slot="tip" class="el-upload__tip">Format: PDF, Word, Excel, Jpeg/Png</div>
+                </el-upload>
             </div>
         </div>
     </div>
@@ -108,6 +77,8 @@
 					pic_url:'',
 					//restaurant_id:0,
 				},
+				baseUrl:process.env.BASE_API,
+                fileList:[],
             };
         },
         created() {
@@ -121,25 +92,22 @@
                     this.listLoading = false;
                 });
             },
-			uploadImg(res, file) {
-				if (res.status == 1) {
-					this.formData.pic_url = res.data.aws_url;
-				}else{
-					this.$message.error('上传图片失败！');
-				}
-			},
-			beforeImgUpload(file) {
-				const isRightType = (file.type === 'image/jpeg') || (file.type === 'image/png');
-				const isLt2M = file.size / 1024 / 1024 < 2;
-
-				if (!isRightType) {
-					this.$message.error('上传图片只能是 JPG 格式!');
-				}
-				if (!isLt2M) {
-					this.$message.error('上传图片大小不能超过 2MB!');
-				}
-				return isRightType && isLt2M;
-			},
+            submitUpload() {
+                this.$refs.upload.submit();
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            beforeUpload(file) {
+                const isLt2M = file.size / 1024 / 1024 < 2;
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isLt2M;
+            },
         }
     };
 

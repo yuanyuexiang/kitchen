@@ -82,6 +82,34 @@ export const constantRouterMap = [
             },
         ]
     },
+    /*
+    {
+        path: '/menuPreparation',
+        component: Layout,
+        children: [
+            {
+                path: 'index',
+                name: 'Menu Preparation',
+                component: () =>
+                    import('@/views/menuPreparation/index'),
+                meta: {
+                    title: 'Menu Preparation',
+                    icon: 'form'
+                },
+            },
+            {
+                path: 'reviewContent',
+                name: 'Review Content',
+                component: () =>
+                    import('@/views/reviewContent/index'),
+                meta: {
+                    title: 'Review Content',
+                    icon: 'link'
+                },
+                hidden: true
+            },
+        ]
+    },*/
     {
         path: '/menuManagement',
         component: Layout,
@@ -92,7 +120,6 @@ export const constantRouterMap = [
             icon: 'example'
         },
         children: [
-            /*
             {
                 path: 'uploadMenu',
                 name: 'Upload Menu',
@@ -103,7 +130,16 @@ export const constantRouterMap = [
                     icon: 'link'
                 }
             },
-            */
+            {
+                 path: 'reviseMenu',
+                 name: 'Revise Menu',
+                 component: () =>
+                     import('@/views/reviseMenu/index'),
+                 meta: {
+                     title: 'Revise Menu',
+                     icon: 'link'
+                 }
+            },
             {
                 path: 'viewDemo',
                 name: 'View Demo',
@@ -135,17 +171,6 @@ export const constantRouterMap = [
                     icon: 'link'
                 }
             },
-            */
-           {
-                path: 'reviseMenu',
-                name: 'Revise Menu',
-                component: () =>
-                    import('@/views/reviseMenu/index'),
-                meta: {
-                    title: 'Revise Menu',
-                    icon: 'link'
-                }
-            },
             {
                 path: 'addNewDish',
                 name: 'Add New Dish',
@@ -167,7 +192,6 @@ export const constantRouterMap = [
                 },
                 hidden: true
             },
-            /*
             {
                 path: 'myDemos',
                 name: 'My Demos',
@@ -179,33 +203,6 @@ export const constantRouterMap = [
                 }
             },
             */
-        ]
-    },
-    {
-        path: '/menuPreparation',
-        component: Layout,
-        children: [
-            {
-                path: 'index',
-                name: 'Menu Preparation',
-                component: () =>
-                    import('@/views/menuPreparation/index'),
-                meta: {
-                    title: 'Menu Preparation',
-                    icon: 'form'
-                },
-            },
-            {
-                path: 'reviewContent',
-                name: 'Review Content',
-                component: () =>
-                    import('@/views/reviewContent/index'),
-                meta: {
-                    title: 'Review Content',
-                    icon: 'link'
-                },
-                hidden: true
-            },
         ]
     },
     {
@@ -232,9 +229,15 @@ export const constantRouterMap = [
                 import('@/views/myAccount/index'),
             meta: {
                 title: 'My Account',
-                icon: 'form'
+                icon: 'user'
             }
         }]
+    },
+    {
+        path: '/forgetPassword',
+        component: () =>
+            import('@/views/forgetPassword/index'),
+        hidden: true
     },
     /*
     {

@@ -16,7 +16,9 @@
     "dependencies": {
         "@njshaoshao/vue-logo-qrcode": "^1.0.1",
         "axios": "0.18.0",
+        "downloadjs": "^1.4.7",
         "element-ui": "2.4.6",
+        "html2canvas": "^1.0.0-alpha.12",
         "js-cookie": "2.2.0",
         "js-md5": "^0.7.3",
         "less": "^3.8.1",
@@ -26,6 +28,7 @@
         "qrcodejs2": "0.0.2",
         "vue": "2.5.17",
         "vue-qart": "^2.2.0",
+        "vue-qr": "^1.5.2",
         "vue-router": "3.0.1",
         "vuex": "3.0.1"
     },
