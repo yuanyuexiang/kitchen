@@ -10,7 +10,10 @@
                     <!-- <el-button type="primary">View</el-button> -->
                 </div>
                 <span style="margin-top: 20px;margin-bottom: 20px;">
-                Linglink <a style="color:#1890FF;" target="_blank" href="http://www.linglink.us/llktermsofservice">Terms of Service</a> and <a target="_blank" style="color:#1890FF;" href="http://www.linglink.us/llkprivacypolicy">Privacy Policy</a> explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
+                Use button below to upload your full menu. It can be in the format of PDF, Word document, Excel sheet, or an image file. 
+                </span>
+                <span style="margin-bottom: 20px;">
+                Subscribed customers enjoy more options to upload additional dishes every month!
                 </span>
             </div>
         </div>

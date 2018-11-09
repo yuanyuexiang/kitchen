@@ -10,13 +10,13 @@
                 <span class="svg-container svg-container_login">
                     <svg-icon icon-class="user" />
                 </span>
-                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="email" />
+                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="Account Email" />
             </el-form-item>
             <el-form-item prop="validationCode">
                 <span class="svg-container svg-container_login">
                     <svg-icon icon-class="user" />
                 </span>
-                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="code" />
+                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="Validation code" />
                 <span class="show-pwd" @click="sendMsg">
                     {{buttonName}}
                 </span>
@@ -25,7 +25,7 @@
                 <span class="svg-container">
                     <svg-icon icon-class="password" />
                 </span>
-                <el-input :type="pwdType" v-model="loginForm.password" name="password" auto-complete="on" placeholder="password"
+                <el-input :type="pwdType" v-model="loginForm.password" name="password" auto-complete="on" placeholder="New password"
                     @keyup.enter.native="handleLogin" />
                 <span class="show-pwd" @click="showPwd">
                     <svg-icon icon-class="eye" />
@@ -123,6 +123,11 @@
                 })
             },
             sendMsg() {
+                this.$notify({
+                    title: 'Get ready for more',
+                    message: "A validation code has been sent to your email, please check your mailbox and insert the code.",
+                    type: 'success'
+                });
                 let me = this;
                 me.isDisabled = true;
                 let interval = window.setInterval(function() {

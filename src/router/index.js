@@ -46,7 +46,8 @@ export const constantRouterMap = [
                 import('@/views/dashboard/index'),
             meta: {
                 title: 'Dashboard',
-                icon: 'dashboard'
+                icon: 'dashboard',
+                keepAlive: true 
             },
         }]
     },
@@ -67,7 +68,8 @@ export const constantRouterMap = [
                     import('@/views/restaurantDetails/index'),
                 meta: {
                     title: 'Restaurant Details',
-                    icon: 'link'
+                    icon: 'link',
+                    keepAlive: true 
                 }
             },
             {
@@ -77,7 +79,8 @@ export const constantRouterMap = [
                     import('@/views/subscription/index'),
                 meta: {
                     title: 'Subscription',
-                    icon: 'link'
+                    icon: 'link',
+                    keepAlive: true 
                 }
             },
         ]
@@ -117,7 +120,8 @@ export const constantRouterMap = [
         name: 'Menu Management',
         meta: {
             title: 'Menu Management',
-            icon: 'example'
+            icon: 'example',
+            keepAlive: true 
         },
         children: [
             {
@@ -127,7 +131,8 @@ export const constantRouterMap = [
                     import('@/views/uploadMenu/index'),
                 meta: {
                     title: 'Upload Menu',
-                    icon: 'link'
+                    icon: 'link',
+                    keepAlive: true 
                 }
             },
             {
@@ -137,8 +142,9 @@ export const constantRouterMap = [
                      import('@/views/reviseMenu/index'),
                  meta: {
                      title: 'Revise Menu',
-                     icon: 'link'
-                 }
+                     icon: 'link',
+                     keepAlive: true // 需要缓存 
+                 },
             },
             {
                 path: 'viewDemo',
@@ -147,7 +153,8 @@ export const constantRouterMap = [
                     import('@/views/viewDemo/index'),
                 meta: {
                     title: 'View Demo',
-                    icon: 'link'
+                    icon: 'link',
+                    keepAlive: true // 需要缓存 
                 }
             },
             {
@@ -157,10 +164,10 @@ export const constantRouterMap = [
                     import('@/views/launchMenu/index'),
                 meta: {
                     title: 'Launch Menu',
-                    icon: 'link'
+                    icon: 'link',
+                    keepAlive: true // 需要缓存 
                 }
             },
-            /*
             {
                 path: 'reviewContent',
                 name: 'Review Content',
@@ -168,9 +175,12 @@ export const constantRouterMap = [
                     import('@/views/reviewContent/index'),
                 meta: {
                     title: 'Review Content',
-                    icon: 'link'
-                }
+                    icon: 'link',
+                    keepAlive: true // 需要缓存 
+                },
+                hidden: true
             },
+            /*
             {
                 path: 'addNewDish',
                 name: 'Add New Dish',
@@ -215,7 +225,8 @@ export const constantRouterMap = [
                 import('@/views/marketingCampaign/index'),
             meta: {
                 title: 'Marketing Campaign',
-                icon: 'form'
+                icon: 'form',
+                keepAlive: true 
             }
         }]
     },
@@ -229,7 +240,8 @@ export const constantRouterMap = [
                 import('@/views/myAccount/index'),
             meta: {
                 title: 'My Account',
-                icon: 'user'
+                icon: 'user',
+                keepAlive: true 
             }
         }]
     },

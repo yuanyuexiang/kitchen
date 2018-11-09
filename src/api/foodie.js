@@ -96,3 +96,18 @@ export function getDish(id) {
         method: 'GET',
     })
 }
+
+export function updateDishForCustomer(data) {
+    return request({
+        url: '/foodie/v1/dish/customer/'+ data.id,
+        method: 'PUT',
+        data
+    });
+}
+
+export function getStepsListByDishID(id) {
+    return request({
+        url: '/foodie/v1/dish/'+id+'/steps',
+        method: 'GET',
+    });
+};
