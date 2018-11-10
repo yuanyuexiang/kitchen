@@ -5,11 +5,15 @@
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                <div class="title" style="display:flex; justify-content: flex-start">
+                    <span style="line-height: 30px;font-weight: bold;">My Account： </span>
+                    <span style="line-height: 30px;">{{user.email}}</span>
+                </div>
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Contact Information</span>
                     <el-button type="primary">Save</el-button>
                 </div>
-                <el-form ref="postForm" :model="postForm" label-width="140px" class="form-container">
+                <el-form ref="formData" :model="formData" label-width="140px" class="form-container">
                     <div style="display:flex;">
                         <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Title:">
                             <el-select v-model="formData.country" placeholder="Select">
@@ -22,7 +26,7 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="120px" label="First Name:">
-                            <el-input type="textarea" v-model="formData.city" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="120px" label="Last Name:">
                             <el-input type="textarea" v-model="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
@@ -37,7 +41,7 @@
                     <span style="line-height: 30px;font-weight: bold;">Reset Password</span>
                     <el-button type="primary">Save</el-button>
                 </div>
-                <el-form ref="postForm" :model="postForm" label-width="150px" class="form-container">
+                <el-form ref="formData" :model="formData" label-width="150px" class="form-container">
                     <el-form-item style="margin-bottom: 0px; text-align: left;" label="Old Password">
                         <el-input :rows="1" type="password" class="article-textarea" autosize placeholder="Please input contents"/>
                     </el-form-item>
@@ -59,7 +63,7 @@
                 <span style="margin-top: 20px;">
                     We process your personal information for the purposes of marketing activities to offer you products or services that may be of interest based on your preferences. 
                 </span>
-                <el-radio style="margin-top: 20px;" v-model="postForm.radio" label="1">I would like to receive relevant marketing communications</el-radio>
+                <el-radio style="margin-top: 20px;" v-model="formData.radio" label="1">I would like to receive relevant marketing communications</el-radio>
             </div>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
@@ -79,7 +83,10 @@
 <script>
     import {
         getList
-    } from "@/api/table";
+    } from "@/api/table"
+    import {
+        mapGetters
+    } from 'vuex'
 
     export default {
         filters: {
@@ -92,12 +99,18 @@
                 return statusMap[status];
             }
         },
+        computed: {
+            ...mapGetters([
+                'user',
+                'restaurant'
+            ])
+        },
         data() {
             return {
                 list: null,
                 listLoading: true,
                 radio:1,
-                postForm:{radio:1},
+                formData:{radio:1},
                 formData: {
                     name_en: '',
                     contact_email: '',
@@ -110,6 +123,8 @@
         },
         created() {
             //this.fetchData();
+            console.log(this.user)
+            this.formData = JSON.parse(JSON.stringify(this.user))
         },
         methods: {
             fetchData() {

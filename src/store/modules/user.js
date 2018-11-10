@@ -18,7 +18,16 @@ const user = {
         user_id: getUserID(),
         name: '',
         avatar: '',
-        role: ''
+        role: '',
+        user:null,
+    },
+    getters: {
+        user: state => {
+            if(!state.user){
+                state.user = JSON.parse(localStorage.getItem("user"))
+            }
+            return state.user
+        },
     },
     mutations: {
         SET_TOKEN: (state, token) => {
@@ -35,7 +44,16 @@ const user = {
         },
         SET_ROLE: (state, role) => {
             state.role = role
-        }
+        },
+        SaveUser: (state,data) => {
+            state.user = data;
+            if(data){
+                localStorage.setItem("user",JSON.stringify(state.user));
+            }
+        },
+        DeleteUser: (state,data) => {
+            localStorage.removeItem("user");
+        },
     },
     actions: {
         // 登录
@@ -44,12 +62,11 @@ const user = {
             return new Promise((resolve, reject) => {
                 createSession(username, userInfo.password).then(response => {
                     const data = response.data
-                    console.log(data);
+                    console.log(data)
                     setToken(data.token)
                     commit('SET_TOKEN', data.token)
-                    setUserID(data.user_id);
+                    setUserID(data.user_id)
                     commit('SET_USER_ID', data.user_id)
-                    localStorage.clear()
                     resolve()
                 }).catch(error => {
                     reject(error)
@@ -69,6 +86,7 @@ const user = {
                     }
                     commit('SET_NAME', data.name)
                     commit('SET_AVATAR', data.avatar)
+                    commit('SaveUser',data)
                     resolve(response)
                 }).catch(error => {
                     reject(error)
@@ -85,6 +103,8 @@ const user = {
                     commit('USER_ID', '')
                     removeToken()
                     removeUserID()
+                    commit('DeleteUser',null)
+                    localStorage.clear()
                     resolve()
                 }).catch(error => {
                     reject(error)

@@ -3,7 +3,7 @@
         <div class="Grid-Column" style="align-items: center;width: 800px;">
             <div>Become an advanced plan customer and enjoy more services!</div>
             <div>Simply click the button below to request a free demo.</div>
-            <el-button style="margin-top:30px" type="primary" @click="upgrade">Upgrade Now</el-button>
+            <el-button style="margin-top:30px" type="primary" :disabled="disableButton" @click="upgrade">Upgrade Now</el-button>
         </div>
         <div class="Grid-Row">
         </div>
@@ -22,59 +22,27 @@
             vueLogoQrcode 
         },
         filters: {
-            statusFilter(status) {
-                const statusMap = {
-                    published: "success",
-                    draft: "gray",
-                    deleted: "danger"
-                };
-                return statusMap[status];
-            }
         },
         data() {
             return {
                 list: null,
                 listLoading: true,
-                config: {
-                    value: 'https://www.baidu.com',
-                    imagePath: '/static/logo.png',
-                    filter: 'color',
-                },
-                content: "http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no",
-                width: 200,
+                disableButton: false,
             };
         },
         created() {
-            //this.fetchData();
-            //this.qrcode();
         },
         mounted(){
             this.qrcode();
         },
         methods: {
-            fetchData() {
-                this.listLoading = true;
-                getList(this.listQuery).then(response => {
-                    this.list = response.data.items;
-                    this.listLoading = false;
-                });
-            },
-            qrcode () {
-                let qrcode = new QRCode('qrcode', {  
-                    width: 180,  // 设置宽度 
-                    height: 180, // 设置高度
-                    text: 'http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no'
-                })
-            },
-            downloadImage() {
-                this.$refs.qrcode.genQrCodeImageDownload();
-            },
             upgrade(){
                 this.$notify({
                     title: 'Get ready for more',
                     message: "It's great that Linglink helps to boost your business! We will get back to you shortly with more info on our advanced plan options.",
                     type: 'success'
                 });
+                this.disableButton = true
             },
         }
     };

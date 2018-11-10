@@ -156,8 +156,13 @@
                 <span style="font-weight: bold;">Make Changes</span>
             </div> -->
             <div class="Grid-Row" style="margin-left: 20px;margin-top: 30px;width: 800px;">
-                <div class="Grid-Column" style="width: 600px;margin-right: 20px;">
+                <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                     <el-form ref="postForm" :model="formData" label-width="150px" class="form-container">
+                        <el-form-item style="margin-bottom: 0px; text-align: left;" label="Picture:">
+                            <div class="Grid-Column" style="width: 200px;align-items: center;">
+                                <img style="width: 200px;" :src="formData.pic_url" class="pan-thumb">
+                            </div>
+                        </el-form-item>
                         <el-form-item style="margin-bottom: 0px; text-align: left;" label="Dish Name:">
                             <el-input :rows="1" v-model="formData.name_en" type="textarea" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
@@ -195,28 +200,7 @@
                         <el-form-item style="margin-bottom: 1px; " label="Options:">
                             <el-collapse>
                                 <el-collapse-item title="Please unfold" name="1">
-                                    <!--
-                                    <el-card class="box-card" :key="step.id" v-for="step in formData.steps">
-                                        <div slot="header" class="clearfix">
-                                            <el-input style="width: 130px;" v-model="step.name_en" size="mini"></el-input>
-                                            <el-input-number size="mini" v-model="step.most" :min="0"></el-input-number>
-                                            <i class="el-icon-arrow-right"></i>
-                                            <el-input-number size="mini" v-model="step.least" :max="step.most" :min="0"></el-input-number>
-                                            <i class="el-icon-delete" style="float: right;line-height: 26px;cursor: pointer;" ></i>
-                                        </div>
-                                        
-                                        <el-tag :key="option.id" v-for="option in step.options" closable :disable-transitions="false" @close="handleCloseOption(option)"> 
-                                                    {{option.name_en}}
-                                                </el-tag>
-                                                <el-input class="input-new-tag" v-if="step.inputVisibleOption" v-model="step.inputValueOption" ref="saveTagInputOption" size="small"
-                                                    @keyup.enter.native="handleInputConfirmOption(step)"
-                                                    @blur="handleInputConfirmOption(step)">
-                                                </el-input>
-                                                <el-button v-else class="button-new-tag" size="small" @click="showInputOption(step)">+ New Option</el-button>
-
-                                    </el-card>-->
-                                    
-                                    <SlickList lockAxis="y" :distance="10" v-model="formData.steps" :value="formData.steps">
+                                    <SlickList lockAxis="y" :distance="20" v-model="formData.steps" :value="formData.steps">
                                         <SlickItem v-for="(step, index) in formData.steps" :index="index" :key="index">
                                             <el-card class="box-card">
                                                 <div slot="header" class="clearfix">
@@ -228,30 +212,28 @@
                                                 </div>
                                                 
                                                 <el-tag :key="option.id" v-for="option in step.options" closable :disable-transitions="false" @close="handleCloseOption(step.options,option)"> 
-                                                    {{option.name_en}}
+                                                    <span>{{option.name_en}}</span><span v-if="option.price" style="color:#C80E11;">-${{option.price}}</span>
                                                 </el-tag>
                                                 <el-input class="input-new-tag" v-show="step.inputVisibleOption" v-model="step.inputValueOption" ref="saveTagInputOption" size="small"
                                                     @keyup.enter.native="handleInputConfirmOption(step)"
-                                                    @blur="handleInputConfirmOption(step)" :autofocus="step.inputVisibleOption">
+                                                    @blur="handleInputConfirmOption(step)" placeholder="option name/price" v-focus="step.inputVisibleOption">
                                                 </el-input>
                                                 <el-button v-show="!step.inputVisibleOption" class="button-new-tag" size="small" @click="showInputOption(step)">+ New Option</el-button>
 
                                             </el-card>
                                         </SlickItem>
                                     </SlickList>
-                                    
+                                    <div style="display:flex;flex-direction:row;justify-content:flex-end;">
+                                        <el-button type="primary" style="margin-top:10px;margin-bottom:10px;" @click="addStep" icon="el-icon-plus" circle></el-button>
+                                    </div>
                                 </el-collapse-item>
                             </el-collapse>
                         </el-form-item>
                     </el-form>
                 </div>
-                <div class="Grid-Column" style="width: 200px;margin-top: 50px;align-items: center;">
+                <!-- <div class="Grid-Column" style="width: 200px;margin-top: 50px;align-items: center;">
                     <img style="width: 200px;" :src="formData.pic_url" class="pan-thumb">
-                    <!-- <div class="Grid-Row" style="margin-top: 20px;">
-                        <el-button type="primary" @click="submitForm('formData')">Submit</el-button>
-                        <el-button @click="goback">Cancel</el-button>
-                    </div> -->
-                </div>
+                </div> -->
             </div>
             <div class="Grid-Column" style="margin-left: 20px;margin-top: 20px;margin-bottom: 20px;">
                 <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
@@ -265,6 +247,20 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div>
+            <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+                <span>这是一段信息</span>
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                </span>
+            </el-dialog>
         </div>
 
     </div>
@@ -283,6 +279,15 @@
     } from 'vuex'
     import { SlickList, SlickItem,} from 'vue-slicksort';
     export default {
+        directives: {
+            focus: {
+                inserted: function (el, {value}) {
+                    if (value) {
+                        el.focus();
+                    }
+                }
+            }
+        },
         data() {
             return {
                 filterText: '',
@@ -331,6 +336,10 @@
                 inputValueOption: '',
                 items: [false, false, false, false, false, false, false, false],
                 timeOut:{},
+
+                //
+                dialogVisible: false,
+                currentDish:{},
             }
         },
         components: {
@@ -354,8 +363,8 @@
         },
         watch:{
             restaurant(newRestaurant, oldRestaurant){
-                this.initData()
                 this.params.query = "restaurant_id:"+this.restaurant.id
+                this.initData()
             },
         },
         created(){
@@ -401,7 +410,17 @@
 						console.log(message);
 					}else{
 						const data = responseData;
-                        this.dishList = data;
+                        this.dishList = data
+                        if(!data){
+                            this.reviewDishList = []
+                            this.translationDishList = []
+                            this.goDishList = []
+
+                            this.countGo = 0
+                            this.countTranslation = 0
+                            this.countReview = 0
+                            return
+                        }
                         this.dishList.forEach(function(dish){
                             let ingredients = dish.ingredients
                             let ingredientList = ""
@@ -463,14 +482,13 @@
             },
             handleScroll () {
                 this.scroll  = document.documentElement &&  document.documentElement.scrollTop
-                //console.log("this.scrollssssssssssssssssssssssssssssssssss")
-                //console.log(this.scroll)
                 if(this.scroll>0){
                     this.scrollBack = this.scroll
                 }
             },
             makeChange(item){
                 //this.changing = true
+                this.currentDish = item
                 this.formData = JSON.parse(JSON.stringify(item))
                 //
                 this.changing = true
@@ -507,7 +525,38 @@
                             message: 'modify dish success',
                             type: 'success'
                         });
-                        this.subscription = this.formData
+                        
+                        let ingredients = this.formData.ingredients
+                        let ingredientList = ""
+                        ingredients.forEach(function(ingredient){
+                            ingredientList+=ingredient.name_en+","
+                        })
+                        this.formData.ingredientList = ingredientList
+                        let steps = this.formData.steps
+                        let stepList = ""
+                        steps.forEach(function(step){
+                            stepList+=step.name_en+","
+                        })
+                        this.formData.stepList = stepList
+
+                        this.changing = false
+                        
+                        this.goDishes.splice(this.goDishes.indexOf(this.currentDish), 1)
+                        this.goDishList.splice(this.goDishList.indexOf(this.currentDish), 1)
+                        this.translationDishes.push(this.formData)
+
+                        this.translationDishList = this.translationDishes.slice(0,10)
+                        this.countGo = this.goDishes.length
+                        this.countTranslation = this.translationDishes.length
+                        /*
+                        this.reviewDishList = this.reviewDishes.slice(0,10)
+                        this.translationDishList = this.translationDishes.slice(0,10)
+                        this.goDishList = this.goDishes.slice(0,10)
+
+                        this.countGo = this.goDishes.length
+                        this.countTranslation = this.translationDishes.length
+                        this.countReview = this.reviewDishes.length
+                        */
                     }else{
                         this.$message.error('modify dish fail')
                     }
@@ -518,7 +567,6 @@
 
             //
             handleClose(tag) {
-                //this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
                 console.log("handleClose")
                 console.log(tag)
                 this.formData.ingredients.splice(this.formData.ingredients.indexOf(tag), 1)
@@ -534,7 +582,6 @@
                 console.log("handleInputConfirm")
                 let inputValue = this.inputValue;
                 if (inputValue) {
-                    //this.dynamicTags.push(inputValue);
                     this.formData.ingredients.push({name_en:inputValue})
                 }
                 this.inputVisible = false;
@@ -542,7 +589,6 @@
             },
 
             handleCloseOption(options,option) {
-                //this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
                 console.log("handleCloseOption")
                 console.log(option)
                 options.splice(options.indexOf(option), 1)
@@ -566,7 +612,15 @@
                 console.log("handleInputConfirmOption")
                 let inputValueOption = step.inputValueOption;
                 if (inputValueOption) {
-                    step.options.push({name_en:inputValueOption})
+                    let nameAndPrice = inputValueOption.split('/')
+                    let name = nameAndPrice[0]
+                    let price = 0
+                    if(nameAndPrice.length>1){
+                        let _price = nameAndPrice[1].match(/\d+(?:\.\d+)?/);
+                        console.log("--------------------------")
+                        price = _price[0]
+                    }
+                    step.options.push({name_en:name,price:price})
                 }
                 step.inputVisibleOption = false;
                 step.inputValueOption = '';
@@ -575,6 +629,9 @@
 
             deleteStep(step){
                 this.formData.steps.splice(this.formData.steps.indexOf(step), 1)
+            },
+            addStep(){
+                this.formData.steps.push({name_en:"new option",price:0,most:0,least:0,options:[]})
             }
         }
     }

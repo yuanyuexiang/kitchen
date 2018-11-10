@@ -58,7 +58,7 @@ export const constantRouterMap = [
         name: 'Restaurant Management',
         meta: {
             title: 'Restaurant Management',
-            icon: 'user'
+            icon: 'restaurant'
         },
         children: [
             {
@@ -120,7 +120,7 @@ export const constantRouterMap = [
         name: 'Menu Management',
         meta: {
             title: 'Menu Management',
-            icon: 'example',
+            icon: 'menu',
             keepAlive: true 
         },
         children: [
@@ -225,7 +225,7 @@ export const constantRouterMap = [
                 import('@/views/marketingCampaign/index'),
             meta: {
                 title: 'Marketing Campaign',
-                icon: 'form',
+                icon: 'marketing',
                 keepAlive: true 
             }
         }]
