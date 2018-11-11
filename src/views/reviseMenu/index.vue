@@ -159,8 +159,8 @@
                 <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                     <el-form ref="postForm" :model="formData" label-width="150px" class="form-container">
                         <el-form-item style="margin-bottom: 0px; text-align: left;" label="Picture:">
-                            <div class="Grid-Column" style="width: 200px;align-items: center;">
-                                <img style="width: 200px;" :src="formData.pic_url" class="pan-thumb">
+                            <div class="Grid-Column" style="width: 300px;align-items: center;">
+                                <img style="width: 300px;" :src="formData.pic_url" class="pan-thumb">
                             </div>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 0px; text-align: left;" label="Dish Name:">
@@ -229,13 +229,19 @@
                                 </el-collapse-item>
                             </el-collapse>
                         </el-form-item>
+                        <el-form-item style="margin-bottom: 1px; " label="">
+                            <div class="Grid-Row" style="margin-top: 20px;">
+                                <el-button type="primary" @click="submitForm('formData')">Submit</el-button>
+                                <el-button @click="goback">Cancel</el-button>
+                            </div>
+                        </el-form-item>
                     </el-form>
                 </div>
                 <!-- <div class="Grid-Column" style="width: 200px;margin-top: 50px;align-items: center;">
                     <img style="width: 200px;" :src="formData.pic_url" class="pan-thumb">
                 </div> -->
             </div>
-            <div class="Grid-Column" style="margin-left: 20px;margin-top: 20px;margin-bottom: 20px;">
+            <!-- <div class="Grid-Column" style="margin-left: 20px;margin-top: 20px;margin-bottom: 20px;">
                 <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Make Changes:</span>
                 </div>
@@ -246,7 +252,7 @@
                         <el-button @click="goback">Cancel</el-button>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div>

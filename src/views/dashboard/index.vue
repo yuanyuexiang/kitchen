@@ -1,22 +1,29 @@
 <template>
     <div class="dashboard-container">
-        <!-- <div class="dashboard-text">name:{{ name }}</div>
-        <div class="dashboard-text">role:<span>{{ role }}</span></div> -->
-        <div class="Grid-Column">
-            <div class="Grid-Column overview">
+        <div class="Grid-Title">
+            <span style="font-weight: bold;">{{restaurant.name_en}}</span>
+        </div>
+        <div class="Grid-Column" style="width: 800px;margin-top: 50px;">
+            <div class="Grid-Column overview" style="height: 270px;">
                 <div style="margin:20px 0px 0px 20px">
                    <span style="font-weight:blod;font-size:20px">Overview</span>
                 </div>
-                <div class="Grid-Row" style="margin:20px 0px 0px 20px;justify-content:center">
+                <div class="Grid-Row" style="justify-content:center;margin-top: 40px;">
                     <div style="display:felx;flex-direction:column;justify-content:space-between;width:150px;">
-                        <div style="display:flex;justify-content:center;">0</div>
-                        <div style="display:flex;justify-content:center;">Sales</div>
+                        <div style="display:flex;justify-content:center;margin-top: 10px;font-weight:blod;">0</div>
+                        <div style="display:flex;justify-content:center;margin-top: 40px;">Up-to-date</div>
+                        <div style="display:flex;justify-content:center;margin-top: 5px;">Sales</div>
                     </div>
-                    <div style="border:1px solid; width: 1px;height:50px"></div>
+                    <div style="display:flex;flex-direction:column;justify-content:space-between;width: 90px;align-items: center;">
+                        <svg-icon icon-class="trending-up" style="height:30px;width: 30px;">sd</svg-icon>
+                        <div style="border-left:1px solid; width: 1px;height:100px"></div>
+                    </div>
                     <div style="display:felx;flex-direction:column;justify-content:space-between;width:150px;">
-                        <div style="display:flex;justify-content:center;">0</div>
-                        <div style="display:flex;justify-content:center;">Orders</div>
+                        <div style="display:flex;justify-content:center;margin-top: 10px;font-weight:blod;">0</div>
+                        <div style="display:flex;justify-content:center;margin-top: 40px;">Total</div>
+                        <div style="display:flex;justify-content:center;margin-top: 5px;">Orders</div>
                     </div>
+                    <!--
                     <div style="border:1px solid; width: 1px;height:50px"></div>
                     <div style="display:felx;flex-direction:column;justify-content:space-between;width:150px;">
                         <div style="display:flex;justify-content:center;">0</div>
@@ -27,13 +34,50 @@
                         <div style="display:flex;justify-content:center;">$0</div>
                         <div style="display:flex;justify-content:center;">Avg order price</div>
                     </div>
+                    -->
                 </div>
             </div>
-            <div class="Grid-Column overview" style="margin-top:30px;">
+            <div class="Grid-Column overview" style="margin-top:30px;height: 270px;">
                 <div style="margin:20px 0px 0px 20px">
-                   <span style="font-weight:blod;font-size:20px">Hot Dishes</span>
+                   <span style="font-weight:blod;font-size:20px">Top 3 Popular Items</span>
                 </div>
-                <div style="display:flex;flex-direction:column;margin:20px 0px 0px 20px;justify-content:center;">
+                <div style="display:flex;flex-direction:row;margin:20px 0px 0px 20px;justify-content:space-around;">
+                    
+                    <div style="display:flex;flex-direction:row; width: 260px;">
+                        <div style="display:flex;flex-direction:row; width: 75px;justify-content: flex-end;">
+                            <div style="display:flex;flex-direction:row; justify-content: center;align-items: center;width: 60px;height:60px;background-size:100% 100%;background-image:url(/static/five-pointed-star.png)">
+                                <span style="font-size: 1.5em;">1</span>
+                            </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column; width: 150px;justify-content: flex-end;align-items: center;">
+                            <div style="background-color: #E5E5E5;width: 150px;height: 90px;margin-top:55px;"></div>
+                            <span style="margin-top:15px;">Dish Name A</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display:flex;flex-direction:row; width: 260px;">
+                        <div style="display:flex;flex-direction:row; width: 75px;justify-content: flex-end;">
+                            <div style="display:flex;flex-direction:row; justify-content: center;align-items: center;width: 60px;height:60px;background-size:100% 100%;background-image:url(/static/five-pointed-star.png)">
+                                <span style="font-size: 1.5em;">2</span>
+                            </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column; width: 150px;justify-content: flex-end;align-items: center;">
+                            <div style="background-color: #E5E5E5;width: 150px;height: 90px;margin-top:55px;"></div>
+                            <span style="margin-top:15px;">Dish Name B</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:row; width: 260px;">
+                        <div style="display:flex;flex-direction:row; width: 75px;justify-content: flex-end;">
+                            <div style="display:flex;flex-direction:row; justify-content: center;align-items: center;width: 60px;height:60px;background-size:100% 100%;background-image:url(/static/five-pointed-star.png)">
+                                <span style="font-size: 1.5em;">3</span>
+                            </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column; width: 150px;justify-content: flex-end;align-items: center;">
+                            <div style="background-color: #E5E5E5;width: 150px;height: 90px;margin-top:55px;"></div>
+                            <span style="margin-top:15px;">Dish Name C</span>
+                        </div>
+                    </div>
+                    <!--
                     <div style="display:flex;flex-direction:row;justify-content:center;">
                         <div style="display:flex;justify-content:flex-end;width:200px;">Set Menu</div>
                         <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
@@ -66,6 +110,7 @@
                         <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
                         <div style="display:flex;justify-content:center;width:400px;">Spirit</div>
                     </div>
+                    -->
                 </div>
             </div>
         </div>
@@ -82,7 +127,8 @@
         computed: {
             ...mapGetters([
                 'name',
-                'role'
+                'role',
+                'restaurant',
             ])
         }
     }
@@ -111,7 +157,7 @@
     flex-direction: column;
 }
 .Grid-Title {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
 }
@@ -120,7 +166,7 @@
     border-width: 20px;
     width: 800px;
     height: 200px;
-    border:2px solid;
+    border:1px solid;
 }
 </style>
 <style lang="less">
