@@ -17,7 +17,27 @@ export function getUser(user_id) {
         method: 'GET',
     })
 }
-
+export function updateUser(data) {
+    return request({
+        url: '/foodie/v1/user/'+data.id,
+        method: 'PUT',
+        data,
+    })
+}
+export function updateUserAcceptEmail(data) {
+    return request({
+        url: '/foodie/v1/user/'+data.id+'/accept_email',
+        method: 'PUT',
+        data,
+    })
+}
+export function updateUserPassword(data,old_password) {
+    return request({
+        url: '/foodie/v1/user/'+data.id+'/password'+'?old_password='+old_password,
+        method: 'PUT',
+        data,
+    })
+}
 export function deleteSession() {
     return request({
         url: '/foodie/v1/session',

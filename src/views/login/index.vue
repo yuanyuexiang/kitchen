@@ -177,6 +177,7 @@
 <style scoped>
 .logo{
     display: flex;
+    margin-bottom: 20px;
     flex-direction: row;
     justify-content: center;
 }
@@ -199,7 +200,7 @@
             right: 0;
             width: 520px;
             padding: 35px 35px 15px 35px;
-            margin: 120px auto;
+            margin: 100px auto;
         }
 
         .tips {

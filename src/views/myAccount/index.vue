@@ -11,12 +11,12 @@
                 </div>
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Contact Information</span>
-                    <el-button type="primary">Save</el-button>
+                    <el-button type="primary" @click="updateUser">Save</el-button>
                 </div>
                 <el-form ref="formData" :model="formData" class="form-container">
                     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;">
                         <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Title:">
-                            <el-select v-model="formData.country" style="width: 150px;" placeholder="Select">
+                            <el-select v-model="formData.title" style="width: 150px;" placeholder="Select">
                                 <el-option
                                 v-for="item in titleList"
                                 :key="item"
@@ -26,13 +26,13 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="100px" label="First Name:">
-                            <el-input type="textarea" v-model="formData.name" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.first_name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="100px" label="Last Name:">
-                            <el-input type="textarea" v-model="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.last_name" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 10px;" label-width="140px" label="Phone Number:">
-                            <el-input type="textarea" v-model="formData.state_or_province" class="article-textarea" autosize placeholder=""/>
+                            <el-input type="textarea" v-model="formData.phone_number" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
                     </div>
                 </el-form>
@@ -42,17 +42,17 @@
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Reset Password</span>
-                    <el-button type="primary">Save</el-button>
+                    <el-button type="primary" @click="updateUserPassword">Save</el-button>
                 </div>
-                <el-form ref="formData" :model="formData" label-width="150px" class="form-container">
-                    <el-form-item style="margin-bottom: 0px; text-align: left;" label="Old Password">
-                        <el-input :rows="1" type="password" class="article-textarea" autosize placeholder=""/>
+                <el-form ref="formData" :model="formData" :rules="rules2" label-width="150px" class="form-container">
+                    <el-form-item style="margin-bottom: 15px; text-align: left;" label="Old Password" prop="old_password">
+                        <el-input :rows="1" type="password" v-model="formData.old_password" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
-                    <el-form-item style="margin-bottom: 0px; "  label="New Password">
-                        <el-input :rows="1" type="password" class="article-textarea" autosize placeholder=""/>
+                    <el-form-item style="margin-bottom: 15px;" label="New Password" prop="password">
+                        <el-input :rows="1" type="password" v-model="formData.password" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
-                    <el-form-item style="margin-bottom: 0px; " label="Confirm Password">
-                        <el-input :rows="1" type="password" class="article-textarea" autosize placeholder=""/>
+                    <el-form-item style="margin-bottom: 10px;" label="Confirm Password" prop="confirm_password">
+                        <el-input :rows="1" type="password" v-model="formData.confirm_password" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
                 </el-form>
             </div>
@@ -61,12 +61,12 @@
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Marketing and Communications</span>
-                    <el-button type="primary">Save</el-button>
+                    <el-button type="primary" @click="updateUserAcceptEmail">Save</el-button>
                 </div>
                 <span style="margin-top: 20px;">
                     We process your personal information for the purposes of marketing activities to offer you products or services that may be of interest based on your preferences. 
                 </span>
-                <el-radio style="margin-top: 20px;" v-model="formData.radio" label="1">I would like to receive relevant marketing communications</el-radio>
+                <el-checkbox style="margin-top: 20px;margin-left: 20px;" v-model="formData.accept_email">I would like to receive relevant marketing communications</el-checkbox>
             </div>
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
@@ -90,7 +90,12 @@
     import {
         mapGetters
     } from 'vuex'
-
+    import {
+        updateUser,
+        updateUserPassword,
+        updateUserAcceptEmail,
+    } from '@/api/foodie'
+    import md5 from 'js-md5';
     export default {
         filters: {
             statusFilter(status) {
@@ -109,11 +114,32 @@
             ])
         },
         data() {
+            var validatePass = (rule, value, callback) => {
+                console.log("-----validatePass-----|"+value)
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else {
+                    if (this.confirm_password !== '') {
+                        this.$refs.formData.validateField('confirm_password');
+                    }
+                    callback();
+                }
+            };
+            var validatePass2 = (rule, value, callback) => {
+                console.log("-----validatePass2-----|"+value)
+                if (value === '') {
+                    callback(new Error('请再次输入密码'));
+                } else if (value !== this.formData.password) {
+                    callback(new Error('两次输入密码不一致!'));
+                } else {
+                    callback();
+                }
+            };
+
             return {
                 list: null,
                 listLoading: true,
                 radio:1,
-                formData:{radio:1},
                 formData: {
                     name_en: '',
                     contact_email: '',
@@ -121,7 +147,22 @@
                     pic_url: '',
                     payment:[],
                 },
-                titleList:["Mr","Mrs","Miss"]
+                old_password:'',
+                confirm_password:'',
+                titleList:["Mr","Mrs","Miss"],
+
+                rules2: {
+                    old_password: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ],
+                    password: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ],
+                    confirm_password: [
+                        { validator: validatePass2, trigger: 'blur' }
+                    ],
+                }
+
             };
         },
         created() {
@@ -136,6 +177,63 @@
                     this.list = response.data.items;
                     this.listLoading = false;
                 });
+            },
+            updateUser(){
+                updateUser(this.formData).then(response => {
+                    const data = response.data
+                    if(response.status == 1){
+                        this.$message({
+                            message: 'update user success',
+                            type: 'success'
+                        });
+                    }else{
+                        this.$message.error('update user fail')
+                    }
+                }).catch(error => {
+                    this.$message.error(error);
+                })
+            },
+            updateUserAcceptEmail(){
+                updateUserAcceptEmail(this.formData).then(response => {
+                    const data = response.data
+                    if(response.status == 1){
+                        this.$message({
+                            message: 'update accept email success',
+                            type: 'success'
+                        });
+                    }else{
+                        this.$message.error('update accept email fail')
+                    }
+                }).catch(error => {
+                    this.$message.error(error);
+                })
+            },
+            updateUserPassword(){
+                if(this.formData.password !== this.formData.confirm_password){
+                    this.$message.error('confirm password error')
+                    return
+                }
+                this.formData.password=md5(this.formData.password)
+                this.formData.old_password=md5(this.formData.old_password)
+                updateUserPassword(this.formData,this.formData.old_password).then(response => {
+                    const data = response.data
+                    if(response.status == 1){
+                        this.$message({
+                            message: 'update user password success',
+                            type: 'success'
+                        });
+                    }else{
+                        this.$message.error('update user password fail')
+                    }
+                    this.formData.password=''
+                    this.formData.confirm_password=''
+                    this.formData.old_password=''
+                }).catch(error => {
+                    this.$message.error('update user password fail '+error)
+                    this.formData.password=''
+                    this.formData.confirm_password=''
+                    this.formData.old_password=''
+                })
             }
         }
     };

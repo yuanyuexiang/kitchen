@@ -251,6 +251,12 @@ export const constantRouterMap = [
             import('@/views/forgetPassword/index'),
         hidden: true
     },
+    {
+        path: '/setUpPassword',
+        component: () =>
+            import('@/views/setUpPassword/index'),
+        hidden: true
+    },
     /*
     {
         path: '/yourAccount',
