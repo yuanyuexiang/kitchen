@@ -66,7 +66,7 @@
                 <span style="margin-top: 20px;">
                     We process your personal information for the purposes of marketing activities to offer you products or services that may be of interest based on your preferences. 
                 </span>
-                <el-checkbox style="margin-top: 20px;margin-left: 20px;" v-model="formData.accept_email">I would like to receive relevant marketing communications</el-checkbox>
+                <el-checkbox style="margin-top: 20px;margin-left: 20px;color: inherit;" v-model="formData.accept_email">I would like to receive relevant marketing communications</el-checkbox>
             </div>
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
@@ -117,7 +117,7 @@
             var validatePass = (rule, value, callback) => {
                 console.log("-----validatePass-----|"+value)
                 if (value === '') {
-                    callback(new Error('请输入密码'));
+                    callback(new Error('Please input a password'));
                 } else {
                     if (this.confirm_password !== '') {
                         this.$refs.formData.validateField('confirm_password');
@@ -128,9 +128,9 @@
             var validatePass2 = (rule, value, callback) => {
                 console.log("-----validatePass2-----|"+value)
                 if (value === '') {
-                    callback(new Error('请再次输入密码'));
+                    callback(new Error('Confirm new password'));
                 } else if (value !== this.formData.password) {
-                    callback(new Error('两次输入密码不一致!'));
+                    callback(new Error('Two passwords do not match'));
                 } else {
                     callback();
                 }
@@ -209,6 +209,10 @@
                 })
             },
             updateUserPassword(){
+                if(this.formData.confirm_password==undefined || this.formData.password==undefined ){
+                    this.$message.error('input password error')
+                    return
+                }
                 if(this.formData.password !== this.formData.confirm_password){
                     this.$message.error('confirm password error')
                     return

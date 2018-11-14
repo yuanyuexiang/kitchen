@@ -152,15 +152,23 @@
             <div class="Grid-Row">
                 <i class="el-icon-back" style="cursor: pointer;" @click="goback"></i>
             </div>
-            <!-- <div class="Grid-Title">
-                <span style="font-weight: bold;">Make Changes</span>
-            </div> -->
             <div class="Grid-Row" style="margin-left: 20px;margin-top: 30px;width: 800px;">
                 <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                     <el-form ref="postForm" :model="formData" label-width="150px" class="form-container">
                         <el-form-item style="margin-bottom: 0px; text-align: left;" label="Picture:">
                             <div class="Grid-Column" style="width: 300px;align-items: center;">
-                                <img style="width: 300px;" :src="formData.pic_url" class="pan-thumb">
+                                <!-- <img style="width: 300px;" :src="formData.pic_url" class="pan-thumb"> -->
+                                
+                                <el-upload
+                                    style="width: 300px;" 
+                                    class="avatar-uploader"
+                                    :action="baseUrl + '/camaro/v1/file'"
+                                    :show-file-list="false"
+                                    :on-success="handleAvatarSuccess"
+                                    :before-upload="beforeAvatarUpload">
+                                    <img v-if="formData.pic_url" :src="formData.pic_url" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
                             </div>
                         </el-form-item>
                         <el-form-item style="margin-bottom: 0px; text-align: left;" label="Dish Name:">
@@ -175,16 +183,9 @@
                         <el-form-item style="margin-bottom: 1px; " label="Description:">
                             <el-input :rows="1" v-model="formData.discription_en" type="textarea" class="article-textarea" autosize placeholder=""/>
                         </el-form-item>
-                        <!-- <el-form-item style="margin-bottom: 0px; "  label="Ingredients:">
-                            <el-input :rows="1" v-model="formData.ingredientList" type="textarea" class="article-textarea" autosize placeholder=""/>
-                        </el-form-item>
-                        <el-form-item style="margin-bottom: 0px; " label="Options:">
-                            <el-input :rows="1" autosize v-model="formData.stepList" type="textarea" class="article-textarea" autosize placeholder=""/>
-                        </el-form-item> -->
                         <el-form-item style="margin-bottom: 1px; " label="Ingredients:">
                             <el-collapse>
                                 <el-collapse-item title="Please unfold" name="1">
-                                    
                                     <el-tag :key="ingredient.id" v-for="ingredient in formData.ingredients" closable :disable-transitions="false" @close="handleClose(ingredient)"> 
                                         {{ingredient.name_en}}
                                     </el-tag>
@@ -237,22 +238,7 @@
                         </el-form-item>
                     </el-form>
                 </div>
-                <!-- <div class="Grid-Column" style="width: 200px;margin-top: 50px;align-items: center;">
-                    <img style="width: 200px;" :src="formData.pic_url" class="pan-thumb">
-                </div> -->
             </div>
-            <!-- <div class="Grid-Column" style="margin-left: 20px;margin-top: 20px;margin-bottom: 20px;">
-                <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Make Changes:</span>
-                </div>
-                <div class="hr2" style="width: 800px; margin-right: 20px;margin-bottom: 20px;"/> 
-                <div class="Grid-Column">
-                    <div class="Grid-Row" style="margin-top: 20px;">
-                        <el-button type="primary" @click="submitForm('formData')">Submit</el-button>
-                        <el-button @click="goback">Cancel</el-button>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
         <div>
@@ -296,6 +282,7 @@
         },
         data() {
             return {
+				baseUrl:process.env.BASE_API,
                 filterText: '',
                 activeName: 'first',
                 dishList:[],
@@ -623,7 +610,10 @@
                     let price = 0
                     if(nameAndPrice.length>1){
                         let _price = nameAndPrice[1].match(/\d+(?:\.\d+)?/);
-                        console.log("--------------------------")
+                        console.log("--------------------------"+_price)
+                        if(_price==null){
+                            return
+                        }
                         price = _price[0]
                     }
                     step.options.push({name_en:name,price:price})
@@ -638,6 +628,29 @@
             },
             addStep(){
                 this.formData.steps.push({name_en:"new option",price:0,most:0,least:0,options:[]})
+            },
+            handleAvatarSuccess(res, file) {
+                //this.imageUrl = URL.createObjectURL(file.raw);
+                console.log(res)
+                if (res.status == 1) {
+                    this.formData.pic_url = res.data.aws_url;
+                    console.log("=================")
+                    console.log(this.formData.pic_url)
+				}else{
+					this.$message.error('上传图片失败！');
+				}
+            },
+            beforeAvatarUpload(file) {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
             }
         }
     }
@@ -691,7 +704,6 @@
     background-color: #E5E5E5;
 }
 .avatar {
-    width: 178px;
     height: 178px;
     display: block;
 }
