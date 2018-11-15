@@ -41,7 +41,9 @@
                     :action="baseUrl + '/camaro/v1/file'"
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
+                    :on-success="handleSuccess"
                     :file-list="fileList"
+                    :multiple="true"
                     :auto-upload="false">
                     <el-button slot="trigger" size="small" type="primary">Choose File</el-button>
                     <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Upload To Server</el-button>
@@ -57,6 +59,12 @@
     import {
         getList
     } from "@/api/table";
+    import {
+        addMaterial
+    } from "@/api/foodie"
+    import {
+        mapGetters
+    } from 'vuex'
     //import {baseUrl, baseImgPath} from '@/config/env'
 
     export default {
@@ -69,6 +77,9 @@
                 };
                 return statusMap[status];
             }
+        },
+        computed: {
+            ...mapGetters(['restaurant','user'])
         },
         data() {
             return {
@@ -110,6 +121,48 @@
                     this.$message.error('上传头像图片大小不能超过 2MB!');
                 }
                 return isLt2M;
+            },
+            handleSuccess(response, file, fileList){
+                let theFileList = JSON.parse(JSON.stringify(fileList))
+                let result = theFileList.every(function(item){
+                    return item.status === "success" 
+                })
+                console.log(result)
+                if(result){
+                    let theFileInfoList=[]
+                    theFileList.forEach(item=>{
+                        theFileInfoList.push({file_name:item.name,file_url:item.response.data.aws_url})
+                    })
+                    let formData={
+                        name:this.restaurant.name_en+" "+this.user.first_name+" commit",
+                        status:-1,
+                        restaurant_id:this.restaurant.id,
+                        submitter_id:this.user.id,
+                        file_info_list:theFileInfoList,
+                    }
+
+                    console.log("-------------------------")
+                    console.log(formData)
+                    addMaterial(formData).then(response=>{
+                        const responseData = response.data;
+                        const status = response.status;
+                        console.log(responseData);
+                        if (status != 1) {
+                            const message = responseData.message;
+                            console.log(message);
+                            this.$message.error(message)
+                        }else{
+                            const data = responseData;
+                            this.$notify({
+                                title: 'Upload Success',
+                                message: "Upload Success",
+                                type: 'success'
+                            });
+                        }
+                    }).catch(err=>{
+
+                    })
+                }
             },
         }
     };

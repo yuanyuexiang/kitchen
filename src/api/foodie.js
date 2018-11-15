@@ -160,4 +160,24 @@ export function getStepsListByDishID(id) {
         url: '/foodie/v1/dish/'+id+'/steps',
         method: 'GET',
     });
-};
+}
+
+export function getMaterialList(restaurant_id) {
+    return request({
+        url: '/foodie/v1/material',
+        method: 'GET',
+        params:{
+            query:'restaurant_id:'+restaurant_id,
+            sortby: "id",
+            order: "desc",
+        },
+    })
+}
+
+export function addMaterial(data) {
+    return request({
+        url: '/foodie/v1/material',
+        method: 'POST',
+        data,
+    })
+}
