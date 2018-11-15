@@ -40,7 +40,7 @@
                             <el-button type="primary">Make Changes</el-button>
                         </router-link> -->
                         <el-button style="width: 150px;" type="primary" @click="makeChange(item)">Make Changes</el-button>
-                        <el-button style="margin-top: 20px;width: 150px;margin-left: 0px;" type="primary">Confirm</el-button>
+                        <el-button style="margin-top: 20px;width: 150px;margin-left: 0px;" type="primary" @click="dishConfirm(item)">Confirm</el-button>
                     </div>
                 </div>
                 <div class="Pagination" style="text-align: left;margin-top: 10px;">
@@ -263,6 +263,7 @@
         getStepsListByDishID,
         getDishList,
         getDishCount,
+        updateDishStatus,
         updateDishForCustomer,
     } from '@/api/foodie'
     import {
@@ -270,6 +271,7 @@
         mapActions
     } from 'vuex'
     import { SlickList, SlickItem,} from 'vue-slicksort';
+    import md5 from 'js-md5';
     export default {
         directives: {
             focus: {
@@ -333,6 +335,8 @@
                 //
                 dialogVisible: false,
                 currentDish:{},
+
+                formDataMD5:'',
             }
         },
         components: {
@@ -435,7 +439,7 @@
                             if(item.status == -2){
                                 me.reviewDishes.push(item)
                             }else if(item.status == -1){
-                                me.translationesDishes.push(item)
+                                me.translationDishes.push(item)
                             }else{
                                 me.goDishes.push(item)
                             }
@@ -479,6 +483,33 @@
                     this.scrollBack = this.scroll
                 }
             },
+            dishConfirm(item){
+                this.currentDish = item
+                item.status=1
+                updateDishStatus(item).then(response => {
+                    const data = response.data
+                    if(response.status == 1){
+                        this.$message({
+                            message: 'modify dish status success',
+                            type: 'success'
+                        });
+                        
+                        this.changing = false
+                        
+                        this.reviewDishes.splice(this.reviewDishes.indexOf(this.currentDish), 1)
+                        this.reviewDishList.splice(this.reviewDishList.indexOf(this.currentDish), 1)
+                        this.goDishes.push(this.currentDish)
+
+                        this.goDishList = this.goDishes.slice(0,10)
+                        this.countGo = this.goDishes.length
+                        this.countReview = this.reviewDishes.length
+                    }else{
+                        this.$message.error('modify dish status fail')
+                    }
+                }).catch(error => {
+                    this.$message.error(error);
+                })
+            },
             makeChange(item){
                 //this.changing = true
                 this.currentDish = item
@@ -498,9 +529,10 @@
                             step.inputVisibleOption = false
                         })
 					}
+                    this.formDataMD5 = md5(JSON.stringify(this.formData))
 				}).catch(error => {
 					console.log(error);
-				});
+                });
             },
             goback(){
                 this.changing = false
@@ -511,6 +543,14 @@
                 window.scrollTo(0,this.scrollBack)
             },
             submitForm(){
+                
+                let formDataMD5 = md5(JSON.stringify(this.formData))
+                console.log(formDataMD5)
+                console.log(this.formDataMD5)
+                if (this.formDataMD5 == formDataMD5){
+                    this.$message.error('no modify dish')
+                    return
+                }
                 updateDishForCustomer(this.formData).then(response => {
                     const data = response.data
                     if(response.status == 1){

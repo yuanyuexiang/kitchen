@@ -14,9 +14,9 @@
             </el-form-item>
             <el-form-item prop="validationCode">
                 <span class="svg-container svg-container_login">
-                    <svg-icon icon-class="user" />
+                    <svg-icon icon-class="verification" />
                 </span>
-                <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="Validation code" />
+                <el-input v-model="loginForm.verification" name="verification" type="text" auto-complete="on" placeholder="Validation code" />
                 <span class="show-pwd" @click="sendMsg">
                     {{buttonName}}
                 </span>
@@ -26,13 +26,13 @@
                     <svg-icon icon-class="password" />
                 </span>
                 <el-input :type="pwdType" v-model="loginForm.password" name="password" auto-complete="on" placeholder="New password"
-                    @keyup.enter.native="handleLogin" />
+                    @keyup.enter.native="regainUser" />
                 <span class="show-pwd" @click="showPwd">
                     <svg-icon icon-class="eye" />
                 </span>
             </el-form-item>
             <el-form-item>
-                <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+                <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="regainUser">
                     Submit
                 </el-button>
             </el-form-item>
@@ -49,6 +49,8 @@
     import {
         isvalidUsername
     } from '@/utils/validate'
+
+    import { verificateUser,regainUser} from '@/api/foodie'
     import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
     import md5 from 'js-md5';
 
@@ -69,16 +71,29 @@
                     callback()
                 }
             }
+            const validateVerification = (rule, value, callback) => {
+                if (value.length < 6) {
+                    callback(new Error('验证码不能小于5位'))
+                } else {
+                    callback()
+                }
+            }
             return {
                 loginForm: {
                     username: '',
-                    password: ''
+                    password: '',
+                    verification: '',
                 },
                 loginRules: {
                     username: [{
                         required: true,
                         trigger: 'blur',
                         validator: validateUsername
+                    }],
+                    verification: [{
+                        required: true,
+                        trigger: 'blur',
+                        validator: validateVerification
                     }],
                     password: [{
                         required: true,
@@ -103,16 +118,31 @@
                     this.pwdType = 'password'
                 }
             },
-            handleLogin() {
+            regainUser() {
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         this.loading = true
-                        this.Login({username:this.loginForm.username,password:md5(this.loginForm.password)}).then(() => {
+                        regainUser({email:this.loginForm.username,code:this.loginForm.verification,password:md5(this.loginForm.password)}).then((response) => {
+                            
+                            const responseData = response.data;
+                            const status = response.status;
+                            console.log(responseData);
+                            if (status != 1) {
+                                const message = responseData.message;
+                                console.log(message);
+                                this.$message.error(message)
+                            }else{
+                                const data = responseData;
+                                this.$notify({
+                                    title: 'Login again',
+                                    message: "Login again",
+                                    type: 'success'
+                                });
+                                this.$router.push({
+                                    path: '/'
+                                })
+                            }
                             this.loading = false
-                            this.getRestaurants()
-                            this.$router.push({
-                                path: '/'
-                            })
                         }).catch(() => {
                             this.loading = false
                         })
@@ -123,11 +153,13 @@
                 })
             },
             sendMsg() {
-                this.$notify({
-                    title: 'Get ready for more',
-                    message: "A validation code has been sent to your email, please check your mailbox and insert the code.",
-                    type: 'success'
-                });
+                if(this.isDisabled){
+                    this.$message({
+                        message: 'Send it later!',
+                        type: 'warning'
+                    });
+                    return
+                }
                 let me = this;
                 me.isDisabled = true;
                 let interval = window.setInterval(function() {
@@ -141,6 +173,25 @@
                     }
                 }, 1000);
 
+                verificateUser({email:this.loginForm.username}).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+                        console.log(message);
+                        this.$message.error(message)
+					}else{
+                        const data = responseData;
+                        this.$notify({
+                            title: 'Get ready for more',
+                            message: "A validation code has been sent to your email, please check your mailbox and insert the code.",
+                            type: 'success'
+                        });
+                    }
+				}).catch(error => {
+					console.log(error);
+                })
             }
         }
     }

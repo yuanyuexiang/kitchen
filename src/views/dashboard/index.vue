@@ -43,18 +43,18 @@
                 </div>
                 <div style="display:flex;flex-direction:row;margin:20px 0px 0px 20px;justify-content:space-around;">
                     
-                    <div style="display:flex;flex-direction:row; width: 260px;">
+                    <div v-for="(item, key,) in dishList" :key="key" style="display:flex;flex-direction:row; width: 260px;">
                         <div style="display:flex;flex-direction:row; width: 75px;justify-content: flex-end;">
                             <div style="display:flex;flex-direction:row; justify-content: center;align-items: center;width: 60px;height:60px;background-size:100% 100%;background-image:url(/static/five-pointed-star.png)">
-                                <span style="font-size: 1.5em;">1</span>
+                                <span style="font-size: 1.5em;">{{key+1}}</span>
                             </div>
                         </div>
                         <div style="display:flex;flex-direction:column; width: 150px;justify-content: flex-end;align-items: center;">
-                            <div style="background-color: #E5E5E5;width: 150px;height: 90px;margin-top:55px;"></div>
-                            <span style="margin-top:15px;">Dish Name A</span>
+                            <img :src="item.pic_url" style="background-color: #E5E5E5;width: 150px;height: 90px;margin-top:55px;">
+                            <span style="margin-top:15px;">{{item.name_en}}</span>
                         </div>
                     </div>
-                    
+                    <!--
                     <div style="display:flex;flex-direction:row; width: 260px;">
                         <div style="display:flex;flex-direction:row; width: 75px;justify-content: flex-end;">
                             <div style="display:flex;flex-direction:row; justify-content: center;align-items: center;width: 60px;height:60px;background-size:100% 100%;background-image:url(/static/five-pointed-star.png)">
@@ -77,39 +77,6 @@
                             <span style="margin-top:15px;">Dish Name C</span>
                         </div>
                     </div>
-                    <!--
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;justify-content:flex-end;width:200px;">Set Menu</div>
-                        <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
-                        <div style="display:flex;justify-content:center;width:400px;">Set A</div>
-                    </div>
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;justify-content:flex-end;width:200px;">Main Dish</div>
-                        <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
-                        <div style="display:flex;justify-content:center;width:400px;">Beef</div>
-                    </div>
-                    
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;flex-direction:row;justify-content:center;border:1px solid; width: 600px;height:1px"></div>
-                    </div>
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;justify-content:flex-end;width:200px;">Side</div>
-                        <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
-                        <div style="display:flex;justify-content:center;width:400px;">Chips</div>
-                    </div>
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;justify-content:flex-end;width:200px;">Drink</div>
-                        <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
-                        <div style="display:flex;justify-content:center;width:400px;">Coco-cola</div>
-                    </div>
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;flex-direction:row;justify-content:center;border:1px solid; width: 600px;height:1px"></div>
-                    </div>
-                    <div style="display:flex;flex-direction:row;justify-content:center;">
-                        <div style="display:flex;justify-content:flex-end;width:200px;">Alcohol</div>
-                        <div style="margin-left:10px;border:1px solid; width: 1px;height:20px"></div>
-                        <div style="display:flex;justify-content:center;width:400px;">Spirit</div>
-                    </div>
                     -->
                 </div>
             </div>
@@ -121,6 +88,9 @@
     import {
         mapGetters
     } from 'vuex'
+    import {
+        getDishList,
+    } from '@/api/foodie'
 
     export default {
         name: 'Dashboard',
@@ -130,7 +100,47 @@
                 'role',
                 'restaurant',
             ])
-        }
+        },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                this.getDishes()
+                this.params.query = "restaurant_id:"+this.restaurant.id
+            },
+        },
+        data() {
+            return {
+                params: {
+                    offset: 0,
+                    limit: 3,
+                    sortby: "id",
+                    order: "asc",//"desc",
+                    query: "",
+                },
+                dishList:[],
+            }
+        },
+        created(){
+            this.getDishes()
+            this.params.query = "restaurant_id:"+this.restaurant.id
+        },
+        methods:{
+            getDishes(){
+				getDishList(this.params).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+						console.log(message);
+					}else{
+						const data = responseData;
+                        this.dishList = data
+                    }
+				}).catch(error => {
+					console.log(error);
+                });
+            }
+        },
     }
 
 </script>

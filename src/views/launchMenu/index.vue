@@ -10,7 +10,10 @@
             <div class="Grid-Row" style="margin-left: 20px;">
                 <span style="margin-right: 10px;">Closed</span>
                 <el-switch
-                    v-model="value2"
+                    v-model.number="formData.status"
+                    @change="updateRestaurantStatus"
+                    :active-value="1"
+                    :inactive-value="0"
                     active-color="#13ce66"
                     inactive-color="#ff4949">
                 </el-switch>
@@ -77,8 +80,8 @@
 
 <script>
     import {
-        getList
-    } from "@/api/table";
+        updateRestaurantStatus,
+    } from "@/api/foodie";
     import {
         mapGetters,
         mapActions
@@ -107,6 +110,7 @@
                 width: 200,
                 dataURL:"",
                 value2:"",
+                formData:{status:1},
             };
         },
         computed: {
@@ -119,6 +123,7 @@
             this.content = this.baseURL.format(this.restaurant.code)
             console.log("this.content")
             console.log(this.content)
+            this.formData = JSON.parse(JSON.stringify(this.restaurant))
         },
         mounted(){
             //this.qrcode();
@@ -175,6 +180,24 @@
                     return result;
                 }
             },
+            updateRestaurantStatus(){
+                console.log("this.formData.status")
+                console.log(this.formData.status)
+                updateRestaurantStatus(this.formData).then(response => {
+                    const data = response.data
+                    if(response.status == 1){
+                        this.$message({
+                            message: 'modify restaurant status success',
+                            type: 'success'
+                        });
+                        
+                    }else{
+                        this.$message.error('modify restaurant status fail')
+                    }
+                }).catch(error => {
+                    this.$message.error(error);
+                })
+            }
         }
     };
 

@@ -38,6 +38,20 @@ export function updateUserPassword(data,old_password) {
         data,
     })
 }
+export function verificateUser(data) {
+    return request({
+        url: '/foodie/v1/user/verification',
+        method: 'POST',
+        data,
+    })
+}
+export function regainUser(data) {
+    return request({
+        url: '/foodie/v1/user/regain',
+        method: 'POST',
+        data,
+    })
+}
 export function deleteSession() {
     return request({
         url: '/foodie/v1/session',
@@ -71,24 +85,32 @@ export function updateRestaurant(data) {
     })
 }
 
-export function getSubscription(id) {
+export function updateRestaurantStatus(data) {
     return request({
-        url: '/foodie/v1/subscription/'+id,
+        url: '/foodie/v1/restaurant/'+ data.id+'/status',
+        method: 'PUT',
+        data
+    });
+}
+
+export function getInvoice(id) {
+    return request({
+        url: '/foodie/v1/invoice/'+id,
         method: 'GET',
     })
 }
 
-export function addSubscription(data) {
+export function addInvoice(data) {
     return request({
-        url: '/foodie/v1/subscription',
+        url: '/foodie/v1/invoice',
         method: 'POST',
         data,
     })
 }
 
-export function updateSubscription(data) {
+export function updateInvoice(data) {
     return request({
-        url: '/foodie/v1/subscription/'+data.id,
+        url: '/foodie/v1/invoice/'+data.id,
         method: 'PUT',
         data,
     })
@@ -120,6 +142,14 @@ export function getDish(id) {
 export function updateDishForCustomer(data) {
     return request({
         url: '/foodie/v1/dish/customer/'+ data.id,
+        method: 'PUT',
+        data
+    });
+}
+
+export function updateDishStatus(data) {
+    return request({
+        url: '/foodie/v1/dish/'+ data.id+'/status',
         method: 'PUT',
         data
     });

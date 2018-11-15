@@ -119,9 +119,9 @@
         getList
     } from "@/api/table"
     import {
-        getSubscription,
-        addSubscription,
-        updateSubscription,
+        getInvoice,
+        addInvoice,
+        updateInvoice,
     } from '@/api/foodie'
     import {
         mapGetters,
@@ -173,7 +173,7 @@
         methods: {
             init(){
                 this.subscription = null
-                this.getSubscription()
+                this.getInvoice()
             },
             fetchData() {
                 this.listLoading = true;
@@ -189,9 +189,9 @@
                     type: 'success'
                 });
             },
-            getSubscription(formName){
+            getInvoice(formName){
                 if(this.restaurant){
-                    getSubscription(this.restaurant.id).then(response => {
+                    getInvoice(this.restaurant.id).then(response => {
                         const data = response.data
                         if(response.status == 1){
                            this.subscription = data
@@ -206,7 +206,7 @@
             },
             save(){
                 if(this.subscription){
-                    updateSubscription(this.subscription).then(response => {
+                    updateInvoice(this.subscription).then(response => {
                         const data = response.data
                         if(response.status == 1){
                             this.$message({
@@ -221,7 +221,7 @@
                     })
                 }else{
                     this.formData.restaurant_id = this.restaurant.id
-                    addSubscription(this.formData).then(response => {
+                    addInvoice(this.formData).then(response => {
                         const data = response.data
                         if(response.status == 1){
                             this.$message({
