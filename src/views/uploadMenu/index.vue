@@ -25,7 +25,7 @@
                             <span style="color: brown;">{{material.create_time}}</span>
                             <span style="color: coral;">{{material.name}}</span>
                             <span>{{material.status | mapStatus}}</span>
-                            <el-button style="float: right; padding: 3px 0" type="text" @click="deleteMaterial(material)">删除</el-button>
+                            <el-button style="float: right; padding: 3px 0" type="text" @click="deleteMaterial(material)">delete</el-button>
                         </div>
                         <div v-for="file_info in material.file_info_list" :key="file_info.id" class="text item">
                             <a :href="file_info.file_url" target="_blank" :title="file_info.file_url" style="text-decoration:underline">{{file_info.file_name}}</a>
@@ -113,11 +113,13 @@
                 return dataTime;
             },
             mapStatus(value){
-                let result="untreated"
+                let result=""
                 if(value==-1){
                     result="pending"
-                }else if(value==-1){
-                    result="done"
+                }else if(value==0){
+                    result="processing"
+                }else{
+                    result="solved"
                 }
                 return result
             },
