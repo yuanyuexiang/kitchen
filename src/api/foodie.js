@@ -181,3 +181,10 @@ export function addMaterial(data) {
         data,
     })
 }
+
+export function deleteMaterial(id) {
+    return request({
+        url: '/foodie/v1/material/'+id,
+        method: 'DELETE',
+    })
+}

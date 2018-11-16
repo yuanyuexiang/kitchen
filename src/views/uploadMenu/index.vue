@@ -13,9 +13,26 @@
                 Use button below to upload your full menu. It can be in the format of PDF, Word document, Excel sheet, or an image file. 
                 </span>
                 <span style="margin-bottom: 20px;">
-                Subscribed customers enjoy more options to upload additional dishes every month!
+                Subscribed customers enjoy more options to upload additional materiales every month!
                 </span>
             </div>
+        </div>
+        <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+            <el-collapse >
+                <el-collapse-item title="history" name="1">
+                    <el-card class="box-card" v-for="material in materialList" :key="material.id">
+                        <div slot="header" class="clearfix">
+                            <span style="color: brown;">{{material.create_time}}</span>
+                            <span style="color: coral;">{{material.name}}</span>
+                            <span>{{material.status | mapStatus}}</span>
+                            <el-button style="float: right; padding: 3px 0" type="text" @click="deleteMaterial(material)">删除</el-button>
+                        </div>
+                        <div v-for="file_info in material.file_info_list" :key="file_info.id" class="text item">
+                            <a :href="file_info.file_url" target="_blank" :title="file_info.file_url" style="text-decoration:underline">{{file_info.file_name}}</a>
+                        </div>
+                    </el-card>
+                </el-collapse-item>
+            </el-collapse>
         </div>
         <div class="Grid-Row">
             <div class="Grid-Raw" style="margin-top: 20px;width: 800px;">
@@ -52,6 +69,7 @@
                 </el-upload>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -60,7 +78,9 @@
         getList
     } from "@/api/table";
     import {
-        addMaterial
+        addMaterial,
+        getMaterialList,
+        deleteMaterial,
     } from "@/api/foodie"
     import {
         mapGetters
@@ -76,10 +96,37 @@
                     deleted: "danger"
                 };
                 return statusMap[status];
-            }
+            },
+            formatTime(value){
+                var dataTime = "";
+                var data = new Date(value);
+                data.setTime();
+                console.log("data")
+                console.log(data)
+                var year = data.getFullYear();
+                var month = data.getMonth() + 1;
+                var day = data.getDate();
+                var hour = data.getHours();
+                var minute = data.getMinutes();
+                var second = data.getSeconds();
+                dataTime = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+                return dataTime;
+            },
+            mapStatus(value){
+                let result="untreated"
+                if(value==-1){
+                    result="pending"
+                }
+                return result
+            },
         },
         computed: {
             ...mapGetters(['restaurant','user'])
+        },
+        watch:{
+            restaurant(newRestaurant, oldRestaurant){
+                this.getMaterials()
+            },
         },
         data() {
             return {
@@ -93,10 +140,11 @@
 				},
 				baseUrl:process.env.BASE_API,
                 fileList:[],
+                materialList:[],
             };
         },
-        created() {
-            //this.fetchData();
+        created(){
+            this.getMaterials()
         },
         methods: {
             fetchData() {
@@ -164,6 +212,38 @@
                     })
                 }
             },
+            getMaterials(){
+				getMaterialList(this.restaurant.id).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+						console.log(message);
+					}else{
+						const data = responseData;
+                        this.materialList = data
+                    }
+				}).catch(error => {
+					console.log(error);
+                });
+            },
+            deleteMaterial(item){
+                deleteMaterial(item.id).then(response => {
+					const responseData = response.data;
+                    const status = response.status;
+                    console.log(responseData);
+					if (status != 1) {
+						const message = responseData.message;
+						console.log(message);
+					}else{
+						const data = responseData;
+                        this.materialList.splice(this.materialList.indexOf(this.item), 1)
+                    }
+				}).catch(error => {
+					console.log(error);
+                });
+            }
         }
     };
 

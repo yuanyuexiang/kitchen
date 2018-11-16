@@ -215,6 +215,7 @@ export const constantRouterMap = [
             */
         ]
     },
+    /*
     {
         path: '/marketingCampaign',
         component: Layout,
@@ -230,6 +231,7 @@ export const constantRouterMap = [
             }
         }]
     },
+    */
     {
         path: '/myAccount',
         component: Layout,
