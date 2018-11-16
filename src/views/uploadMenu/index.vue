@@ -116,6 +116,8 @@
                 let result="untreated"
                 if(value==-1){
                     result="pending"
+                }else if(value==-1){
+                    result="done"
                 }
                 return result
             },
