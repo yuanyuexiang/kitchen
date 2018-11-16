@@ -197,10 +197,10 @@
                            this.subscription = data
                            this.formData = data
                         }else{
-                            this.$message('fail')
+                            //this.$message('fail')
                         }
                     }).catch(error => {
-                        this.$message(error);
+                        //this.$message(error);
                     })
                 }
             },
@@ -233,7 +233,7 @@
                             this.$message.error('create subscription fail')
                         }
                     }).catch(error => {
-                        this.$message.error(error);
+                        //this.$message.error(error);
                     })
                 }
             },
