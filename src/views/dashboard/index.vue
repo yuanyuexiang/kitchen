@@ -1,7 +1,8 @@
 <template>
     <div class="dashboard-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">{{restaurant.name_en}}</span>
+            <span v-if="restaurant" style="font-weight: bold;">{{restaurant.name_en}}</span>
+            <span v-else style="font-weight: bold;">Please Create Restaurant</span>
         </div>
         <div class="Grid-Column" style="width: 800px;margin-top: 50px;">
             <div class="Grid-Column overview" style="height: 270px;">
@@ -120,8 +121,10 @@
             }
         },
         created(){
-            this.getDishes()
-            this.params.query = "restaurant_id:"+this.restaurant.id
+            if(this.restaurant!=null){
+                this.params.query = "restaurant_id:"+this.restaurant.id
+                this.getDishes()
+            }
         },
         methods:{
             getDishes(){

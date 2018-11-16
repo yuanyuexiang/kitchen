@@ -7,7 +7,8 @@
             <div class="avatar-wrapper">
                 <!-- <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar"> -->
                 <!-- <i class="el-icon-caret-bottom" /> -->
-                <img :src='restaurant.pic_url.length>1?restaurant.pic_url:"/static/logo.png"' class="user-avatar">
+                <img v-if="restaurant!=null" :src='restaurant.pic_url.length>1?restaurant.pic_url:"/static/logo.png"' class="user-avatar">
+                <img v-else src="/static/logo.png" class="user-avatar">
             </div>
             <el-dropdown-menu slot="dropdown" class="user-dropdown">
                 <router-link class="inlineBlock" to="/myAccount/index">
