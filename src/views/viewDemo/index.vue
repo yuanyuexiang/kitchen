@@ -54,6 +54,9 @@
         mapGetters,
         mapActions
     } from 'vuex'
+    import {
+        getToken,
+    } from '@/utils/auth'
 
     export default {
         data() {
@@ -66,12 +69,12 @@
             }
         },
         computed: {
-            ...mapGetters(['restaurant'])
+            ...mapGetters(['restaurant','user',])
         },
         watch:{
             restaurant(newRestaurant, oldRestaurant){
-                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no&lang=en'
-                this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no'
+                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'lang=en&token='+getToken()
+                this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
                 this.qrcodeChinese.clear()
                 this.qrcodeEnglish.clear()
                 this.qrcodeChinese.makeCode(this.qrcodeChineseText);
@@ -79,8 +82,8 @@
             },
         },
         created(){
-            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no&lang=en'
-            this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&isAuthorization=no'
+            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'lang=en&token='+getToken()
+            this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
         },
         mounted(){
             this.createQrcode()
