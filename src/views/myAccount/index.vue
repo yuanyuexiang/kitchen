@@ -190,7 +190,7 @@
                         this.$message.error('update user fail')
                     }
                 }).catch(error => {
-                    this.$message.error(error);
+                    console.log(error)
                 })
             },
             updateUserAcceptEmail(){
@@ -205,7 +205,7 @@
                         this.$message.error('update accept email fail')
                     }
                 }).catch(error => {
-                    this.$message.error(error);
+                    console.log(error)
                 })
             },
             updateUserPassword(){

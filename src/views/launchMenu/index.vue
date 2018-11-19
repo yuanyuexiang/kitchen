@@ -195,7 +195,7 @@
                         this.$message.error('modify restaurant status fail')
                     }
                 }).catch(error => {
-                    this.$message.error(error);
+                    console.log(error)
                 })
             }
         }

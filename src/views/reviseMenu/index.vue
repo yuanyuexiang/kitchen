@@ -507,7 +507,7 @@
                         this.$message.error('modify dish status fail')
                     }
                 }).catch(error => {
-                    this.$message.error(error);
+                    console.log(error)
                 })
             },
             makeChange(item){
@@ -594,7 +594,7 @@
                         this.$message.error('modify dish fail')
                     }
                 }).catch(error => {
-                    this.$message.error(error);
+                    console.log(error)
                 })
             },
 

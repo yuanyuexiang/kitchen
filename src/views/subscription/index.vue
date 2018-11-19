@@ -217,7 +217,7 @@
                             this.$message.error('update subscription fail')
                         }
                     }).catch(error => {
-                        this.$message.error(error);
+                        console.log(error)
                     })
                 }else{
                     this.formData.restaurant_id = this.restaurant.id
@@ -233,7 +233,7 @@
                             this.$message.error('create subscription fail')
                         }
                     }).catch(error => {
-                        //this.$message.error(error);
+                        //console.log(error)
                     })
                 }
             },
