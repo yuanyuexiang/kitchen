@@ -130,7 +130,6 @@
                             if (status != 1) {
                                 const message = responseData.message;
                                 console.log(message);
-                                this.$message.error(message)
                             }else{
                                 const data = responseData;
                                 this.$notify({
@@ -180,7 +179,6 @@
 					if (status != 1) {
 						const message = responseData.message;
                         console.log(message);
-                        this.$message.error(message)
 					}else{
                         const data = responseData;
                         this.$notify({

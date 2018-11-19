@@ -192,9 +192,6 @@
                         submitter_id:this.user.id,
                         file_info_list:theFileInfoList,
                     }
-
-                    console.log("-------------------------")
-                    console.log(formData)
                     addMaterial(formData).then(response=>{
                         const responseData = response.data;
                         const status = response.status;
@@ -202,7 +199,6 @@
                         if (status != 1) {
                             const message = responseData.message;
                             console.log(message);
-                            this.$message.error(message)
                         }else{
                             const data = responseData;
                             this.$notify({

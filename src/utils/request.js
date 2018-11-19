@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {
-    Message,
     MessageBox
 } from 'element-ui'
 import store from '../store'
@@ -37,12 +36,6 @@ service.interceptors.response.use(
          */
         const res = response.data
         if (res.status !== 1) {
-            Message({
-                message: res.message,
-                type: 'error',
-                duration: 5 * 1000
-            })
-
             // 0:非法的token; -1:业务失败; -2:Token 过期了;
             if (res.status === -2) {
                 MessageBox.confirm(
@@ -65,11 +58,6 @@ service.interceptors.response.use(
     },
     error => {
         console.log('err' + error) // for debug
-        Message({
-            message: error.message,
-            type: 'error',
-            duration: 5 * 1000
-        })
         return Promise.reject(error)
     }
 )
