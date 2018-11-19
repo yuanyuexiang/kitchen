@@ -73,7 +73,7 @@
         },
         watch:{
             restaurant(newRestaurant, oldRestaurant){
-                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'lang=en&token='+getToken()
+                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&lang=en&token='+getToken()
                 this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
                 this.qrcodeChinese.clear()
                 this.qrcodeEnglish.clear()
@@ -82,7 +82,7 @@
             },
         },
         created(){
-            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'lang=en&token='+getToken()
+            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&lang=en&token='+getToken()
             this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
         },
         mounted(){
