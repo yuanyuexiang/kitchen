@@ -66,6 +66,7 @@
                 qrcodeEnglish:{},
                 qrcodeChineseText:'',
                 qrcodeEnglishText:'',
+                baseURL:'',
             }
         },
         computed: {
@@ -73,8 +74,8 @@
         },
         watch:{
             restaurant(newRestaurant, oldRestaurant){
-                this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&lang=en&token='+getToken()
-                this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
+                this.qrcodeEnglishText = this.baseURL+this.restaurant.code+'&lang=en&token='+getToken()
+                this.qrcodeChineseText = this.baseURL+this.restaurant.code+'&token='+getToken()
                 this.qrcodeChinese.clear()
                 this.qrcodeEnglish.clear()
                 this.qrcodeChinese.makeCode(this.qrcodeChineseText);
@@ -82,8 +83,15 @@
             },
         },
         created(){
-            this.qrcodeEnglishText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&lang=en&token='+getToken()
-            this.qrcodeChineseText = 'http://gastronome.linglinkmenu.cn/?restaurantCode='+this.restaurant.code+'&token='+getToken()
+            if(process.env.NODE_ENV == 'test'){
+                this.baseURL = 'http://gastronome.test.linglinkmenu.cn/?restaurantCode='
+            }else if(process.env.NODE_ENV == 'development'){
+                this.baseURL = 'http://gastronome.test.youentang.org/?restaurantCode='
+            }else{
+                this.baseURL = 'http://gastronome.linglinkmenu.cn/?restaurantCode='
+            }
+            this.qrcodeEnglishText = this.baseURL+this.restaurant.code+'&lang=en&token='+getToken()
+            this.qrcodeChineseText = this.baseURL+this.restaurant.code+'&token='+getToken()
         },
         mounted(){
             this.createQrcode()
