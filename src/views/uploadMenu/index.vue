@@ -7,7 +7,6 @@
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="display:flex; justify-content: space-between">
                     <span style="line-height: 30px;font-weight: bold;">Tips</span>
-                    <!-- <el-button type="primary">View</el-button> -->
                 </div>
                 <span style="margin-top: 20px;margin-bottom: 20px;">
                 Use button below to upload your full menu. It can be in the format of PDF, Word document, Excel sheet, or an image file. 
@@ -22,7 +21,7 @@
                 <el-collapse-item title="history" name="1">
                     <el-card class="box-card" v-for="material in materialList" :key="material.id">
                         <div slot="header" class="clearfix">
-                            <span style="color: brown;">{{material.create_time}}</span>
+                            <span style="color: brown;">{{material.create_time | formatTime}}</span>
                             <span style="color: coral;">{{material.name}}</span>
                             <span>{{material.status | mapStatus}}</span>
                             <el-button style="float: right; padding: 3px 0" type="text" @click="deleteMaterial(material)">delete</el-button>
@@ -36,22 +35,6 @@
         </div>
         <div class="Grid-Row">
             <div class="Grid-Raw" style="margin-top: 20px;width: 800px;">
-                <!-- <el-upload
-                    class="upload-demo"
-                    :action="baseUrl + '/camaro/v1/file'"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :before-remove="beforeRemove"
-                    multiple
-                    :limit="10"
-                    :on-exceed="handleExceed"
-                    :on-success="handleSuccess"
-                    :before-upload="beforeUpload"
-                    :file-list="fileList">
-                    <el-button size="small" type="primary">Choose File</el-button>
-                    <div slot="tip" class="el-upload__tip">SIze: less than 2 MB</div>
-                    <div slot="tip" class="el-upload__tip">Format: PDF, Word, Excel, Jpeg/Png</div>
-                </el-upload> -->
                 <el-upload
                     class="upload-demo"
                     ref="upload"
@@ -86,31 +69,12 @@
         mapGetters
     } from 'vuex'
     //import {baseUrl, baseImgPath} from '@/config/env'
+    import moment from 'moment'
 
     export default {
         filters: {
-            statusFilter(status) {
-                const statusMap = {
-                    published: "success",
-                    draft: "gray",
-                    deleted: "danger"
-                };
-                return statusMap[status];
-            },
             formatTime(value){
-                var dataTime = "";
-                var data = new Date(value);
-                data.setTime();
-                console.log("data")
-                console.log(data)
-                var year = data.getFullYear();
-                var month = data.getMonth() + 1;
-                var day = data.getDate();
-                var hour = data.getHours();
-                var minute = data.getMinutes();
-                var second = data.getSeconds();
-                dataTime = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-                return dataTime;
+                return moment(value).format('YYYY-MM-DD HH:mm:ss')
             },
             mapStatus(value){
                 let result=""
