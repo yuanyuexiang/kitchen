@@ -40,14 +40,14 @@ export function updateUserPassword(data,old_password) {
 }
 export function verificateUser(data) {
     return request({
-        url: '/foodie/v1/user/verification',
+        url: '/foodie/v1/exemption/user/verification',
         method: 'POST',
         data,
     })
 }
 export function regainUser(data) {
     return request({
-        url: '/foodie/v1/user/regain',
+        url: '/foodie/v1/exemption/user/regain',
         method: 'POST',
         data,
     })
