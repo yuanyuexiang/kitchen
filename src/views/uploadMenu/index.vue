@@ -143,7 +143,6 @@
                 let result = theFileList.every(function(item){
                     return item.status === "success" 
                 })
-                console.log(result)
                 if(result){
                     let theFileInfoList=[]
                     theFileList.forEach(item=>{
@@ -159,10 +158,8 @@
                     addMaterial(formData).then(response=>{
                         const responseData = response.data;
                         const status = response.status;
-                        console.log(responseData);
                         if (status != 1) {
                             const message = responseData.message;
-                            console.log(message);
                         }else{
                             const data = responseData;
                             this.$notify({
@@ -180,10 +177,8 @@
 				getMaterialList(this.restaurant.id).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
 						const data = responseData;
                         this.materialList = data
@@ -196,10 +191,8 @@
                 deleteMaterial(item.id).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
 						const data = responseData;
                         this.materialList.splice(this.materialList.indexOf(this.item), 1)

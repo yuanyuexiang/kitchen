@@ -344,7 +344,6 @@
             SlickList
         },
         activated() {
-            console.log("this.activated")
             if(this.scroll > 0){
                 window.scrollTo(0, this.scroll);
                 this.scroll = 0;
@@ -352,7 +351,6 @@
             }
         },
         deactivated(){
-            console.log("this.deactivated")
             window.removeEventListener('scroll', this.handleScroll);
         },
         computed: {
@@ -365,11 +363,9 @@
             },
         },
         created(){
-            console.log("-----------------------created-------------------------")
         },
         mounted(){
             window.addEventListener('scroll', this.handleScroll);
-            console.log("-----------------------mounted-------------------------")
             this.initData()
             this.params.query = "restaurant_id:"+this.restaurant.id
         },
@@ -384,7 +380,6 @@
                     getDishCount(params).then(response => {
                         const responseData = response.data
                         const status = response.status
-                        console.log(responseData)
                         if (status == 1) {
                             this.count = responseData
                         }
@@ -401,10 +396,8 @@
 				getDishList(params).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
 						const data = responseData;
                         this.dishList = data
@@ -433,7 +426,6 @@
                             dish.stepList = stepList
                         })
                         this.reviewDishList = this.dishList.slice(0,10)
-                        console.log(this.dishList);
                         let me = this
                         this.dishList.forEach(function(item){
                             if(item.status == -2){
@@ -519,10 +511,8 @@
                 getStepsListByDishID(item.id).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
                         this.formData.steps = responseData;
                         this.formData.steps.forEach(function(step){
@@ -536,17 +526,10 @@
             },
             goback(){
                 this.changing = false
-                console.log("this.scrollBack")
-                console.log(this.scrollBack)
-                //console.log(window)
-                //window.scrollTo(0, this.scrollBack);
                 window.scrollTo(0,this.scrollBack)
             },
             submitForm(){
-                
                 let formDataMD5 = md5(JSON.stringify(this.formData))
-                console.log(formDataMD5)
-                console.log(this.formDataMD5)
                 if (this.formDataMD5 == formDataMD5){
                     this.$message.error('no modify dish')
                     return
@@ -600,8 +583,6 @@
 
             //
             handleClose(tag) {
-                console.log("handleClose")
-                console.log(tag)
                 this.formData.ingredients.splice(this.formData.ingredients.indexOf(tag), 1)
             },
             showInput() {
@@ -609,10 +590,8 @@
                 this.$nextTick(_ => {
                     this.$refs.saveTagInput.$refs.input.focus();
                 });
-                console.log("showInput")
             },
             handleInputConfirm() {
-                console.log("handleInputConfirm")
                 let inputValue = this.inputValue;
                 if (inputValue) {
                     this.formData.ingredients.push({name_en:inputValue})
@@ -622,17 +601,13 @@
             },
 
             handleCloseOption(options,option) {
-                console.log("handleCloseOption")
-                console.log(option)
                 options.splice(options.indexOf(option), 1)
             },
             showInputOption(step) {
                 let x = step.name_en
                 step.name_en = ""
                 step.name_en = x
-                console.log(step)
                 step.inputVisibleOption = true;
-                console.log(step)
                 // this.$nextTick(_ => {
                 //     this.$refs.saveTagInputOption.$refs.input.focus();
                 // // });
@@ -641,8 +616,6 @@
                 let x = step.name_en
                 step.name_en = ""
                 step.name_en = x
-                console.log(step)
-                console.log("handleInputConfirmOption")
                 let inputValueOption = step.inputValueOption;
                 if (inputValueOption) {
                     let nameAndPrice = inputValueOption.split('/')
@@ -650,7 +623,6 @@
                     let price = 0
                     if(nameAndPrice.length>1){
                         let _price = nameAndPrice[1].match(/\d+(?:\.\d+)?/);
-                        console.log("--------------------------"+_price)
                         if(_price==null){
                             return
                         }
@@ -670,12 +642,8 @@
                 this.formData.steps.push({name_en:"new option",price:0,most:0,least:0,options:[]})
             },
             handleAvatarSuccess(res, file) {
-                //this.imageUrl = URL.createObjectURL(file.raw);
-                console.log(res)
                 if (res.status == 1) {
                     this.formData.pic_url = res.data.aws_url;
-                    console.log("=================")
-                    console.log(this.formData.pic_url)
 				}else{
 					this.$message.error('上传图片失败！');
 				}

@@ -89,8 +89,6 @@
             }
         },
         mounted(){
-            console.log("this.$route.query")
-            console.log(this.$route.query)
             let restaurant_id = this.$route.query.restaurant_id
             this.getDish(restaurant_id)
         },
@@ -106,10 +104,8 @@
 				getDish(id).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
 						this.dish = responseData;
 					}

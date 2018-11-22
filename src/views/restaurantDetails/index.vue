@@ -265,7 +265,6 @@
         methods: {
             ...mapActions(['getRestaurants','setRestaurant']),
             submitForm(formName){
-                console.log(this.formData)
                 let myRestaurant = JSON.parse(JSON.stringify(this.formData))
                 if(myRestaurant.id){
                     myRestaurant.payment = myRestaurant.payment.join(',')
@@ -311,12 +310,8 @@
                 }
             },
             handleAvatarSuccess(res, file) {
-                //this.imageUrl = URL.createObjectURL(file.raw);
-                console.log(res)
                 if (res.status == 1) {
                     this.formData.pic_url = res.data.aws_url;
-                    console.log("=================")
-                    console.log(this.formData.pic_url)
 				}else{
 					this.$message.error('上传图片失败！');
 				}

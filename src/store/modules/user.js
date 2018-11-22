@@ -62,7 +62,6 @@ const user = {
             return new Promise((resolve, reject) => {
                 createSession(username, userInfo.password).then(response => {
                     const data = response.data
-                    console.log(data)
                     setToken(data.token)
                     commit('SET_TOKEN', data.token)
                     setUserID(data.user_id)

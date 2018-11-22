@@ -121,8 +121,6 @@
             //this.qrcode();
             this.extendsString()
             this.content = this.baseURL.format(this.restaurant.code)
-            console.log("this.content")
-            console.log(this.content)
             this.formData = JSON.parse(JSON.stringify(this.restaurant))
         },
         mounted(){
@@ -131,8 +129,6 @@
         watch:{
             restaurant(newRestaurant, oldRestaurant){
                 this.content = this.baseURL.format(this.restaurant.code)
-                console.log("this.content")
-                console.log(this.content)
             },
         },
         methods: {
@@ -152,7 +148,6 @@
                 }).then((canvas) => {
                     let dataURL = canvas.toDataURL("image/png");
                     this.dataURL = dataURL;
-                    console.log(dataURL)
                     downloadjs(dataURL,"qrcode.png","image/png")
                 });
             },
@@ -181,8 +176,6 @@
                 }
             },
             updateRestaurantStatus(){
-                console.log("this.formData.status")
-                console.log(this.formData.status)
                 updateRestaurantStatus(this.formData).then(response => {
                     const data = response.data
                     if(response.status == 1){

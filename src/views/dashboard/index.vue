@@ -131,10 +131,8 @@
 				getDishList(this.params).then(response => {
 					const responseData = response.data;
                     const status = response.status;
-                    console.log(responseData);
 					if (status != 1) {
 						const message = responseData.message;
-						console.log(message);
 					}else{
 						const data = responseData;
                         this.dishList = data

@@ -27,7 +27,6 @@ const restaurant = {
     mutations: {
         SaveRestaurantList: (state,data) => {
             state.restaurants = data;
-            console.log(JSON.stringify(state.restaurants))
             if(data){
                 localStorage.setItem("restaurants",JSON.stringify(state.restaurants));
             }
@@ -41,8 +40,6 @@ const restaurant = {
         DeleteRestaurant: (state,data) => {
             localStorage.removeItem("restaurant");
             state.restaurant = {name_en:"Create Restaurant"}
-            console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-            console.log(state.restaurant)
         },
     },
     actions: {
@@ -51,9 +48,6 @@ const restaurant = {
                 getRestaurantList(getUserID()).then(response => {
                     const data = response.data
                     commit('SaveRestaurantList',data)
-                    console.log("----------------getRestaurantList------------------")
-                    console.log(data)
-                    console.log("----------------getRestaurantList------------------")
                     if(state.restaurant == null && data != null){
                         commit('SaveRestaurant',data[0])
                     }
@@ -67,7 +61,6 @@ const restaurant = {
             commit('SaveRestaurant', restaurant)
         },
         deleteRestaurant({ commit,}){
-            console.log("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG")
             commit('DeleteRestaurant',null)
         }
     }

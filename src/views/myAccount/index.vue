@@ -115,7 +115,6 @@
         },
         data() {
             var validatePass = (rule, value, callback) => {
-                console.log("-----validatePass-----|"+value)
                 if (value === '') {
                     callback(new Error('Please input a password'));
                 } else {
@@ -126,7 +125,6 @@
                 }
             };
             var validatePass2 = (rule, value, callback) => {
-                console.log("-----validatePass2-----|"+value)
                 if (value === '') {
                     callback(new Error('Confirm new password'));
                 } else if (value !== this.formData.password) {
@@ -167,7 +165,6 @@
         },
         created() {
             //this.fetchData();
-            console.log(this.user)
             this.formData = JSON.parse(JSON.stringify(this.user))
         },
         methods: {
