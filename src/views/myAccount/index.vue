@@ -1,19 +1,21 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">My Account</span>
+            <span style="font-weight: bold;;color:#FB001F">My Account</span>
         </div>
-        <div class="Grid-Row" style="margin-top: 50px;">
+        <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
+                <div style="width: 800px;margin-bottom: 10px;border-top:1px solid"/>
                 <div class="title" style="display:flex; justify-content: flex-start">
                     <span style="line-height: 30px;font-weight: bold;">My Account： </span>
                     <span style="line-height: 30px;">{{user.email}}</span>
                 </div>
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Contact Information</span>
+                <div style="width: 800px;margin-top: 10px;margin-bottom: 10px;border-top:1px solid"/>
+                <div class="title" style="display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">
+                    <span style="line-height: 30px;font-weight: bold;color:white">Contact Information</span>
                     <el-button type="primary" @click="updateUser">Save</el-button>
                 </div>
-                <el-form ref="formData" :model="formData" class="form-container">
+                <el-form ref="formData" :model="formData" class="form-container" style="margin-top: 10px;">
                     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;">
                         <el-form-item style="margin-bottom: 10px;" label-width="60px" label="Title:">
                             <el-select v-model="formData.title" style="width: 150px;" placeholder="Select">
@@ -40,8 +42,8 @@
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Reset Password</span>
+                <div class="title" style="width: 800px;display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">
+                    <span style="line-height: 30px;font-weight: bold;color:white">Reset Password</span>
                     <el-button type="primary" @click="updateUserPassword">Save</el-button>
                 </div>
                 <el-form ref="formData" :model="formData" :rules="rules2" label-width="150px" class="form-container">
@@ -59,24 +61,24 @@
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Marketing and Communications</span>
+                <div class="title" style="width: 800px;display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">
+                    <span style="line-height: 30px;font-weight: bold;color:white">Marketing and Communications</span>
                     <el-button type="primary" @click="updateUserAcceptEmail">Save</el-button>
                 </div>
                 <span style="margin-top: 20px;">
                     We process your personal information for the purposes of marketing activities to offer you products or services that may be of interest based on your preferences. 
                 </span>
-                <el-checkbox style="margin-top: 20px;margin-left: 20px;color: inherit;" v-model="formData.accept_email">I would like to receive relevant marketing communications</el-checkbox>
+                <el-checkbox class="el-checkbox" style="margin-top: 20px;margin-left: 20px;color: inherit;" v-model="formData.accept_email">I would like to receive relevant marketing communications</el-checkbox>
             </div>
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Terms of Service and Privacy Policy</span>
+                <div class="title" style="width: 800px;display:flex; justify-content: space-between;align-items: center;padding: 12px 5px 12px 5px; background-color:#898989">
+                    <span style="line-height: 30px;font-weight: bold;color:white">Terms of Service and Privacy Policy</span>
                     <!-- <el-button type="primary">View</el-button> -->
                 </div>
                 <span style="margin-top: 20px;margin-bottom: 20px;">
-                Linglink <a style="color:#1890FF;" target="_blank" href="http://www.linglink.us/llktermsofservice">Terms of Service</a> and <a target="_blank" style="color:#1890FF;" href="http://www.linglink.us/llkprivacypolicy">Privacy Policy</a> explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
+                Linglink <a style="color:#FF004B;" target="_blank" href="http://www.linglink.us/llktermsofservice">Terms of Service</a> and <a target="_blank" style="color:#FF004B;" href="http://www.linglink.us/llkprivacypolicy">Privacy Policy</a> explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
                 </span>
             </div>
         </div>
@@ -301,6 +303,45 @@
     cursor: pointer;
     white-space: nowrap;
     outline: 0;
+}
+.el-button--primary {
+    color: #fff;
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
+.el-button:focus, .el-button:hover {
+    color: #409EFF;
+    border-color: #FF004B;
+    background-color: #FF004B;
+}
+
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #FF008B;
+    border-color: #FF008B;
+    color: #fff;
+}
+.el-button--primary.is-active, .el-button--primary:active {
+    background: #FF004B;
+    /* border-color: #3a8ee6; */
+    color: #fff;
+}
+.el-button:active {
+    /* color: #3a8ee6; */
+    border-color: #FF004B;
+    outline: 0;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {
+    color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-focus .el-checkbox__inner {
+    border-color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__inner:hover {
+    border-color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: #FF004B;
+    border-color: #FF004B;
 }
 </style>
 <style lang="less">

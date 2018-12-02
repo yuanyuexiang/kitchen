@@ -1,9 +1,10 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Restaurant Details</span>
+            <span style="font-weight: bold;color:#FB001F">Restaurant Details</span>
         </div>
-        <div class="Grid-Row" style="width: 800px;margin-top: 50px;">
+        <div style="width: 800px;margin-top: 30px;border-top:1px solid"/>
+        <div class="Grid-Row" style="width: 800px;margin-top: 30px;">
             <div class="Grid-Column" style="width: 200px;">
                 <span style="font-weight: bold;">Upload Logo:</span>
                 <!-- <el-upload
@@ -74,8 +75,10 @@
         </div>
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
-                <span class="title" style="line-height: 10px;font-weight: bold;">Restaurant Address:</span>
-                <el-form ref="formData" class="form-container">
+                <div style="padding: 15px 0px 15px 15px; background-color:#898989">
+                    <span class="title" style="line-height: 10px;font-weight: bold;color:white">Restaurant Address:</span>
+                </div>
+                <el-form ref="formData" class="form-container" style="margin-top: 10px;">
                     <el-form-item style="margin-bottom: 10px;" label-width="70px" label="Street:">
                         <el-input type="textarea" v-model="formData.street" class="article-textarea" autosize placeholder=""/>
                     </el-form-item>
@@ -111,8 +114,10 @@
         </div>
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
-                <span class="title" style="line-height: 20px;font-weight: bold;">Features:</span>
-                <el-form ref="formData" class="form-container" label-width="150px">
+                <div style="padding: 15px 0px 15px 15px; background-color:#898989">
+                    <span class="title" style="line-height: 20px;font-weight: bold;color:white">Features:</span>
+                </div>
+                <el-form ref="formData" class="form-container" label-width="150px" style="margin-top: 10px;">
                     <el-form-item style="margin-bottom: 10px;" label="Take Reservations:">
                         <el-select v-model="formData.reservations" placeholder="Select">
                             <el-option value="Yes">Yes</el-option>
@@ -133,7 +138,7 @@
                     </el-form-item>
                     <el-form-item style="margin-bottom: 10px;" label="Payment:">
                         <el-checkbox-group v-model="formData.payment">
-                            <el-checkbox v-for="item in paymentList" :label="item" :key="item"></el-checkbox>
+                            <el-checkbox class="el-checkbox" v-for="item in paymentList" :label="item" :key="item"></el-checkbox>
                         </el-checkbox-group>
                     </el-form-item> 
                 </el-form>
@@ -141,8 +146,10 @@
         </div>
         <div class="Grid-Row">
             <div class="Grid-Column" style="width: 800px;margin-top: 20px;">
-                <span class="title" style="line-height: 10px;font-weight: bold;">About Us:</span>
-                <el-form ref="formData" class="form-container" style="margin-top: 20px;">
+                <div style="padding: 15px 0px 15px 15px; background-color:#898989">
+                    <span class="title" style="line-height: 10px;font-weight: bold;color:white">About Us:</span>
+                </div>
+                <el-form ref="formData" class="form-container" style="margin-top: 10px;">
                     <el-input
                         type="textarea"
                         rows="5"
@@ -382,7 +389,45 @@
     display: flex;
     justify-content: center;
 }
+.el-button--primary {
+    color: #fff;
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
+.el-button:focus, .el-button:hover {
+    color: #409EFF;
+    border-color: #FF004B;
+    background-color: #FF004B;
+}
 
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #FF008B;
+    border-color: #FF008B;
+    color: #fff;
+}
+.el-button--primary.is-active, .el-button--primary:active {
+    background: #FF004B;
+    /* border-color: #3a8ee6; */
+    color: #fff;
+}
+.el-button:active {
+    /* color: #3a8ee6; */
+    border-color: #FF004B;
+    outline: 0;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {
+    color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-focus .el-checkbox__inner {
+    border-color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__inner:hover {
+    border-color: #FF004B;
+}
+.el-checkbox /deep/ .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
 </style>
 <style lang="less">
 //文章页textarea修改样式

@@ -137,7 +137,7 @@
     }
 
 </script>
-<!--//$bg:#2d3a4b;-->
+<!--//$bg:#2B2B2B;-->
 <style rel="stylesheet/scss" lang="scss">
     $bg:#eee;
     $light_gray:#eee;
@@ -183,7 +183,7 @@
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-    $bg:#2d3a4b;
+    $bg:#2B2B2B;
     $dark_gray:#889aa4;
     $light_gray:#eee;
 
@@ -250,4 +250,30 @@
         }
     }
 
+    .el-button--primary {
+        color: #fff;
+        background-color: #FF004B;
+        border-color: #FF004B;
+    }
+    .el-button:focus, .el-button:hover {
+        color: #409EFF;
+        border-color: #FF004B;
+        background-color: #FF004B;
+    }
+
+    .el-button--primary:focus, .el-button--primary:hover {
+        background: #FF008B;
+        border-color: #FF008B;
+        color: #fff;
+    }
+    .el-button--primary.is-active, .el-button--primary:active {
+        background: #FF004B;
+        /* border-color: #3a8ee6; */
+        color: #fff;
+    }
+    .el-button:active {
+        /* color: #3a8ee6; */
+        border-color: #FF004B;
+        outline: 0;
+    }
 </style>

@@ -1,13 +1,13 @@
 <template>
     <div class="dashboard-container">
         <div class="Grid-Title">
-            <span v-if="restaurant" style="font-weight: bold;">{{restaurant.name_en}}</span>
-            <span v-else style="font-weight: bold;">Please Create Restaurant</span>
+            <span v-if="restaurant" style="font-weight: bold;color:#FB001F">{{restaurant.name_en}}</span>
+            <span v-else style="font-weight: bold;color:#FB001F">Please Create Restaurant</span>
         </div>
         <div class="Grid-Column" style="width: 800px;margin-top: 50px;">
             <div class="Grid-Column overview" style="height: 270px;">
-                <div style="margin:20px 0px 0px 20px">
-                   <span style="font-weight:blod;font-size:20px">Overview</span>
+                <div style="padding: 10px 0px 10px 10px; background-color:#898989">
+                   <span style="font-weight:blod;font-size:20px;color:white">Overview</span>
                 </div>
                 <div class="Grid-Row" style="justify-content:center;margin-top: 40px;">
                     <div style="display:felx;flex-direction:column;justify-content:space-between;width:150px;">
@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div class="Grid-Column overview" style="margin-top:30px;height: 270px;">
-                <div style="margin:20px 0px 0px 20px">
-                   <span style="font-weight:blod;font-size:20px">Top 3 Popular Items</span>
+                <div style="padding: 10px 0px 10px 10px; background-color:#898989">
+                   <span style="font-weight:blod;font-size:20px;color:white">Top 3 Popular Items</span>
                 </div>
                 <div style="display:flex;flex-direction:row;margin:20px 0px 0px 20px;justify-content:space-around;">
                     
@@ -173,11 +173,10 @@
     justify-content: center;
 }
 .overview {
-    border-color: black;
     border-width: 20px;
     width: 800px;
     height: 200px;
-    border:1px solid;
+    border:1px solid #CCCCCC;
 }
 </style>
 <style lang="less">

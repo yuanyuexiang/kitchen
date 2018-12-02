@@ -1,33 +1,31 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Subscription</span>
+            <span style="font-weight: bold;color:#FB001F">Subscription</span>
         </div>
-        <div class="Grid-Row" style="margin-top: 50px;">
-            <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Subscription Summary</span>
-                    <el-button type="primary" @click="upgrade">Upgrade</el-button>
-                </div>
-                <el-form ref="formData" :model="formData" class="form-container">
-                    <el-form-item class="form-item-label" style="margin-bottom: 10px; " label="My Plan:">
-                        <div style="margin-right: 30px; margin-top: 15px; display:flex; flex-direction: column;">
-                            <el-radio-group v-model="formData.my_plan" disabled style="display:flex;flex-direction: column">
-                                <el-radio style="margin-left: 30px; color:inherit;" label="Appetizer">Appetizer</el-radio>
-                                <el-radio style="margin-top: 10px;color:inherit;" label="Entree">Entree</el-radio>
-                                <el-radio style="margin-top: 10px;color:inherit;" label="Combo">Combo</el-radio>
-                            </el-radio-group>
-                        </div>
-                    </el-form-item>
-                </el-form>
+        <div class="Grid-Column" style="margin-top: 50px;">
+            <div class="title" style="width: 800px; display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">
+                <span style="line-height: 30px;font-weight: bold;color:white">Subscription Summary</span>
+                <el-button type="primary" @click="upgrade">Upgrade</el-button>
             </div>
+            <el-form ref="formData" :model="formData" class="form-container">
+                <el-form-item class="form-item-label" style="margin-bottom: 10px; " label="My Plan:">
+                    <div style="margin-right: 30px; margin-top: 15px; display:flex; flex-direction: column;">
+                        <el-radio-group v-model="formData.my_plan" disabled style="display:flex;flex-direction: column">
+                            <el-radio style="margin-left: 30px; color:inherit;" label="Appetizer">Appetizer</el-radio>
+                            <el-radio style="margin-top: 10px;color:inherit;" label="Entree">Entree</el-radio>
+                            <el-radio style="margin-top: 10px;color:inherit;" label="Combo">Combo</el-radio>
+                        </el-radio-group>
+                    </div>
+                </el-form-item>
+            </el-form>
         </div>
         <div class="Grid-Column" style="margin-top: 20px;">
-            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;font-weight: bold;">Invoice Information (optional)</span>
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">
+                <span style="line-height: 30px;font-weight: bold;color:white">Invoice Information (optional)</span>
                 <el-button type="primary" @click="save">Save</el-button>
             </div>
-            <div class="Grid-Row">
+            <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="formData" :model="formData" class="form-container">
                         <span class="title" style="line-height: 10px;">First Name</span>
@@ -82,10 +80,10 @@
             </div>
         </div>
         <div class="Grid-Column" style="margin-top: 20px;margin-bottom: 20px;">
-            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between">
-                <span style="line-height: 30px;font-weight: bold;">Statement</span>
+            <div class="title" style="width: 800px; margin-right: 20px;display:flex; justify-content: space-between;align-items: center;padding: 12px 5px 12px 5px; background-color:#898989">
+                <span style="line-height: 30px;font-weight: bold;;color:white">Statement</span>
             </div>
-            <div class="Grid-Row">
+            <div class="Grid-Row" style="margin-top: 20px;">
                 <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
                     <el-form ref="formData" :model="formData" class="form-container">
                         <span class="title" style="line-height: 10px;">Date</span>
@@ -310,7 +308,33 @@
     border:none;
     border-top:1px solid #bfcbd9;
     margin-top: 10px;
-}  
+}
+.el-button--primary {
+    color: #fff;
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
+.el-button:focus, .el-button:hover {
+    color: #409EFF;
+    border-color: #FF004B;
+    background-color: #FF004B;
+}
+
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #FF008B;
+    border-color: #FF008B;
+    color: #fff;
+}
+.el-button--primary.is-active, .el-button--primary:active {
+    background: #FF004B;
+    /* border-color: #3a8ee6; */
+    color: #fff;
+}
+.el-button:active {
+    /* color: #3a8ee6; */
+    border-color: #FF004B;
+    outline: 0;
+}
 </style>
 <style lang="less">
 //文章页textarea修改样式

@@ -191,7 +191,7 @@
     }
 
 </script>
-<!--//$bg:#2d3a4b;-->
+<!--//$bg:#2B2B2B;-->
 <style rel="stylesheet/scss" lang="scss">
     $bg:#eee;
     $light_gray:#eee;
@@ -243,7 +243,7 @@
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-    $bg:#2d3a4b;
+    $bg:#2B2B2B;
     $dark_gray:#889aa4;
     $light_gray:#eee;
 
