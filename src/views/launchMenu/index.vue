@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold; color: #FB001F;">Launch Menu</span>
+            <span style="font-weight: bold; color: #FB001F;font-size: 1.5em;">Launch Menu</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Row">

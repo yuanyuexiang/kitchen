@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold; color: #FB001F;">Revise Menu</span>
+            <span style="font-weight: bold; color: #FB001F;font-size: 1.5em;">Revise Menu</span>
         </div>
         <el-tabs class="el-tabs" v-show="!changing" v-model="activeName" style="width: 800px;margin-top: 20px;">
             <el-tab-pane label="1. To Be Reviewed" name="first">

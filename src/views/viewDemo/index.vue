@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold; color: #FB001F;">My Demos</span>
+            <span style="font-weight: bold; color: #FB001F;font-size: 1.5em;">My Demos</span>
         </div>
         <div class="Grid-Column" style="margin-top: 50px;">
             <div>

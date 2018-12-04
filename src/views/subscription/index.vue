@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;color:#FB001F">Subscription</span>
+            <span style="font-weight: bold;color: #FB001F;font-size: 1.5em;">Subscription</span>
         </div>
         <div class="Grid-Column" style="margin-top: 50px;">
             <div class="title" style="width: 800px; display:flex; justify-content: space-between;align-items: center;padding: 5px 5px 5px 5px; background-color:#898989">

@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;color:#FB001F">Restaurant Details</span>
+            <span style="font-weight: bold;color: #FB001F;font-size: 1.5em;">Restaurant Details</span>
         </div>
         <div style="width: 800px;margin-top: 30px;border-top:1px solid"/>
         <div class="Grid-Row" style="width: 800px;margin-top: 30px;">
