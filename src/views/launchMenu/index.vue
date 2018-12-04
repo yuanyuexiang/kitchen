@@ -60,7 +60,7 @@
                         <div style="padding:15px; background-color: white;">
                             <vue-qr :text="content" :size="300" :margin="0" :logoScale=".23" logoSrc="/static/logo.png" :logoMargin="5"></vue-qr>
                         </div>
-                        <span style="color: white; margin-top: 10px;margin-bottom: 20px;font-size:1.5em">Menu in Chinese Available on Wechat!</span>
+                        <span style="color: white; margin-top: 15px;margin-bottom: 30px;font-size:1.5em">Menu in Chinese Available on Wechat!</span>
                         
                     </div>
                     <div class="Grid-Column" style="align-items: center;margin-top: 20px;">
