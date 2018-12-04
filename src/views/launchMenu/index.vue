@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Launch Menu</span>
+            <span style="font-weight: bold; color: #FB001F;">Launch Menu</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Row">
@@ -44,7 +44,7 @@
                         @click.native="downloadImage">
                     </vueLogoQrcode> -->
                     <div class="imageWrapper" ref="imageWrapper">
-                        <img src="/static/up.png" style="width:350px;margin-top: 20px;margin-bottom: 10px;">
+                        <img src="/static/up.png" style="width:525px;margin-top: 30px;margin-bottom: 15px;">
                         <!-- 
                         <vueLogoQrcode
                             style="align-items: center"
@@ -57,10 +57,10 @@
                             @click.native="downloadImage">
                         </vueLogoQrcode>
                         -->
-                        <div style="padding:10px; width: 220px;height: 220px; background-color: white;">
-                            <vue-qr :text="content" :size="200" :margin="0" logoSrc="/static/logo.png" :logoMargin="5"></vue-qr>
+                        <div style="padding:15px; background-color: white;">
+                            <vue-qr :text="content" :size="300" :margin="0" :logoScale=".23" logoSrc="/static/logo.png" :logoMargin="5"></vue-qr>
                         </div>
-                        <span style="color: white; margin-top: 10px;margin-bottom: 20px;">Menu in Chinese Available on Wechat!</span>
+                        <span style="color: white; margin-top: 10px;margin-bottom: 20px;font-size:1.5em">Menu in Chinese Available on Wechat!</span>
                         
                     </div>
                     <div class="Grid-Column" style="align-items: center;margin-top: 20px;">
@@ -196,6 +196,32 @@
 
 </script>
 <style scoped>
+.el-button--primary {
+    color: #fff;
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
+.el-button:focus, .el-button:hover {
+    color: #409EFF;
+    border-color: #FF004B;
+    background-color: #FF004B;
+}
+
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #FF008B;
+    border-color: #FF008B;
+    color: #fff;
+}
+.el-button--primary.is-active, .el-button--primary:active {
+    background: #FF004B;
+    /* border-color: #3a8ee6; */
+    color: #fff;
+}
+.el-button:active {
+    /* color: #3a8ee6; */
+    border-color: #FF004B;
+    outline: 0;
+}
 .imageWrapper{
     display: flex;
     flex-direction: column;

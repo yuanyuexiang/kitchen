@@ -1,9 +1,9 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Revise Menu</span>
+            <span style="font-weight: bold; color: #FB001F;">Revise Menu</span>
         </div>
-        <el-tabs v-show="!changing" v-model="activeName" style="width: 800px;margin-top: 20px;">
+        <el-tabs class="el-tabs" v-show="!changing" v-model="activeName" style="width: 800px;margin-top: 20px;">
             <el-tab-pane label="1. To Be Reviewed" name="first">
                 <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in reviewDishList" :key="item.id" >
                     <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
@@ -665,7 +665,49 @@
 
 </script>
 <style scoped>
+.Pagination /deep/ .el-pager li.active {
+    color: #FF004B;
+    cursor: default;
+}
+.Pagination /deep/ .el-pager li:hover {
+    color: #FF004B;
+}
+.el-tabs /deep/ .el-tabs__item.is-active {
+    color: #FF004B;
+}
+.el-tabs /deep/ .el-tabs__item:hover {
+    color: #FF004B;
+    cursor: pointer;
+}
+.el-tabs /deep/ .el-tabs__active-bar {
+    background-color: #FF004B;
+}
+.el-button--primary {
+    color: #fff;
+    background-color: #FF004B;
+    border-color: #FF004B;
+}
+.el-button:focus, .el-button:hover {
+    color: #409EFF;
+    border-color: #FF004B;
+    background-color: #FF004B;
+}
 
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #FF008B;
+    border-color: #FF008B;
+    color: #fff;
+}
+.el-button--primary.is-active, .el-button--primary:active {
+    background: #FF004B;
+    /* border-color: #3a8ee6; */
+    color: #fff;
+}
+.el-button:active {
+    /* color: #3a8ee6; */
+    border-color: #FF004B;
+    outline: 0;
+}
 .el-input-number--mini {
     width: 100px;
     line-height: 26px;

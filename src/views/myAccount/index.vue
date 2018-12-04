@@ -74,7 +74,7 @@
         <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
                 <div class="title" style="width: 800px;display:flex; justify-content: space-between;align-items: center;padding: 12px 5px 12px 5px; background-color:#898989">
-                    <span style="line-height: 30px;font-weight: bold;color:white">Terms of Service and Privacy Policy</span>
+                    <span style="line-height: 30px;font-weight: bold;color: white;">Terms of Service and Privacy Policy</span>
                     <!-- <el-button type="primary">View</el-button> -->
                 </div>
                 <span style="margin-top: 20px;margin-bottom: 20px;">

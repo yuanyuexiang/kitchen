@@ -1,13 +1,16 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">My Demos</span>
+            <span style="font-weight: bold; color: #FB001F;">My Demos</span>
         </div>
         <div class="Grid-Column" style="margin-top: 50px;">
             <div>
                 <!-- <div>To receive the best outcome, you are highly recommended to view demos on your mobile phone.</div>
                 <div>You can choose any one of the following ways to access your demo.</div> -->
-                <div>Reminders:</div>
+                <!-- <div>Reminders:</div> -->
+                <div class="title" style="width: 800px;margin-bottom: 20px;display:flex; justify-content: space-between;align-items: center;padding: 12px 5px 12px 5px; background-color: #898989;">
+                    <span style="line-height: 30px;font-weight: bold;color: white;">Reminders:</span>
+                </div>
                 <div>1. To receive the best outcome, please <span style="font-weight:bold">view demos on your mobile phone.</span></div>
                 <div>2. These two versions are demos for 
                     <el-popover

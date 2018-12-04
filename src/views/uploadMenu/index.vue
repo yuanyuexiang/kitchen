@@ -1,12 +1,12 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;">Upload Menu</span>
+            <span style="font-weight: bold; color: #FB001F;">Upload Menu</span>
         </div>
         <div class="Grid-Row" style="margin-top: 50px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
-                <div class="title" style="display:flex; justify-content: space-between">
-                    <span style="line-height: 30px;font-weight: bold;">Tips</span>
+                <div class="title" style="display:flex; justify-content: space-between;align-items: center;padding: 12px 5px 12px 5px; background-color: #898989;">
+                    <span style="line-height: 30px;font-weight: bold;color: white;">Tips</span>
                 </div>
                 <span style="margin-top: 20px;margin-bottom: 20px;">
                 Use button below to upload your full menu. It can be in the format of PDF, Word document, Excel sheet, or an image file. 
