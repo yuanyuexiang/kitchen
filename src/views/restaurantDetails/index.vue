@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;color: #FB001F;font-size: 1.5em;">Restaurant Details</span>
+            <span style="font-weight: bold;color: #E6002D;font-size: 1.5em;">Restaurant Details</span>
         </div>
         <div style="width: 800px;margin-top: 30px;border-top:1px solid"/>
         <div class="Grid-Row" style="width: 800px;margin-top: 30px;">
@@ -401,18 +401,18 @@
 }
 
 .el-button--primary:focus, .el-button--primary:hover {
-    background: #FF008B;
-    border-color: #FF008B;
+    background: #FF4663;
+    border-color: #FF4663;
     color: #fff;
 }
 .el-button--primary.is-active, .el-button--primary:active {
-    background: #FF004B;
+    background: #CD1B37;
     /* border-color: #3a8ee6; */
     color: #fff;
 }
 .el-button:active {
     /* color: #3a8ee6; */
-    border-color: #FF004B;
+    border-color: #CD1B37;
     outline: 0;
 }
 .el-checkbox /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {

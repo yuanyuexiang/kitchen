@@ -1,8 +1,8 @@
 <template>
     <div class="dashboard-container">
         <div class="Grid-Title">
-            <span v-if="restaurant" style="font-weight: bold;color: #FB001F;font-size: 1.5em;">{{restaurant.name_en}}</span>
-            <span v-else style="font-weight: bold;color: #FB001F;font-size: 1.5em;">Please Create Restaurant</span>
+            <span v-if="restaurant" style="font-weight: bold;color: #E6002D;font-size: 1.5em;">{{restaurant.name_en}}</span>
+            <span v-else style="font-weight: bold;color: #E6002D;font-size: 1.5em;">Please Create Restaurant</span>
         </div>
         <div class="Grid-Column" style="width: 800px;margin-top: 50px;">
             <div class="Grid-Column overview" style="height: 270px;">

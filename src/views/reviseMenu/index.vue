@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold; color: #FB001F;font-size: 1.5em;">Revise Menu</span>
+            <span style="font-weight: bold; color: #E6002D;font-size: 1.5em;">Revise Menu</span>
         </div>
         <el-tabs class="el-tabs" v-show="!changing" v-model="activeName" style="width: 800px;margin-top: 20px;">
             <el-tab-pane label="1. To Be Reviewed" name="first">
@@ -694,18 +694,18 @@
 }
 
 .el-button--primary:focus, .el-button--primary:hover {
-    background: #FF008B;
-    border-color: #FF008B;
+    background: #FF4663;
+    border-color: #FF4663;
     color: #fff;
 }
 .el-button--primary.is-active, .el-button--primary:active {
-    background: #FF004B;
+    background: #CD1B37;
     /* border-color: #3a8ee6; */
     color: #fff;
 }
 .el-button:active {
     /* color: #3a8ee6; */
-    border-color: #FF004B;
+    border-color: #CD1B37;
     outline: 0;
 }
 .el-input-number--mini {

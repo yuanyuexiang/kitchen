@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold;;color:#FB001F">My Account</span>
+            <span style="font-weight: bold;;color:#E6002D">My Account</span>
         </div>
         <div class="Grid-Row" style="margin-top: 20px;">
             <div class="Grid-Column" style="width: 800px;margin-right: 20px;">
@@ -316,18 +316,18 @@
 }
 
 .el-button--primary:focus, .el-button--primary:hover {
-    background: #FF008B;
-    border-color: #FF008B;
+    background: #FF4663;
+    border-color: #FF4663;
     color: #fff;
 }
 .el-button--primary.is-active, .el-button--primary:active {
-    background: #FF004B;
+    background: #CD1B37;
     /* border-color: #3a8ee6; */
     color: #fff;
 }
 .el-button:active {
     /* color: #3a8ee6; */
-    border-color: #FF004B;
+    border-color: #CD1B37;
     outline: 0;
 }
 .el-checkbox /deep/ .el-checkbox__input.is-checked+.el-checkbox__label {

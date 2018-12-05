@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
         <div class="Grid-Title">
-            <span style="font-weight: bold; color: #FB001F;font-size: 1.5em;">My Demos</span>
+            <span style="font-weight: bold; color: #E6002D;font-size: 1.5em;">My Demos</span>
         </div>
         <div class="Grid-Column" style="margin-top: 50px;">
             <div>
@@ -20,7 +20,7 @@
                         width="400"
                         trigger="hover"
                         content='The codes here are NOT the same as the one printed for your dine-in customers. If you need to print extra copies for display, please refer to the code in "Launch Menu" page under "Menu Management".'>
-                        <span style="color:#1890FF;cursor:pointer; color: #FB001F;" slot="reference" @click="visible = !visible">restaurants' use only.</span>
+                        <span style="color:#1890FF;cursor:pointer; color: #E6002D;" slot="reference" @click="visible = !visible">restaurants' use only.</span>
                     </el-popover>
                 </div>
 
@@ -32,7 +32,7 @@
                         width="400"
                         trigger="hover"
                         content='You can choose one of the following ways to access your demo. To scan the code using the camera, hold your phone steady for 2-3 seconds towards the QR Code below. Click on the notification to open the website.'>
-                        <span style="color:#1890FF;cursor:pointer; color: #FB001F;" slot="reference" @click="visible = !visible">Camera function.</span>
+                        <span style="color:#1890FF;cursor:pointer; color: #E6002D;" slot="reference" @click="visible = !visible">Camera function.</span>
                     </el-popover>
                 </div>
 

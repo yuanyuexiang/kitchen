@@ -1,7 +1,7 @@
 <template>
     <el-scrollbar wrap-class="scrollbar-wrapper">
         <el-menu :show-timeout="200" :default-active="$route.path" :collapse="isCollapse" mode="vertical"
-            background-color="#2B2B2B" text-color="#bfcbd9" active-text-color="#FB001F">
+            background-color="#2B2B2B" text-color="#bfcbd9" active-text-color="#E6002D">
             <sidebar-item v-for="route in routes" :key="route.name" :item="route" :base-path="route.path" />
         </el-menu>
     </el-scrollbar>
