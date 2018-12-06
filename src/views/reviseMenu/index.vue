@@ -5,43 +5,46 @@
         </div>
         <el-tabs class="el-tabs" v-show="!changing" v-model="activeName" style="width: 800px;margin-top: 20px;">
             <el-tab-pane label="1. To Be Reviewed" name="first">
-                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in reviewDishList" :key="item.id" >
-                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                <div class="Grid-Column" style="margin-bottom: 20px;" v-for="item in reviewDishList" :key="item.id" >
+                    <div class="Grid-Row">
+                        <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                            <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                        </div>
+                        <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Dish Name:</span>
+                                <span style="margin-top: 20px;">{{item.name_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Category:</span>
+                                <span style="margin-top: 20px;">{{item.category_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Price:</span>
+                                <span>{{item.price}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Description:</span>
+                                <span>{{item.discription_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Ingredients:</span>
+                                <span>{{item.ingredientList}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Options:</span>
+                                <span>{{item.stepList}}</span>
+                            </div>
+                        </div>
+                        <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                            <!-- <router-link :to="{path:'/menuManagement/reviewContent',query: {restaurant_id: item.id}}">
+                                <el-button type="primary">Make Changes</el-button>
+                            </router-link> -->
+                            <el-button style="width: 150px;" type="primary" @click="makeChange(item)">Make Changes</el-button>
+                            <el-button style="margin-top: 20px;width: 150px;margin-left: 0px;" type="primary" @click="dishConfirm(item)">Confirm</el-button>
+                        </div>
                     </div>
-                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Dish Name:</span>
-                            <span style="margin-top: 20px;">{{item.name_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Category:</span>
-                            <span style="margin-top: 20px;">{{item.category_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Price:</span>
-                            <span>{{item.price}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Description:</span>
-                            <span>{{item.discription_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Ingredients:</span>
-                            <span>{{item.ingredientList}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Options:</span>
-                            <span>{{item.stepList}}</span>
-                        </div>
-                    </div>
-                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                        <!-- <router-link :to="{path:'/menuManagement/reviewContent',query: {restaurant_id: item.id}}">
-                            <el-button type="primary">Make Changes</el-button>
-                        </router-link> -->
-                        <el-button style="width: 150px;" type="primary" @click="makeChange(item)">Make Changes</el-button>
-                        <el-button style="margin-top: 20px;width: 150px;margin-left: 0px;" type="primary" @click="dishConfirm(item)">Confirm</el-button>
-                    </div>
+                    <div style="width: 800px;margin-top: 22px;border-top:1px solid #E4E7ED"/>
                 </div>
                 <div class="Pagination" style="text-align: left;margin-top: 10px;">
                     <el-pagination
@@ -55,36 +58,39 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane label="2. Translation in Progress" name="second">
-                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in translationDishList" :key="item.id" >
-                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                <div class="Grid-Column" style="margin-bottom: 20px;" v-for="item in translationDishList" :key="item.id" >
+                    <div class="Grid-Row">
+                        <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                            <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                        </div>
+                        <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Dish Name:</span>
+                                <span style="margin-top: 20px;">{{item.name_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Category:</span>
+                                <span style="margin-top: 20px;">{{item.category_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Price:</span>
+                                <span>{{item.price}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Description:</span>
+                                <span>{{item.discription_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Ingredients:</span>
+                                <span>{{item.ingredientList}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Options:</span>
+                                <span>{{item.stepList}}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Dish Name:</span>
-                            <span style="margin-top: 20px;">{{item.name_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Category:</span>
-                            <span style="margin-top: 20px;">{{item.category_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Price:</span>
-                            <span>{{item.price}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Description:</span>
-                            <span>{{item.discription_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Ingredients:</span>
-                            <span>{{item.ingredientList}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Options:</span>
-                            <span>{{item.stepList}}</span>
-                        </div>
-                    </div>
+                    <div style="width: 800px;margin-top: 22px;border-top:1px solid #E4E7ED"/>
                 </div>
                 <div class="Pagination" style="text-align: left;margin-top: 10px;">
                     <el-pagination
@@ -98,42 +104,42 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane label="3. Good to Go" name="third">
-                <div class="Grid-Row" style="margin-bottom: 20px;" v-for="item in goDishList" :key="item.id" >
-                    <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
-                        <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                <div class="Grid-Column" style="margin-bottom: 20px;" v-for="item in goDishList" :key="item.id" >
+                    <div class="Grid-Row">
+                        <div class="Grid-Column" style="width: 200px;margin-right: 20px;">
+                            <img style="width: 200px;" :src="item.pic_url" class="pan-thumb">
+                        </div>
+                        <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Dish Name:</span>
+                                <span style="margin-top: 20px;">{{item.name_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Category:</span>
+                                <span style="margin-top: 20px;">{{item.category_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Price:</span>
+                                <span>{{item.price}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Description:</span>
+                                <span>{{item.discription_en}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Ingredients:</span>
+                                <span>{{item.ingredientList}}</span>
+                            </div>
+                            <div style="width: 400px;margin-right: 20px;">
+                                <span style="font-weight:bold;">Options:</span>
+                                <span>{{item.stepList}}</span>
+                            </div>
+                        </div>
+                        <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
+                            <el-button style="width: 150px;" type="primary" @click="makeChange(item)">Make Changes</el-button>
+                        </div>
                     </div>
-                    <div class="Grid-Column" style="width: 400px;margin-right: 20px;">
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Dish Name:</span>
-                            <span style="margin-top: 20px;">{{item.name_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Category:</span>
-                            <span style="margin-top: 20px;">{{item.category_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Price:</span>
-                            <span>{{item.price}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Description:</span>
-                            <span>{{item.discription_en}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Ingredients:</span>
-                            <span>{{item.ingredientList}}</span>
-                        </div>
-                        <div style="width: 400px;margin-right: 20px;">
-                            <span style="font-weight:bold;">Options:</span>
-                            <span>{{item.stepList}}</span>
-                        </div>
-                    </div>
-                    <div class="Grid-Column" style="width: 150px;margin-right: 20px;">
-                        <!-- <router-link :to="{path:'/menuManagement/reviewContent',query: {restaurant_id: item.id}}">
-                            
-                        </router-link> -->
-                        <el-button style="width: 150px;" type="primary" @click="makeChange(item)">Make Changes</el-button>
-                    </div>
+                    <div style="width: 800px;margin-top: 22px;border-top:1px solid #E4E7ED"/>
                 </div>
                 <div class="Pagination" style="text-align: left;margin-top: 10px;">
                     <el-pagination
@@ -185,8 +191,8 @@
                         </el-form-item>
                         <el-form-item style="margin-bottom: 1px; " label="Ingredients:">
                             <el-collapse>
-                                <el-collapse-item title="Please unfold" name="1">
-                                    <el-tag :key="ingredient.id" v-for="ingredient in formData.ingredients" closable :disable-transitions="false" @close="handleClose(ingredient)"> 
+                                <el-collapse-item class="el-collapse-item" title="Please unfold" name="1">
+                                    <el-tag class="my-el-tag" :key="ingredient.id" v-for="ingredient in formData.ingredients" closable :disable-transitions="false" @close="handleClose(ingredient)"> 
                                         {{ingredient.name_en}}
                                     </el-tag>
                                     <el-input class="input-new-tag" v-if="inputVisible" v-model="inputValue" ref="saveTagInput" size="small"
@@ -212,8 +218,8 @@
                                                     <i class="el-icon-delete" style="float: right;line-height: 26px;cursor: pointer;" @click="deleteStep(step)"></i>
                                                 </div>
                                                 
-                                                <el-tag :key="option.id" v-for="option in step.options" closable :disable-transitions="false" @close="handleCloseOption(step.options,option)"> 
-                                                    <span>{{option.name_en}}</span><span v-if="option.price" style="color:#C80E11;">-${{option.price}}</span>
+                                                <el-tag class="my-el-tag" :key="option.id" v-for="option in step.options" closable :disable-transitions="false" @close="handleCloseOption(step.options,option)"> 
+                                                    <span>{{option.name_en}}</span><span v-if="option.price" style="color:#D00026;font-weight: bold;">-<span style="font-size: 12px;transform: scale(0.6);">$</span>{{option.price}}</span>
                                                 </el-tag>
                                                 <el-input class="input-new-tag" v-show="step.inputVisibleOption" v-model="step.inputValueOption" ref="saveTagInputOption" size="small"
                                                     @keyup.enter.native="handleInputConfirmOption(step)"
@@ -672,8 +678,11 @@
 .Pagination /deep/ .el-pager li:hover {
     color: #FF004B;
 }
+.el-tabs /deep/ .el-tabs__header{
+    background-color: #F3F3F3;
+}
 .el-tabs /deep/ .el-tabs__item.is-active {
-    color: #FF004B;
+    color: #E6002D;
 }
 .el-tabs /deep/ .el-tabs__item:hover {
     color: #FF004B;
@@ -720,6 +729,9 @@
 .el-tag {
     margin-right: 10px;
     margin-bottom: 10px;
+    border: 1px solid #FFC1CE;
+    background-color: #FFE8Ed;
+    color: #FF365B;
 }
 .button-new-tag {
     margin-right: 10px;
@@ -732,8 +744,17 @@
 .input-new-tag {
     width: 150px;
     margin-right: 10px;
+    /* border: 1px solid #FFC1CE; */
+    background-color: #FFE8Ed;
+    color: #FF365B;
 }
-
+.my-el-tag /deep/ i {
+    color: #FF365B;
+}
+.my-el-tag /deep/ i:hover{
+    background-color: #FF365B;
+    color: #fff;
+}
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -785,6 +806,9 @@
     width: 800px;
     display: flex;
     justify-content: center;
+}
+.el-collapse-item /deep/ .el-collapse-item__header{
+    color: #979899
 }
 </style>
 <style lang="less">
