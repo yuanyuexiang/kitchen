@@ -76,3 +76,12 @@ a:hover {
 .app-container {
     padding: 20px;
 }
+
+#nprogress .bar{
+    background-color: #FF004B !important;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: #FF004B !important;
+    border-left-color: #FF004B !important;
+}
