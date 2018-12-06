@@ -219,7 +219,7 @@
                                                 </div>
                                                 
                                                 <el-tag class="my-el-tag" :key="option.id" v-for="option in step.options" closable :disable-transitions="false" @close="handleCloseOption(step.options,option)"> 
-                                                    <span>{{option.name_en}}</span><span v-if="option.price" style="color:#D00026;font-weight: bold;">-<span style="font-size: 12px;transform: scale(0.6);">$</span>{{option.price}}</span>
+                                                    <span>{{option.name_en}}</span><span v-if="option.price" style="color:#FF004B;font-weight: bold;">-<span style="font-size: 12px;transform: scale(0.6);">$</span>{{option.price}}</span>
                                                 </el-tag>
                                                 <el-input class="input-new-tag" v-show="step.inputVisibleOption" v-model="step.inputValueOption" ref="saveTagInputOption" size="small"
                                                     @keyup.enter.native="handleInputConfirmOption(step)"
