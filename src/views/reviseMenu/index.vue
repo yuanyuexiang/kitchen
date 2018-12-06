@@ -211,10 +211,10 @@
                                         <SlickItem v-for="(step, index) in formData.steps" :index="index" :key="index">
                                             <el-card class="box-card">
                                                 <div slot="header" class="clearfix">
-                                                    <el-input style="width: 130px;" v-model="step.name_en" size="mini"></el-input>
-                                                    <el-input-number size="mini" v-model="step.most" :min="0"></el-input-number>
-                                                    <i class="el-icon-arrow-right"></i>
-                                                    <el-input-number size="mini" v-model="step.least" :max="step.most" :min="0"></el-input-number>
+                                                    <el-input class="my-el-input-number" style="width: 130px;" v-model="step.name_en" size="mini"></el-input>
+                                                    <el-input-number class="my-el-input-number" size="mini" v-model="step.most" :min="0"></el-input-number>
+                                                        <i class="el-icon-arrow-right"></i>
+                                                    <el-input-number class="my-el-input-number" size="mini" v-model="step.least" :max="step.most" :min="0"></el-input-number>
                                                     <i class="el-icon-delete" style="float: right;line-height: 26px;cursor: pointer;" @click="deleteStep(step)"></i>
                                                 </div>
                                                 
@@ -754,6 +754,22 @@
 .my-el-tag /deep/ i:hover{
     background-color: #FF365B;
     color: #fff;
+}
+.my-el-input-number /deep/ input:hover{
+    border-color:#FFC1CE !important;
+}
+.my-el-input-number /deep/ input:focus{
+    border-color:#FF365B !important;
+}
+.my-el-input-number /deep/ .el-input-number__increase:hover{
+    border-color:#FFC1CE;
+}
+.my-el-input-number /deep/ .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled) {
+    border-color: #FF365B;
+}
+.input-new-tag /deep/ .el-input__inner:focus {
+    border-color: #FF365B;
+    outline: 0;
 }
 .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
