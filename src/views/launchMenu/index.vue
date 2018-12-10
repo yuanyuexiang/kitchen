@@ -61,7 +61,7 @@
                             <vue-qr :text="content" :size="300" :margin="0" :logoScale=".23" logoSrc="/static/logo.png" :logoMargin="5"></vue-qr>
                         </div>
                         <span style="color: white; margin-top: 15px;margin-bottom: 30px;font-size:1.5em">Menu in Chinese Available on Wechat!</span>
-                        <span style="color: white; margin-top: -12px;margin-bottom: -4px;font-size:12px;transform: scale(0.6);">{{restaurant.code}}</span>
+                        <span style="color: white; margin-top: -16px;margin-bottom: -2px;font-size:16px;transform: scale(0.7);">{{restaurant.code}}</span>
                     </div>
                     <div class="Grid-Column" style="align-items: center;margin-top: 20px;">
                         <span style="align-items: center">Download the QR Code for printing</span>
