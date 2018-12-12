@@ -42,6 +42,7 @@
                 </span>
             </div>
         </el-form>
+        <div class="foot">Copyright © 2018-2018 LingLink,LLC. All Rights Reserved.</div>
     </div>
 </template>
 
@@ -238,6 +239,18 @@
 }
 .validationCode /deep/ .el-input{
     width: 80%;
+}
+.foot{
+    display: flex;
+    justify-content:center;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    bottom:0;
+    position:absolute;
+    padding: 0 10px;
+    width: 100%;
+    font-size: .2em;
+    color: #FFF;
 }
 </style>
 
