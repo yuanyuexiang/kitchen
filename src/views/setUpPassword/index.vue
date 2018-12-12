@@ -322,4 +322,30 @@
         }
     }
 
+    .el-button--primary {
+        color: #fff;
+        background-color: #FF004B;
+        border-color: #FF004B;
+    }
+    .el-button:focus, .el-button:hover {
+        color: #409EFF;
+        border-color: #FF004B;
+        background-color: #FF004B;
+    }
+
+    .el-button--primary:focus, .el-button--primary:hover {
+        background: #FF4663;
+        border-color: #FF4663;
+        color: #fff;
+    }
+    .el-button--primary.is-active, .el-button--primary:active {
+        background: #CD1B37;
+        border-color: #CD1B37;
+        color: #fff;
+    }
+    .el-button:active {
+        // color: #FF4663;
+        border-color: #CD1B37;
+        outline: 0;
+    }
 </style>
