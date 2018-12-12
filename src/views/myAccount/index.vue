@@ -77,9 +77,10 @@
                     <span style="line-height: 30px;font-weight: bold;color: white;">Terms of Service and Privacy Policy</span>
                     <!-- <el-button type="primary">View</el-button> -->
                 </div>
-                <span style="margin-top: 20px;margin-bottom: 20px;">
+                <span style="margin-top: 20px;">
                 Linglink <a style="color:#FF004B;" target="_blank" href="http://www.linglink.us/llktermsofservice">Terms of Service</a> and <a target="_blank" style="color:#FF004B;" href="http://www.linglink.us/llkprivacypolicy">Privacy Policy</a> explains how we use, store, and process information about you to provide, understand, improve, and develop the Instapage Platform, create and maintain a trusted and safer environment and comply with our legal obligations.
                 </span>
+                <el-checkbox class="el-checkbox" style="margin-top: 20px;margin-left: 20px;color: inherit;margin-bottom: 20px;" disabled checked>I agree to the terms of service and privacy policy</el-checkbox>
             </div>
         </div>
     </div>

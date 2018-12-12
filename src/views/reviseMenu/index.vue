@@ -483,7 +483,7 @@
             },
             dishConfirm(item){
                 this.currentDish = item
-                item.status=1
+                item.status = -1
                 updateDishStatus(item).then(response => {
                     const data = response.data
                     if(response.status == 1){
@@ -496,10 +496,15 @@
                         
                         this.reviewDishes.splice(this.reviewDishes.indexOf(this.currentDish), 1)
                         this.reviewDishList.splice(this.reviewDishList.indexOf(this.currentDish), 1)
+                        /*
                         this.goDishes.push(this.currentDish)
-
                         this.goDishList = this.goDishes.slice(0,10)
                         this.countGo = this.goDishes.length
+                        */
+                        this.translationDishes.push(this.currentDish)
+                        this.translationDishList = this.translationDishes.slice(0,10)
+                        this.countTranslation = this.translationDishes.length
+
                         this.countReview = this.reviewDishes.length
                     }else{
                         this.$message.error('modify dish status fail')
@@ -544,7 +549,7 @@
                     const data = response.data
                     if(response.status == 1){
                         this.$message({
-                            message: 'modify dish success',
+                            message: 'Change request submitted',
                             type: 'success'
                         });
                         
@@ -563,11 +568,14 @@
 
                         this.changing = false
                         
+                        this.reviewDishes.splice(this.reviewDishes.indexOf(this.currentDish), 1)
+                        this.reviewDishList.splice(this.reviewDishList.indexOf(this.currentDish), 1)
                         this.goDishes.splice(this.goDishes.indexOf(this.currentDish), 1)
                         this.goDishList.splice(this.goDishList.indexOf(this.currentDish), 1)
                         this.translationDishes.push(this.formData)
 
                         this.translationDishList = this.translationDishes.slice(0,10)
+                        this.countReview = this.reviewDishes.length
                         this.countGo = this.goDishes.length
                         this.countTranslation = this.translationDishes.length
                         /*

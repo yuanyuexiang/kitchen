@@ -282,9 +282,9 @@
                             this.getRestaurants()
                             this.setRestaurant(myRestaurant)
                             this.$notify({
-                                title: 'update success',
-                                message: "It's great that Linglink helps to boost your business! We will get back to you shortly to add your new restaurant for you.",
-                                type: 'success'
+                                title: 'Information updated',
+                                //message: "It's great that Linglink helps to boost your business! We will get back to you shortly to add your new restaurant for you.",
+                                type: 'success',
                             });
                         }else{
                             this.$message('fail')

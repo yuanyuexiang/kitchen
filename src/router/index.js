@@ -71,7 +71,7 @@ export const constantRouterMap = [
                     icon: 'link',
                     keepAlive: true 
                 }
-            },
+            },/*
             {
                 path: 'subscription',
                 name: 'Subscription',
@@ -82,7 +82,7 @@ export const constantRouterMap = [
                     icon: 'link',
                     keepAlive: true 
                 }
-            },
+            },*/
         ]
     },
     /*
