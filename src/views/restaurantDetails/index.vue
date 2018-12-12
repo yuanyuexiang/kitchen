@@ -7,18 +7,10 @@
         <div class="Grid-Row" style="width: 800px;margin-top: 30px;">
             <div class="Grid-Column" style="width: 200px;">
                 <span style="font-weight: bold;">Upload Logo:</span>
-                <!-- <el-upload
-                    class="avatar-uploader"
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :show-file-list="false"
-                    :on-success="handleAvatarSuccess"
-                    :before-upload="beforeAvatarUpload">
-                    <img v-if="formData.pic_url" :src="formData.pic_url" class="avatar">
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload> -->
                 <el-upload
                     class="avatar-uploader"
                     :action="baseUrl + '/camaro/v1/file'"
+                    :data="fileParams"
                     :show-file-list="false"
                     :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload">
@@ -229,6 +221,7 @@
                     pic_url: '',
                     payment:[],
                 },
+                fileParams:{subpath:"",rename:""},
             }
         },
         computed: {
@@ -324,6 +317,9 @@
 				}
             },
             beforeAvatarUpload(file) {
+                // set fileParams
+                this.fileParams.subpath = this.restaurant.code
+
                 const isLt2M = file.size / 1024 / 1024 < 2;
                 if (!isLt2M) {
                     this.$message.error('上传头像图片大小不能超过 2MB!');

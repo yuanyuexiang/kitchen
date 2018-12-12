@@ -39,6 +39,7 @@
                     class="upload-demo"
                     ref="upload"
                     :action="baseUrl + '/camaro/v1/file'"
+                    :data="fileParams"
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
                     :on-success="handleSuccess"
@@ -109,6 +110,7 @@
 				baseUrl:process.env.BASE_API,
                 fileList:[],
                 materialList:[],
+                fileParams:{subpath:"",rename:""},
             };
         },
         created(){
@@ -123,6 +125,8 @@
                 });
             },
             submitUpload() {
+                // set fileParams
+                this.fileParams.subpath = this.restaurant.code
                 this.$refs.upload.submit();
             },
             handleRemove(file, fileList) {

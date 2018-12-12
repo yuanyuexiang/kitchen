@@ -13,6 +13,7 @@
             <el-upload
                 class="upload-demo"
                 :action="baseUrl + '/camaro/v1/file'"
+                :data="fileParams"
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
                 :before-remove="beforeRemove"
@@ -178,6 +179,9 @@
                 return statusMap[status];
             }
         },
+        computed: {
+            ...mapGetters(['restaurant'])
+        },
         data() {
             return {
 				baseUrl:process.env.BASE_API,
@@ -191,7 +195,8 @@
                 content: "http://gastronome.linglinkmenu.cn/?restaurantCode=KraziKebob-USA-MD-20740&isAuthorization=no",
                 width: 200,
                 fileList:[],
-                active:3
+                active:3,
+                fileParams:{subpath:"",rename:""},
             };
         },
         created() {
@@ -224,6 +229,9 @@
                 //this.imageUrl = URL.createObjectURL(file.raw);
             },
             beforeUpload(file) {
+                // set fileParams
+                this.fileParams.subpath = this.restaurant.code
+
                 const isLt2M = file.size / 1024 / 1024 < 2;
                 if (!isLt2M) {
                     this.$message.error('上传头像图片大小不能超过 2MB!');
