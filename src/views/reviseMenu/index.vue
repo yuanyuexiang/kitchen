@@ -270,7 +270,7 @@
         getStepsListByDishID,
         getDishList,
         getDishCount,
-        updateDishStatus,
+        updateDishSchedule,
         updateDishForCustomer,
     } from '@/api/foodie'
     import {
@@ -436,9 +436,9 @@
                         this.reviewDishList = this.dishList.slice(0,10)
                         let me = this
                         this.dishList.forEach(function(item){
-                            if(item.status == -2){
+                            if(item.schedule == -2){
                                 me.reviewDishes.push(item)
-                            }else if(item.status == -1){
+                            }else if(item.schedule == -1){
                                 me.translationDishes.push(item)
                             }else{
                                 me.goDishes.push(item)
@@ -485,12 +485,12 @@
             },
             dishConfirm(item){
                 this.currentDish = item
-                item.status = -1
-                updateDishStatus(item).then(response => {
+                item.schedule = -1
+                updateDishSchedule(item).then(response => {
                     const data = response.data
                     if(response.status == 1){
                         this.$message({
-                            message: 'modify dish status success',
+                            message: 'modify dish schedule success',
                             type: 'success'
                         });
                         
@@ -509,7 +509,7 @@
 
                         this.countReview = this.reviewDishes.length
                     }else{
-                        this.$message.error('modify dish status fail')
+                        this.$message.error('modify dish schedule fail')
                     }
                 }).catch(error => {
                     console.log(error)

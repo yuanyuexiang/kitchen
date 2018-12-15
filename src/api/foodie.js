@@ -155,6 +155,14 @@ export function updateDishStatus(data) {
     });
 }
 
+export function updateDishSchedule(data) {
+    return request({
+        url: '/foodie/v1/dish/'+ data.id+'/schedule',
+        method: 'PUT',
+        data
+    });
+}
+
 export function getStepsListByDishID(id) {
     return request({
         url: '/foodie/v1/dish/'+id+'/steps',
