@@ -38,10 +38,10 @@ service.interceptors.response.use(
             // 0:非法的token; -1:业务失败; -2:Token 过期了;
             if (res.status === -2) {
                 MessageBox.confirm(
-                    '会话过期重新登录',
-                    '确定登出', {
-                        confirmButtonText: '重新登录',
-                        cancelButtonText: '取消',
+                    'Your current session has been expired. Please login again.',
+                    'Logout', {
+                        confirmButtonText: 'login again',
+                        cancelButtonText: 'cancel',
                         type: 'warning'
                     }
                 ).then(() => {
